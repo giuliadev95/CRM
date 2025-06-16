@@ -11,5 +11,5 @@ export const pool = new Pool({
 
 // Open the pool 
 pool.connect()
-  .then(() => console.log('Connected to the PostgreSQL database on render.com'))
-  .catch(err => console.error('PostgreSQL connection error:', err));
+  .then(() => console.log("Connected to the PostgreSQL database on render.com"))
+  .catch(err => console.error("PostgreSQL connection error:", err));

@@ -4,11 +4,11 @@ import { pool } from '../database/config.js';
 export const get_companies = async (req, res) => {
   try {
     const result = await pool.query(
-      "SELECT id_company, name FROM company ORDER BY name"
+      `SELECT id_company, name FROM company ORDER BY name`
     );
     res.status(200).json(result.rows);
   } catch (err) {
     console.error("Error getting the companies:", err);
-    res.status(500).send("Error getting the companies");
+    res.status(500).send("Internal Server Error: Error getting the companies");
   }
 };

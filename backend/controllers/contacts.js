@@ -20,23 +20,32 @@ export const get_contacts = async (req, res) => {
 export const post_contact = async (req, res) => {
   const { name, phone, email, role, company_id, details } = req.body;
 
-  if (!name || !email) {
+  // If one field is missing, you get an error
+  if (!name || !phone ||!email || !role || !company_id || !details) {
     return res.status(400).send({
-      error: 'The name or email of the contact are missing, you must insert them both!'
+      error: "Bad request: One or more fields of the contact are missing, you must insert them all."
     });
   }
 
+  // try catch block: insert the record and use $int placeholders to establish the values' counting
   try {
     await pool.query(
       `INSERT INTO contact (name, phone, email, role, company_id, details)
        VALUES ($1, $2, $3, $4, $5, $6)`,
-      [name, phone || '', email, role || '', company_id || null, details || '']
+      [
+        name,
+        phone, 
+        email, 
+        role, 
+        company_id, 
+        details
+      ]
     );
 
-    res.status(201).send({ message: 'Contact added successfully.' });
+    res.status(201).send({ message: "Contact created successfully." });
   } catch (err) {
-    console.error('Error inserting the contact', err);
-    res.status(500).send({ error: 'The insert in the database failed.' });
+    console.error("Error creating the contact", err);
+    res.status(500).send({ error: "Internal server error: The creation of the contact failed. Check the syntax and logic of the query in the backend." });
   }
 };
 
@@ -53,13 +62,13 @@ export const get_single_contact = async (req, res) => {
     );
 
     if (result.rows.length === 0) {
-      return res.status(404).send({ message: `The contact with id: ${id} was not found.` });
+      return res.status(404).send({ message: `404 Not Found: The contact with id: ${id} was not found.`});
     }
 
     res.send(result.rows[0]);
   } catch (err) {
     console.error(`Error retrieving the contact with ID ${id}:`, err);
-    res.status(500).send('Internal server error: couldn\'t retrieve the contact.');
+    res.status(500).send("Internal server error: couldn't retrieve the contact.");
   }
 };
 
@@ -68,18 +77,18 @@ export const delete_contact = async (req, res) => {
   const { id } = req.params;
   try {
     const result = await pool.query(
-      'DELETE FROM contact WHERE id_contact = $1',
+      `DELETE FROM contact WHERE id_contact = $1`,
       [id]
     );
 
     if (result.rowCount === 0) {
-      return res.status(404).send({ message: `Contact with id: ${id} not found.` });
+      return res.status(404).send({ message: `404 Not Found: Contact with id: ${id} not found.` });
     }
 
     res.send({ message: `Contact with id ${id} deleted successfully.` });
   } catch (err) {
     console.error(err);
-    res.status(500).send({ error: "Error: couldn't delete the contact." });
+    res.status(500).send({ error: "Internal Server Error: couldn't delete the contact." });
   }
 };
 
@@ -88,8 +97,8 @@ export const update_contact = async (req, res) => {
   const { id } = req.params;
   const { name, phone, email, role, company_id, details } = req.body;
 
-  if (!name || !email) {
-    return res.status(400).send({ error: 'The required fields: name, email are missing.' });
+  if (!name || !phone ||!email || !role || !company_id || !details) {
+    return res.status(400).send({ error: "Bad request: One or more fields of the contact are missing, you must insert them all to update the record." });
   }
 
   try {
@@ -97,17 +106,18 @@ export const update_contact = async (req, res) => {
       `UPDATE contact
        SET name = $1, phone = $2, email = $3, role = $4,
            company_id = $5, details = $6
-       WHERE id_contact = $7`,
-      [name, phone || '', email, role || '', company_id || null, details || '', id]
+       WHERE id_contact = $7`, // where the ID of the contact is equal to the req. params id. ATTENTION: The comparison is possible because PostgreSQL automatically converts the req.params to an integer while trying to compare it with the contact_id serial primary key.
+      [name, phone, email, role, company_id, details, id] // Here, each value gets associated with the respective $placeholder.
     );
 
     if (result.rowCount === 0) {
-      return res.status(404).send({ message: `Contact with id: ${id} not found.` });
+      return res.status(404).send({ message: `404 Not Found: Contact with id: ${id} not found.` });
     }
 
-    res.send({ message: `Contact with id: ${id} updated successfully.` });
+    res.send({message: `Contact with id: ${id} updated successfully.`});
   } catch (err) {
-    console.error('Error updating the contact: ', err);
-    res.status(500).send({ error: 'Error updating the contact.' });
+    console.error("Error updating the contact: ", err);
+    res.status(500).send({ error: "Error updating the contact."});
   }
 };
+
