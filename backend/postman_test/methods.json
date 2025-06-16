@@ -1,11 +1,4 @@
 {
-	"info": {
-		"_postman_id": "2e5f5411-466b-4143-9a3a-5936346a74f3",
-		"name": "contactlist project",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "43461936",
-		"_collection_link": "https://usergiulia.postman.co/workspace/User-Giulia's-Workspace~bf6a7173-36f0-4a88-821b-f6c6db75518d/collection/43461936-2e5f5411-466b-4143-9a3a-5936346a74f3?action=share&source=collection_link&creator=43461936"
-	},
 	"item": [
 		{
 			"name": "POST NEW  CONTACT",
