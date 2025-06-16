@@ -1,0 +1,27 @@
+{
+  "name": "contactlist",
+  "version": "1.0.0",
+  "description": "CRUD webapp to add, remove, and update contacts.",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "g.m.",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.8.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "pg": "^8.16.0",
+    "tedious": "^18.6.1",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
