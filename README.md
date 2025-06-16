@@ -12,7 +12,7 @@ database    /   config.js = Sets a pool connection with a PostgreSQL database
 
 routes      /   contacts_companies.js  = Defines all routes for the server
 
-postman_test    /   methods.json = The json export of all the methods called with Postman. Copy the body of this json object in Postman API calls to test if the backend API work
+postman_doc    /   methods.json = The json export of all the methods called with Postman. Copy the body of this json object in Postman API calls to test if the backend API work
 
 .env     / ignored by GIT, it contains the PostgreSQL connection string
 
@@ -57,8 +57,25 @@ README.md / This very README.md file
 
 
 ## FRONTEND
-1. add react frontend call it "frontend"
-2. organize src/components
-3. organize src/pages
 
+1. add react frontend  as "frontend"
+
+2. Clean the structure of the proejct
+    - Delete unused files and folders
+    - Create new folders and files
+2. organize src/components:
+    - buttons: add, delete, update a contact
+    - Navbar.jsx
+    - Table.jsx
+
+3. organize src/pages:
+    - Home.jsx
+    - AddContact.jsx
+    - UpdateContact.jsx
+
+
+4. Fix Pages
+    - Home
+    - AddContact
+    - UpdateContact
 
