@@ -74,14 +74,5 @@ README.md / This very README.md file
     - UpdateContact.jsx
 
 
-4. Fix Pages WITH NO CSS
-    - Home
-        LOGIC FIXED: DELETE CONTACT, OPEN 'NEW CONTACT' ROUTE, OPEN 'UPDATE CONTACT' ROUTE
-        CLEAN ERROR HANDLING AND COMMENTS
-        CLEAN CODE
 
-
-
-    - AddContact ROUTE EXISTS
-    - UpdateContact ROUTE EXISTS
 

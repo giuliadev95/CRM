@@ -4,23 +4,34 @@ import { AiTwotoneDelete } from "react-icons/ai"; // bin icon to delete a contac
 import { FaPen } from "react-icons/fa"; // pen to update a contact
 
 const Fetch = () => {
-    const [ contacts, setContacts ] = useState([]); // Store all contacts fetched from the PostgreSQL database 
-    const [input, setInput] = useState(""); // Store the search input value and handles the input change
-    const navigate = useNavigate(); // Hooks the redirecting useNavigate functionalities to the "navigate" variable
+    // Store all contacts fetched from the PostgreSQL database 
+    const [ contacts, setContacts ] = useState([]);
+
+    // Store the search input value and handles the input change
+    const [input, setInput] = useState("");
+
+    // Hooks the redirecting useNavigate functionalities to the "navigate" variable
+    const navigate = useNavigate();
 
     
     useEffect(()=> {
-        fetch("http://localhost:3000/api/contacts") // Fetch all contacts from the backend when the DOM mounts
+
+        // Fetch all contacts from the backend when the DOM mounts
+        fetch("http://localhost:3000/api/contacts/get")
         .then ( (response) => response.json() )
         .then( (data) => {
-            setContacts(data); // The fetched data update the content of the contact variable. This happens even after the deletion of a single contact.
-            console.log(data, typeof data); // OUTPUT EXPECTED: [ { array of objects fetched from localhost:3000/api } ] , object
+
+            // The fetched data update the content of the contact variable. This happens even after the deletion of a single contact.
+            setContacts(data);
+
+            // OUTPUT EXPECTED: [ { array of objects fetched from localhost:3000/api } ] , object
+            console.log(data, typeof data);
        })
        .catch((err) => console.error(`There was an error fetching contacts: ${err}`));
     },[]);
     
     
-    // Filter contacts based on the "Search" bar
+    // Contacts filtered by the "Search" bar
     const filteredContacts = contacts.filter((contact) => {
         return (
             contact &&
@@ -29,18 +40,18 @@ const Fetch = () => {
         );
     });
 
-    {/** 2 */}
-    // Deletion function
+    // Delete function
     function deleteContact(id) {
         if (!id) return console.error("The ID is missing to perform the deletion.");
     
-        fetch(`http://localhost:3000/api/${id}`, {
+        fetch(`http://localhost:3000/api/contact/delete/${id}`, {
             method: "DELETE",
         })
         .then((res) => {
             if (!res.ok) throw new Error("Error during the deletion.");
             console.log(`Contact with ID: ${id} deleted successfully.`);
-            setContacts(contacts.filter((contact) => contact.id_contact !== id)); // Avoid mapping and filtering the deleted contact, as its ID will be missing.
+            // Avoid mapping and filtering the deleted contact, as its ID will be missing.
+            setContacts(contacts.filter((contact) => contact.id_contact !== id));
         })
         .catch((err) => console.error(`Error: ${err}`));
     }
@@ -52,7 +63,7 @@ const Fetch = () => {
 
     // Open the page to update the contact
     const openContactPage = (id) => {
-        navigate(`update-contact/:${id}`);
+        navigate(`update-contact/${id}`);
     }
     
     
@@ -68,7 +79,7 @@ const Fetch = () => {
                 value = {input}
                 onChange = {(e) => setInput(e.target.value)}
             />   
-        {/** Button to add a new contact */}
+        {/* Button to add a new contact */}
         <button 
             type="button" 
             class="add-new-contact"
@@ -77,7 +88,7 @@ const Fetch = () => {
             + New
         </button>
         </div>
-        {/** Contact list table */}
+        {/* Contact list table */}
         <table>
             <thead>
                 <tr>
