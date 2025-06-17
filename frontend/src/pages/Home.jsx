@@ -1,26 +1,26 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate to redirect to internal routes without refreshing the page thanks to SPA
+import { useNavigate } from "react-router-dom"; // Import useNavigate to redirect to configured routes without refreshing the page thanks to SPA
 import { AiTwotoneDelete } from "react-icons/ai"; // bin icon to delete a contact
 import { FaPen } from "react-icons/fa"; // pen to update a contact
 
-
 const Fetch = () => {
-    const [ contacts, setContacts ] = useState([]); // Store all contacts fetched from the db with a get() 
-    const [input, setInput] = useState(""); // Store the search input value and handle the input change
-    const navigate = useNavigate(); // hook the redirecting useNavigate functionalities to the navigate variable
-    {/** 3 => 4 [ setContacts ] */}
+    const [ contacts, setContacts ] = useState([]); // Store all contacts fetched from the PostgreSQL database 
+    const [input, setInput] = useState(""); // Store the search input value and handles the input change
+    const navigate = useNavigate(); // Hooks the redirecting useNavigate functionalities to the "navigate" variable
+
+    
     useEffect(()=> {
-        fetch("http://localhost:5000/api/") // Fetch all contacts from the backend when the component mounts
+        fetch("http://localhost:3000/api/contacts") // Fetch all contacts from the backend when the DOM mounts
         .then ( (response) => response.json() )
         .then( (data) => {
-            setContacts(data); // setContacts = data => DATA = CONTACTS (UPDATED AFTER DELETION)
-            console.log(data, typeof data); // [ { array of objects fetched from localhost:5000/api } ] , object
+            setContacts(data); // The fetched data update the content of the contact variable. This happens even after the deletion of a single contact.
+            console.log(data, typeof data); // OUTPUT EXPECTED: [ { array of objects fetched from localhost:3000/api } ] , object
        })
        .catch((err) => console.error(`There was an error fetching contacts: ${err}`));
     },[]);
     
-    {/** 5 */}
-    // Filter contacts based on the search input
+    
+    // Filter contacts based on the "Search" bar
     const filteredContacts = contacts.filter((contact) => {
         return (
             contact &&
@@ -30,64 +30,66 @@ const Fetch = () => {
     });
 
     {/** 2 */}
-    // DeleteContact function  
+    // Deletion function
     function deleteContact(id) {
-        if (!id) return console.error("ID mancante per l'eliminazione.");
+        if (!id) return console.error("The ID is missing to perform the deletion.");
     
-        fetch(`http://localhost:5000/api/${id}`, {
+        fetch(`http://localhost:3000/api/${id}`, {
             method: "DELETE",
         })
         .then((res) => {
-            if (!res.ok) throw new Error("Errore durante l'eliminazione");
-            console.log(`Contatto con ID ${id} eliminato.`);
-            setContacts(contacts.filter((contact) => contact.id_contact !== id));
+            if (!res.ok) throw new Error("Error during the deletion.");
+            console.log(`Contact with ID: ${id} deleted successfully.`);
+            setContacts(contacts.filter((contact) => contact.id_contact !== id)); // Avoid mapping and filtering the deleted contact, as its ID will be missing.
         })
-        .catch((err) => console.error(`Errore: ${err}`));
+        .catch((err) => console.error(`Error: ${err}`));
     }
 
+    // Open the page to create a new contact
     function openForm() {
-        //window.location.href = "http://localhost:5173/nuovo-contatto"
-        navigate("/nuovo-contatto")
+        navigate("/new-contact")
     }
 
+    // Open the page to update the contact
     const openContactPage = (id) => {
-        navigate(`/modifica-contatto/${id}`);
+        navigate(`update-contact/:${id}`);
     }
     
     
     // return:
     return (
         <>   
-        {/** 1 */}
         <div class="contacts-field-container">
+        {/* Searchbar*/}
         <input 
                 type='text' 
-                placeholder='Cerca' 
+                placeholder='Search' 
                 class="searchBar" 
                 value = {input}
                 onChange = {(e) => setInput(e.target.value)}
-                />   
-        {/** Button add new contact */}
+            />   
+        {/** Button to add a new contact */}
         <button 
             type="button" 
             class="add-new-contact"
             onClick={ ()=> openForm()}
             >
-            + Nuovo
+            + New
         </button>
         </div>
-        {/** 2 */}
+        {/** Contact list table */}
         <table>
             <thead>
                 <tr>
-                    <th scope="col"> Nome </th>
+                    <th scope="col"> Name </th>
                     <th scope="col"> Email </th>
-                    <th scope="col"> Ruolo</th>
-                    <th scope="col"> Azienda</th>
-                    <th scope="col"> Azioni</th>
+                    <th scope="col"> Role</th>
+                    <th scope="col"> Company</th>
+                    <th scope="col"> Actions</th>
                 </tr>
             </thead>
             <tbody>
+                {/* Map the fetched contacts to display each of them in a table row */}
                 {filteredContacts.length > 0 ? (
                     filteredContacts.map((contact) => (  
                         <tr key={contact.id_contact}>
@@ -95,26 +97,31 @@ const Fetch = () => {
                             <td>{contact.email}</td>
                             <td>{contact.role}</td>
                             <td>{contact.company_name || "-"}</td>
-                            <td class="update-delete-btn-container">     {/** 2 */}
+
+                            <td class="update-delete-btn-container"> 
+
+                                {/* Delete button that calls the delete function */}
                                 <button
                                 type="button"
                                 id="delete"
-                                onClick={ ()=> deleteContact(contact.id_contact) } // with the onClick() function, this delete function gets executed after the fetching of the contacts
+                                onClick={ ()=> deleteContact(contact.id_contact) }
                                 >
-                                <AiTwotoneDelete/>
-                                </button>     
+                                    <AiTwotoneDelete/>
+                                </button>   
+
+                                {/* Update button that calls the update function */}
                                 <button
                                 type="button"
                                 id="update"
-                                onClick={ ()=> openContactPage(contact.id_contact) } // with the onClick() function, this delete function gets executed after the fetching of the contacts
+                                onClick={ ()=> openContactPage(contact.id_contact) }
                                 >
-                                <FaPen/>
+                                    <FaPen/>
                                 </button>         
                             </td>      
                         </tr>
                     ))
                 ) : (
-                    <p>Nessun risultato</p>
+                    <p>No matching results</p>
                 )}
             </tbody>
         </table>
