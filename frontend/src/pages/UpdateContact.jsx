@@ -103,7 +103,7 @@ const UpdateContact = () => {
                     ))}
                 </select>
 
-                <button type="submit" className="add">Saves</button>
+                <button type="submit" className="add">Save</button>
             </form>
         </>
     );
