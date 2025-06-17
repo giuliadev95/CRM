@@ -19,14 +19,6 @@ export const get_contacts = async (req, res) => {
 // POST a new contact
 export const post_contact = async (req, res) => {
   const { name, phone, email, role, company_id, details } = req.body;
-
-  // If one field is missing, you get an error
-  if (!name || !phone ||!email || !role || !company_id || !details) {
-    return res.status(400).send({
-      error: "Bad request: One or more fields of the contact are missing, you must insert them all."
-    });
-  }
-
   // try catch block: insert the record and use $int placeholders to establish the values' counting
   try {
     await pool.query(

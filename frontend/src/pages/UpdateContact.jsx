@@ -95,7 +95,7 @@ const UpdateContact = () => {
                     onChange={(e) => setCompanyId(e.target.value)}
                     required
                 >
-                    <option value="">Company name</option>
+                    <option value="">Select company</option>
                     {companies.map((c) => (
                         <option key={c.id_company} value={c.id_company}>
                             {c.name}
