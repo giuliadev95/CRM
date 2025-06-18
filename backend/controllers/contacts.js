@@ -7,7 +7,7 @@ export const get_contacts = async (req, res) => {
       SELECT contact.*, company.name AS company_name
       FROM contact
       LEFT JOIN company ON contact.company_id = company.id_company
-      ORDER BY contact.id_contact;
+      ORDER BY contact.name ASC
     `);
     res.status(200).json(result.rows);
   } catch (err) {

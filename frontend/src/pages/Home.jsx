@@ -70,19 +70,17 @@ const Fetch = () => {
     // return:
     return (
         <>   
-        <div class="contacts-field-container">
+        <div>
         {/* Searchbar*/}
         <input 
                 type='text' 
-                placeholder='Search' 
-                class="searchBar" 
+                placeholder='Search'
                 value = {input}
                 onChange = {(e) => setInput(e.target.value)}
             />   
         {/* Button to add a new contact */}
         <button 
-            type="button" 
-            class="add-new-contact"
+            type="button"
             onClick={ ()=> openForm()}
             >
             + New
@@ -109,7 +107,7 @@ const Fetch = () => {
                             <td>{contact.role}</td>
                             <td>{contact.company_name || "-"}</td>
 
-                            <td class="update-delete-btn-container"> 
+                            <td> 
 
                                 {/* Delete button that calls the delete function */}
                                 <button
@@ -117,7 +115,7 @@ const Fetch = () => {
                                 id="delete"
                                 onClick={ ()=> deleteContact(contact.id_contact) }
                                 >
-                                    <AiTwotoneDelete/>
+                                <AiTwotoneDelete/>
                                 </button>   
 
                                 {/* Update button that calls the update function */}
@@ -126,7 +124,7 @@ const Fetch = () => {
                                 id="update"
                                 onClick={ ()=> openContactPage(contact.id_contact) }
                                 >
-                                    <FaPen/>
+                                <FaPen/>
                                 </button>         
                             </td>      
                         </tr>
