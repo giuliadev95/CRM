@@ -3,7 +3,7 @@ import contacts_routes from "./routes/contacts_companies.js";
 import cors from 'cors';
 
 const app = express(); 
-const PORT = "3000";
+const port = "3000";
 app.use(express.json());
 app.use(cors());
 app.use(express.static('public'));
@@ -26,6 +26,6 @@ app.get('/*', (req, res)=>{
 });
 
 // Server listen at port 5000
-app.listen(PORT, ()=> {
-    console.log(`Server listening at http://localhost:${PORT}`);   
+app.listen(port, ()=> {
+    console.log(`Server listening at http://localhost:${port}`);   
 });

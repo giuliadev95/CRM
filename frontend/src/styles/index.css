@@ -19,6 +19,7 @@ a {
   font-weight: 500;
   color: white;
   text-decoration: none;
+  padding:10px;
 }
 
 a:hover { 
@@ -58,19 +59,10 @@ button {
     background-color: #15182e;
 }
 
-.download-buttons {
-    height: 20px;
-    display:flex;
-    font-size: .7rem;
-    font-weight: 700;
-    width: 5rem;
-    border-radius: 4px;
-    transition: all 0.3s ease-in-out;
-}
-
-.download-buttons:hover {
-  background-color: white;
-  color:#15182e;
+.search-and-actions-container {
+  display: flex;
+  align-items: center;
+  justify-content: right;
 }
 
 .actions-button {
@@ -82,17 +74,16 @@ button {
 }
 
 .actions-button:hover {
-  background-color: white;
-  color:#15182e;
-  font-size: .7rem;
+    background-color: white;
+    color:#15182e;
+    font-size: .7rem;
     font-weight: 700;
     border-radius: 4px;
     transition: all 0.3s ease-in-out;
 }
 
-.contacts-field-container {
+.actions-button-container {
   display: flex;
-  gap: 1rem;
 }
 
 button:hover {
@@ -102,10 +93,4 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
-
-input.searchBar {
-  font-size: .7rem;
-  height: 1.5rem;
-  width: 10rem;
 }

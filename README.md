@@ -1,4 +1,4 @@
-# HOW I CREATED THE PROEJCT
+# HOW I CREATED THE PROJECT
 
 
 ## BACKEND
@@ -55,7 +55,6 @@ README.md / This very README.md file
 
 
 
-
 ## FRONTEND
 
 1. add react frontend  as "frontend"
@@ -72,7 +71,3 @@ README.md / This very README.md file
     - Home.jsx
     - AddContact.jsx
     - UpdateContact.jsx
-
-
-
-

@@ -72,21 +72,21 @@ const Fetch = () => {
     // return:
     return (
         <>   
-        <div>
-        {/* Searchbar*/}
-        <input 
-                type='text' 
-                placeholder='Search'
-                value = {input}
-                onChange = {(e) => setInput(e.target.value)}
-            />   
-        {/* Button to add a new contact */}
-        <button 
-            type="button"
-            onClick={ ()=> openForm()}
-            >
-            + New
-        </button>
+        <div class="search-and-actions-container">
+            {/* Searchbar*/}
+            <input 
+                    type='text' 
+                    placeholder='Search'
+                    value = {input}
+                    onChange = {(e) => setInput(e.target.value)}
+                />   
+            {/* Button to add a new contact */}
+            <button 
+                type="button"
+                onClick={ ()=> openForm()}
+                >
+                + New
+            </button>
         </div>
         {/* Contact list table */}
         <table>
@@ -109,12 +109,12 @@ const Fetch = () => {
                             <td>{contact.role}</td>
                             <td>{contact.company_name || "-"}</td>
 
-                            <td> 
+                            <td class="actions-button-container"> 
 
                                 {/* Delete button that calls the delete function */}
                                 <button
                                 type="button"
-                                id="delete"
+                                class="actions-button"
                                 onClick={ ()=> deleteContact(contact.id_contact) }
                                 >
                                 <AiTwotoneDelete/>
@@ -123,7 +123,7 @@ const Fetch = () => {
                                 {/* Update button that calls the update function */}
                                 <button
                                 type="button"
-                                id="update"
+                                class="actions-button"
                                 onClick={ ()=> openContactPage(contact.id_contact) }
                                 >
                                 <FaPen/>

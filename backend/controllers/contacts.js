@@ -18,19 +18,18 @@ export const get_contacts = async (req, res) => {
 
 // POST a new contact
 export const post_contact = async (req, res) => {
-  const { name, phone, email, role, company_id, details } = req.body;
+  const { name, phone, email, role, company_id} = req.body;
   // try catch block: insert the record and use $int placeholders to establish the values' counting
   try {
     await pool.query(
-      `INSERT INTO contact (name, phone, email, role, company_id, details)
-       VALUES ($1, $2, $3, $4, $5, $6)`,
+      `INSERT INTO contact (name, phone, email, role, company_id)
+       VALUES ($1, $2, $3, $4, $5)`,
       [
         name,
         phone, 
         email, 
         role, 
-        company_id, 
-        details
+        company_id
       ]
     );
 
@@ -85,7 +84,7 @@ export const delete_contact = async (req, res) => {
   }
 };
 
-// UPDATE a single contact (BY ID )
+// UPDATE a single contact (by ID )
 export const update_contact = async (req, res) => {
   const { id } = req.params;
   const { name, phone, email, role, company_id, details } = req.body;
