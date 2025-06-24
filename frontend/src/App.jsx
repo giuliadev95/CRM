@@ -3,6 +3,8 @@ import Home from '../src/pages/Home.jsx'
 import AddContact from '../src/pages/AddContact.jsx'
 import UpdateContact from "./pages/UpdateContact.jsx";
 
+import './styles/app.css';
+
 // 3 ROUTES: Homepage with the contact list, Page to add a new contact, Page to update an existent contact
 function App() {
   return (

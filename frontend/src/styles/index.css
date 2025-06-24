@@ -1,0 +1,111 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-size:1.5rem;
+
+  color-scheme: light dark;
+  color: white;
+  background-color: #15182e;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-size: 1rem;
+  font-weight: 500;
+  color: white;
+  text-decoration: none;
+}
+
+a:hover { 
+  background-color: white;
+  color: #15182e;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 2em;
+  line-height: 1.1;
+}
+
+button {
+    min-width: 1rem;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 300;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    transition: all 0.3s ease-in-out;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0 2px;
+    background-color: #15182e;
+}
+
+.download-buttons {
+    height: 20px;
+    display:flex;
+    font-size: .7rem;
+    font-weight: 700;
+    width: 5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease-in-out;
+}
+
+.download-buttons:hover {
+  background-color: white;
+  color:#15182e;
+}
+
+.actions-button {
+    display:flex;
+    font-size: .7rem;
+    font-weight: 700;
+    border-radius: 4px;
+    transition: all 0.3s ease-in-out;
+}
+
+.actions-button:hover {
+  background-color: white;
+  color:#15182e;
+  font-size: .7rem;
+    font-weight: 700;
+    border-radius: 4px;
+    transition: all 0.3s ease-in-out;
+}
+
+.contacts-field-container {
+  display: flex;
+  gap: 1rem;
+}
+
+button:hover {
+  text-decoration: underline;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+input.searchBar {
+  font-size: .7rem;
+  height: 1.5rem;
+  width: 10rem;
+}

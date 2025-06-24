@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate to redirec
 import { AiTwotoneDelete } from "react-icons/ai"; // bin icon to delete a contact
 import { FaPen } from "react-icons/fa"; // pen to update a contact
 
+import "../styles/app.css";
+
 const Fetch = () => {
     // Store all contacts fetched from the PostgreSQL database 
     const [ contacts, setContacts ] = useState([]);
