@@ -1,44 +1,51 @@
 # HOW I CREATED THE PROJECT
 
+This is the tech stack I used:
+- Back-end: Node.js, Express
+- Database: PostgreSQL
+- Front-end: React.js with Vite
+- Style: CSS
 
-## BACKEND
+This is the design model I used:
+The project follows the mvc model, using controllers to store the database queries and routes to make them available for the server at certain endpoints.
+The front-end takes care of fetching all the content to perform the get, put, delete or post method.
+
+
+
+## BACK-END
 
 ### STRUCTURE
 
-controllers /   contacts.js = Functions to perform CRUD actions on the 'contact' table (that gives life to the contact list you'll see in the frontend)
-            /   companies.js = One single function to get all companies (no further methods are needed on the 'company' table)
+controllers =>   contacts.js = Functions to perform CRUD actions on the 'contact' table (that gives life to the contact list you'll see in the frontend)
+            =>   companies.js = One single function to get all companies (no further methods are needed on the 'company' table)
 
-database    /   config.js = Sets a pool connection with a PostgreSQL database
+database    =>   config.js = Sets a pool connection with a PostgreSQL database
 
-routes      /   contacts_companies.js  = Defines all routes for the server
+routes      =>   contacts_companies.js  = Defines all routes for the server
 
-postman_doc    /   methods.json = The json export of all the methods called with Postman. Copy the body of this json object in Postman API calls to test if the backend API work
+postman_doc =>   methods.json = The json export of all the methods called with Postman. Copy the body of this json object in Postman API calls to test if the backend API work
 
-.env     / ignored by GIT, it contains the PostgreSQL connection string
+.env        => ignored by GIT, it contains the PostgreSQL connection string
 
-server.js / the main (and only) express app that starts the server
+server.js   => the main (and only) express app that starts the server
 
-.gitignore / Instructions for GIT to ignore the .env
+.gitignore  => Instructions for GIT to ignore the .env
 
-README.md / This very README.md file
+README.md   => This very README.md file
 
-### WORKFLOW TO CREATE THE BACKEND
-0. install dependencies in package.json
-1. initialize server
-2. Cadd and configure the database connection
-2. add controllers logic
-3. add routes
-4. test routes with Postman
+### WORKFLOW TO CREATE THE BACK-END
+0. Install all dependencies into package.json
+1. Initialize the server.js
+2. Add and configure the database connection
+2. Add logic to the controllers
+3. Add routes
+4. Test the routes with Postman
 
-
-### HOW I TESTED THE BACKEND
-
-- I tested the routes with Postman: you can find the json exports at this path: contactlist\backend\postman_test\methods.json
-
+### HOW I TESTED THE BACK-END
+I tested the routes with Postman: you can find the json exports at this path: contactlist\backend\postman_test\methods.json
 
 ### ERROR HANDLING
-
-2. GUIDE TO HTTP STATUS CODES USED IN THIS PROJECT:
+2.  THE HTTP STATUS CODES I  USED IN THIS PROJECT:
 
     ERRORS: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status#client_error_responses
 
@@ -57,17 +64,16 @@ README.md / This very README.md file
 
 ## FRONTEND
 
-1. add react frontend  as "frontend"
+1. Add react front-end  as "frontend"
 
 2. Clean the structure of the proejct
     - Delete unused files and folders
     - Create new folders and files
-2. organize src/components:
-    - buttons: add, delete, update a contact
-    - Navbar.jsx
-    - Table.jsx
 
 3. organize src/pages:
     - Home.jsx
     - AddContact.jsx
     - UpdateContact.jsx
+
+4. Add a minimalistic style with CSS:
+- I chose not to focus on the style, bacause I needed to concentrate on the back-end logic and on building a solid React front-end using Hooks like UseEffect and UseState. These were my 2 main goals.
