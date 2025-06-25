@@ -18,7 +18,8 @@ The front-end takes care of fetching all the content to perform the get, put, de
 
 controllers =>   contacts.js = Functions to perform CRUD actions on the 'contact' table (that gives life to the contact list you'll see in the frontend)
 
-            =>   companies.js = One single function to get all companies (no further methods are needed on the 'company' table)
+
+controllers =>   companies.js = One single function to get all companies (no further methods are needed on the 'company' table)
 
 
 database    =>   config.js = Sets a pool connection with a PostgreSQL database
