@@ -17,21 +17,30 @@ The front-end takes care of fetching all the content to perform the get, put, de
 ### STRUCTURE
 
 controllers =>   contacts.js = Functions to perform CRUD actions on the 'contact' table (that gives life to the contact list you'll see in the frontend)
+
             =>   companies.js = One single function to get all companies (no further methods are needed on the 'company' table)
+
 
 database    =>   config.js = Sets a pool connection with a PostgreSQL database
 
+
 routes      =>   contacts_companies.js  = Defines all routes for the server
+
 
 postman_doc =>   methods.json = The json export of all the methods called with Postman. Copy the body of this json object in Postman API calls to test if the backend API work
 
+
 .env        => ignored by GIT, it contains the PostgreSQL connection string
 
+
 server.js   => the main (and only) express app that starts the server
+
+
 
 .gitignore  => Instructions for GIT to ignore the .env
 
 README.md   => This very README.md file
+
 
 ### WORKFLOW TO CREATE THE BACK-END
 0. Install all dependencies into package.json
