@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import "../styles/app.css";
+import "../styles/index.css";
 
 const UpdateContact = () => {
     const { id } = useParams();

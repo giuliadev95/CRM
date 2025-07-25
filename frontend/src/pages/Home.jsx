@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate to redirec
 import { AiTwotoneDelete } from "react-icons/ai"; // bin icon to delete a contact
 import { FaPen } from "react-icons/fa"; // pen to update a contact
 
-import "../styles/app.css";
+import "../styles/index.css";
 
 const Fetch = () => {
     // Store all contacts fetched from the PostgreSQL database 
@@ -71,71 +71,71 @@ const Fetch = () => {
     
     // return:
     return (
-        <>   
-        <div class="search-and-actions-container">
-            {/* Searchbar*/}
-            <input 
-                    type='text' 
-                    placeholder='Search'
-                    value = {input}
-                    onChange = {(e) => setInput(e.target.value)}
-                />   
-            {/* Button to add a new contact */}
-            <button 
-                type="button"
-                onClick={ ()=> openForm()}
-                >
-                + New
-            </button>
-        </div>
-        {/* Contact list table */}
-        <table>
-            <thead>
-                <tr>
-                    <th scope="col"> Name </th>
-                    <th scope="col"> Email </th>
-                    <th scope="col"> Role</th>
-                    <th scope="col"> Company</th>
-                    <th scope="col"> Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {/* Map the fetched contacts to display each of them in a table row */}
-                {filteredContacts.length > 0 ? (
-                    filteredContacts.map((contact) => (  
-                        <tr key={contact.id_contact}>
-                            <td> {contact.name}</td>
-                            <td>{contact.email}</td>
-                            <td>{contact.role}</td>
-                            <td>{contact.company_name || "-"}</td>
+        <> 
+            <div class="search-and-actions-container">
+                {/* Searchbar*/}
+                <input 
+                        type='text' 
+                        placeholder='Search'
+                        value = {input}
+                        onChange = {(e) => setInput(e.target.value)}
+                    />   
+                {/* Button to add a new contact */}
+                <button 
+                    type="button"
+                    onClick={ ()=> openForm()}
+                    >
+                    + New
+                </button>
+            </div>
+            {/* Contact list table */}
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col"> Name </th>
+                        <th scope="col"> Email </th>
+                        <th scope="col"> Role</th>
+                        <th scope="col"> Company</th>
+                        <th scope="col"> Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {/* Map the fetched contacts to display each of them in a table row */}
+                    {filteredContacts.length > 0 ? (
+                        filteredContacts.map((contact) => (  
+                            <tr key={contact.id_contact}>
+                                <td> {contact.name}</td>
+                                <td>{contact.email}</td>
+                                <td>{contact.role}</td>
+                                <td>{contact.company_name || "-"}</td>
 
-                            <td class="actions-button-container"> 
+                                <td class="actions-button-container"> 
 
-                                {/* Delete button that calls the delete function */}
-                                <button
-                                type="button"
-                                class="actions-button"
-                                onClick={ ()=> deleteContact(contact.id_contact) }
-                                >
-                                <AiTwotoneDelete/>
-                                </button>   
+                                    {/* Delete button that calls the delete function */}
+                                    <button
+                                    type="button"
+                                    class="actions-button"
+                                    onClick={ ()=> deleteContact(contact.id_contact) }
+                                    >
+                                    <AiTwotoneDelete/>
+                                    </button>   
 
-                                {/* Update button that calls the update function */}
-                                <button
-                                type="button"
-                                class="actions-button"
-                                onClick={ ()=> openContactPage(contact.id_contact) }
-                                >
-                                <FaPen/>
-                                </button>         
-                            </td>      
-                        </tr>
-                    ))
-                ) : (
-                    <p>No matching results</p>
-                )}
-            </tbody>
-        </table>
+                                    {/* Update button that calls the update function */}
+                                    <button
+                                    type="button"
+                                    class="actions-button"
+                                    onClick={ ()=> openContactPage(contact.id_contact) }
+                                    >
+                                    <FaPen/>
+                                    </button>         
+                                </td>      
+                            </tr>
+                        ))
+                    ) : (
+                        <p>No matching results</p>
+                    )}
+                </tbody>
+            </table>
         </>
     );
 };
