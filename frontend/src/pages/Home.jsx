@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate to redirect to configured routes without refreshing the page thanks to SPA
 import { AiTwotoneDelete } from "react-icons/ai"; // bin icon to delete a contact
 import { FaPen } from "react-icons/fa"; // pen to update a contact
-
+import { IoSearchOutline } from "react-icons/io5";
 import "../styles/index.css";
 
 const Fetch = () => {
@@ -71,45 +71,40 @@ const Fetch = () => {
     
     // return:
     return (
-        <> 
-            <div class="search-and-actions-container">
+        <div className="mt-[20px]"> 
+            <div className="flex flex-col justify-center items-center">
+                <div className="flex">
                 {/* Searchbar*/}
-                <input 
-                        type='text' 
-                        placeholder='Search'
-                        value = {input}
-                        onChange = {(e) => setInput(e.target.value)}
-                    />   
+                <input className="min-w-fit"
+                    type='text' 
+                    placeholder='Search'
+                    value = {input}
+                    onChange = {(e) => setInput(e.target.value)}
+                />   
+                <IoSearchOutline />
+
+                </div>
                 {/* Button to add a new contact */}
                 <button 
                     type="button"
                     onClick={ ()=> openForm()}
                     >
-                    + New
+                    +
                 </button>
             </div>
+
             {/* Contact list table */}
-            <table>
-                <thead>
-                    <tr>
-                        <th scope="col"> Name </th>
-                        <th scope="col"> Email </th>
-                        <th scope="col"> Role</th>
-                        <th scope="col"> Company</th>
-                        <th scope="col"> Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <div>
                     {/* Map the fetched contacts to display each of them in a table row */}
                     {filteredContacts.length > 0 ? (
                         filteredContacts.map((contact) => (  
-                            <tr key={contact.id_contact}>
-                                <td> {contact.name}</td>
-                                <td>{contact.email}</td>
-                                <td>{contact.role}</td>
-                                <td>{contact.company_name || "-"}</td>
+                            <ul key={contact.id_contact}>
+                                <li> {contact.name}</li>
+                                <li>{contact.email}</li>
+                                <li>{contact.role}</li>
+                                <li>{contact.company_name || "-"}</li>
 
-                                <td class="actions-button-container"> 
+                                <li class="actions-button-container"> 
 
                                     {/* Delete button that calls the delete function */}
                                     <button
@@ -128,15 +123,14 @@ const Fetch = () => {
                                     >
                                     <FaPen/>
                                     </button>         
-                                </td>      
-                            </tr>
+                                </li>      
+                            </ul>
                         ))
                     ) : (
                         <p>No matching results</p>
-                    )}
-                </tbody>
-            </table>
-        </>
+                    )}      
+            </div>
+        </div>
     );
 };
 

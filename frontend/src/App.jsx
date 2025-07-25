@@ -8,7 +8,6 @@ import './styles/index.css';
 // 3 ROUTES: Homepage with the contact list, Page to add a new contact, Page to update an existent contact
 function App() {
   return (
-    <> 
       <BrowserRouter>
         <Navbar/>
         <Routes>
@@ -17,7 +16,6 @@ function App() {
           <Route path='/update-contact/:id' element={<UpdateContact/>}/> {/** ROUTE TO DISPLAY THE UPDATE-CONTACT FORM */}
         </Routes>
       </BrowserRouter>
-    </>
   )
 }
 
