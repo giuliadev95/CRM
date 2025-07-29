@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate to redirect to configured routes without refreshing the page thanks to SPA
 import { AiTwotoneDelete } from "react-icons/ai"; // bin icon to delete a contact
 import { FaPen } from "react-icons/fa"; // pen to update a contact
-import { IoSearchOutline } from "react-icons/io5";
+import { IoSearchOutline } from "react-icons/io5"; // search lens icon
+import { FaUser } from "react-icons/fa"; // user icon
 import "../styles/index.css";
 
 const Fetch = () => {
@@ -99,11 +100,11 @@ const Fetch = () => {
                     {filteredContacts.length > 0 ? (
                         filteredContacts.map((contact) => (  
                             <ul key={contact.id_contact}>
+                                <FaUser/>
                                 <li> {contact.name}</li>
                                 <li>{contact.email}</li>
                                 <li>{contact.role}</li>
                                 <li>{contact.company_name || "-"}</li>
-
                                 <li class="actions-button-container"> 
 
                                     {/* Delete button that calls the delete function */}
