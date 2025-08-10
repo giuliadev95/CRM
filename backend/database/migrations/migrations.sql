@@ -74,3 +74,33 @@ SELECT * FROM CONTACT;
 
 /* SELECT ALL DATABASES ON POSTGRESQL FOR SANITY CHECK */
 SELECT datname, datallowconn, datacl FROM pg_database
+
+
+/* VIEW OF CONTACTS + COMPANIES : USE ONLY FOR VIEWS */
+CREATE OR REPLACE VIEW contacts_companies_view AS
+SELECT
+  c.id_contact,
+  c.name,
+  c.phone,
+  c.email,
+  c.role,
+  c.company_id,
+  co.name as company_name,
+  co.email AS company_email,
+  co.website AS website
+FROM contact c
+LEFT JOIN company co
+  ON c.company_id = co.id_company
+ORDER BY c.name;
+  /* test the view */
+  SELECT * FROM contacts_companies_view ORDER BY name;
+  SELECT * FROM contacts_companies_view WHERE id_contact = 13;
+  SELECT * FROM contacts_companies_view WHERE id_contact = $1; /* for dynamic research in the webapp only */
+
+
+  /* VIEW OF COMPANIES : USE ONLY FOR VIEWS */
+CREATE OR REPLACE VIEW companies_view AS
+SELECT * FROM company;
+/* test the view */
+SELECT * FROM companies_view ORDER BY name;
+

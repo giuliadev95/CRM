@@ -4,15 +4,12 @@ import { pool } from '../database/config.js';
 export const get_contacts = async (req, res) => {
   try {
     const result = await pool.query(`
-      SELECT contact.*, company.name AS company_name
-      FROM contact
-      LEFT JOIN company ON contact.company_id = company.id_company
-      ORDER BY contact.name ASC
+       SELECT * FROM contacts_companies_view ORDER BY name
     `);
     res.status(200).json(result.rows);
   } catch (err) {
     console.error(err);
-    res.status(500).send("Error in getting all contacts joined to their company-names.");
+    res.status(500).send("Error in getting the VIEW of all contacts joined to their company-names.");
   }
 };
 
@@ -46,10 +43,7 @@ export const get_single_contact = async (req, res) => {
 
   try {
     const result = await pool.query(
-      `SELECT contact.*, company.name AS company_name
-       FROM contact
-       LEFT JOIN company ON contact.company_id = company.id_company
-       WHERE id_contact = $1`,
+      `SELECT * FROM contacts_companies_view WHERE id_contact = $1`,
       [id]
     );
 
