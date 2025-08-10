@@ -51,3 +51,7 @@ td {
   font-weight: 400;
 }
 */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -73,6 +73,7 @@ const Fetch = () => {
     // return:
     return (
         <div className="mt-[20px]"> 
+        <h1 className="text-red-500">Test colors</h1>
             <div className="flex flex-col justify-center items-center">
                 <div className="flex">
                 {/* Searchbar*/}
