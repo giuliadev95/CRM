@@ -4,7 +4,7 @@ import { pool } from '../database/config.js';
 export const get_companies = async (req, res) => {
   try {
     const result = await pool.query(
-      `SELECT id_company, name FROM company ORDER BY name`
+      ` SELECT * FROM companies_view `
     );
     res.status(200).json(result.rows);
   } catch (err) {
