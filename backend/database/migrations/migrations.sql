@@ -1,10 +1,3 @@
-/*
-    Queries to create the
-    - contact
-    - company
-    tables on PostgreSQL
-*/
-
 /* COMPANY TABLE */
 CREATE TABLE IF NOT EXISTS company (
   id_company SERIAL PRIMARY KEY,
@@ -16,8 +9,6 @@ CREATE TABLE IF NOT EXISTS company (
   notes TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-
 
 /* CONTACT TABLE */
 CREATE TABLE IF NOT EXISTS contact (
@@ -51,7 +42,7 @@ INSERT INTO company (name, phone, email, website, company_type, notes, created_a
 ('NovaTrends', '0302 44 11 22 99', 'info@novatrends.it', 'www.novatrends.it', 'Client', 'Retail chain across Europe.', '2025-06-03 20:56:42.163');
 
 /* SELECT ALL FROM COMPANY */
-SELECT * FROM COMPANY;
+SELECT * FROM COMPANY ORDER BY name;
 
 /* POPULATE THE CONTACT TABLE */
 INSERT INTO contact (name, phone, email, role, company_id, details, created_at) VALUES
@@ -70,14 +61,14 @@ INSERT INTO contact (name, phone, email, role, company_id, details, created_at) 
 ('Anna Altani', '349 27 34 573', 'annaaltani@gmail.com', 'Secretary', 8, 'Coordinates meetings, documents, and client calls.', '2025-06-10');
 
 /* SELECT ALL FROM CONTACT */
-SELECT * FROM CONTACT;
+SELECT * FROM CONTACT ORDER BY name;
 
 /* SELECT ALL DATABASES ON POSTGRESQL FOR SANITY CHECK */
 SELECT datname, datallowconn, datacl FROM pg_database
 
-
 /* VIEW OF CONTACTS + COMPANIES : USE ONLY FOR VIEWS */
-CREATE OR REPLACE VIEW contacts_companies_view AS
+DROP VIEW contacts_companies_view;
+CREATE VIEW contacts_companies_view AS
 SELECT
   c.id_contact,
   c.name,
@@ -85,6 +76,7 @@ SELECT
   c.email,
   c.role,
   c.company_id,
+  c.details,
   co.name as company_name,
   co.email AS company_email,
   co.website AS website
@@ -97,10 +89,9 @@ ORDER BY c.name;
   SELECT * FROM contacts_companies_view WHERE id_contact = 13;
   SELECT * FROM contacts_companies_view WHERE id_contact = $1; /* for dynamic research in the webapp only */
 
-
   /* VIEW OF COMPANIES : USE ONLY FOR VIEWS */
 CREATE OR REPLACE VIEW companies_view AS
 SELECT * FROM company;
-/* test the view */
+/* test the view */+
 SELECT * FROM companies_view ORDER BY name;
 

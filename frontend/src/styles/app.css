@@ -1,3 +1,4 @@
+/*
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -47,3 +48,30 @@ td {
   text-align: left;
   font-weight: 400;
 }
+  */
+  .search-new-container{
+    display: flex;
+    gap: 1rem;
+  }
+  form input{
+    border:none;
+    border-color: white;
+    max-width: 300px;
+  }
+
+  button {
+    border:none;
+    background-color: white;
+  }
+
+  .app-container {
+    min-width: 100vh;
+    background-color: #d5d5d5;
+  }
+
+.navlink,
+.navlink:visited {
+    text-decoration: none;
+    color: inherit;
+}
+

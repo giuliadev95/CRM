@@ -15,29 +15,30 @@ export const get_contacts = async (req, res) => {
 
 // POST a new contact
 export const post_contact = async (req, res) => {
-  const { name, phone, email, role, company_id} = req.body;
+  const { name, phone, email, role, company_id, details} = req.body;
   // try catch block: insert the record and use $int placeholders to establish the values' counting
   try {
     await pool.query(
-      `INSERT INTO contact (name, phone, email, role, company_id)
-       VALUES ($1, $2, $3, $4, $5)`,
+      `INSERT INTO contact (name, phone, email, role, company_id, details)
+       VALUES ($1, $2, $3, $4, $5, $6)`,
       [
         name,
         phone, 
         email, 
         role, 
-        company_id
+        company_id,
+        details
       ]
     );
 
     res.status(201).send({ message: "Contact created successfully." });
   } catch (err) {
-    console.error("Error creating the contact", err);
+    console.error(`Error creating the contact: ${error}`);
     res.status(500).send({ error: "Internal server error: The creation of the contact failed. Check the syntax and logic of the query in the backend." });
   }
 };
 
-// GET a single contact ( BY ID )
+// GET a single contact by ID
 export const get_single_contact = async (req, res) => {
   const { id } = req.params;
 
@@ -58,7 +59,7 @@ export const get_single_contact = async (req, res) => {
   }
 };
 
-// DELETE a single contact ( by ID )
+// DELETE a single contact by ID
 export const delete_contact = async (req, res) => {
   const { id } = req.params;
   try {
@@ -78,7 +79,7 @@ export const delete_contact = async (req, res) => {
   }
 };
 
-// UPDATE a single contact (by ID )
+// UPDATE a single contact by ID
 export const update_contact = async (req, res) => {
   const { id } = req.params;
   const { name, phone, email, role, company_id, details } = req.body;
