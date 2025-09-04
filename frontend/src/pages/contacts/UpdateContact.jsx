@@ -113,8 +113,25 @@ const UpdateContact = () => {
                         </option>
                     ))}
                 </select>
+                <button
+                    type="button"
+                    onClick={(e)=> navigate("/new-company")}
+                >
+                    Aggiungi nuova
+                </button>
 
-                <button type="submit" className="add">Save</button>
+                <button 
+                    type="submit"
+                >
+                    Salva
+                </button>
+                <button 
+                    type="button"
+                    onClick= {(e)=>  navigate("/")}
+                >
+                    Indietro
+                </button>
+
             </form>
         </>
     );

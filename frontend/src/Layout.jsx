@@ -7,7 +7,6 @@ export default function Layout() {
         <nav>
           <NavLink to="/" className="navlink">Contatti</NavLink>
           <NavLink to="/companies" className="navlink">Aziende</NavLink>
-          <NavLink to="/leads" className="navlink">Leads</NavLink>
           <NavLink to="/projects" className="navlink">Progetti</NavLink>
         </nav>
       </aside>

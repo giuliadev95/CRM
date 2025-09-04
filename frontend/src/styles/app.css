@@ -49,7 +49,7 @@ td {
   font-weight: 400;
 }
   */
-  .search-new-container{
+  .top-actions-container{
     display: flex;
     gap: 1rem;
   }

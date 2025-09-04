@@ -19,7 +19,6 @@ const ContactsList = () => {
 
     
     useEffect(()=> {
-
         // Fetch all contacts from the backend when the DOM mounts
         fetch("http://localhost:3000/api/contacts/get")
         .then ( (response) => response.json() )
@@ -80,16 +79,15 @@ const ContactsList = () => {
         navigate(`/contact-view/${id}`);
     }
     
-    
     // return:
     return (
         <>   
-        <div class="search-new-container">
+        <div class="top-actions-container">
             <form onSubmit={handleSubmit}>
                 {/* Searchbar*/}
                 <input 
                         type='text' 
-                        placeholder='Search'
+                        placeholder='Nome contatto'
                         value = {input}
                         onChange = {(e) => setInput(e.target.value)}
                     />   
@@ -100,7 +98,7 @@ const ContactsList = () => {
                 type="button"
                 onClick={ ()=> openForm()}
                 >
-                + New
+                + Nuovo
             </button>
         </div>
         {/* Contact list table */}
@@ -108,6 +106,7 @@ const ContactsList = () => {
             <thead>
                 <tr>
                     <th scope="col"> Nome </th>
+                    <th scope="col"> Telefono</th>
                     <th scope="col"> Email </th>
                     <th scope="col"> Ruolo</th>
                     <th scope="col"> Azienda</th>
@@ -120,10 +119,10 @@ const ContactsList = () => {
                     filteredContacts.map((contact) => (  
                         <tr key={contact.id_contact}>
                             <td>{contact.name}</td>
+                            <td>{contact.phone}</td>
                             <td>{contact.email}</td>
                             <td>{contact.role}</td>
                             <td>{contact.company_name || "-"}</td>
-
                             <td class="actions-button-container"> 
 
                                 {/* View single contact's page button that calls the delete function */}
@@ -155,7 +154,7 @@ const ContactsList = () => {
                         </tr>
                     ))
                 ) : (
-                    <p>No matching results</p>
+                    <p>Nessun contatto trovato</p>
                 )}
             </tbody>
         </table>

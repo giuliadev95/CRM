@@ -80,6 +80,12 @@ const ContactView = () => {
                     )}
                 </tbody>
             </table>
+            <button
+                type="button"
+                onClick={ (e)=> navigate ("/")}
+            >
+                Indietro
+            </button>
         </div>
     );
 };

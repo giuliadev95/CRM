@@ -1,4 +1,6 @@
 /* COMPANY TABLE */
+SELECT * FROM company ORDER BY name;
+
 CREATE TABLE IF NOT EXISTS company (
   id_company SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
@@ -22,46 +24,47 @@ CREATE TABLE IF NOT EXISTS contact (
   created_at DATE DEFAULT CURRENT_DATE
 );
 
+/* CONFIGURE: ON DELETE OF THE COMPANY ID, SET IT TO 'NULL'*/
+ALTER TABLE contact
+ALTER COLUMN company_id DROP NOT NULL;
+
+/* DROP THE FK OF 'COMPANY_ID' AND ADD IT AGAIN BUT WITH THE PROPERTY: 'ON DELETE SET NULL'*/
+ALTER TABLE contact DROP CONSTRAINT contact_company_id_fkey;
+ALTER TABLE contact
+ADD CONSTRAINT contact_company_id_fkey
+FOREIGN KEY (company_id)
+REFERENCES company(id_company)
+ON DELETE SET NULL;
+
 /* LEFT JOIN */
 SELECT contact.*, company.name AS company_name
 FROM contact
 LEFT JOIN company ON contact.company_id = company.id_company
 ORDER BY contact.id_contact;
 
-/* POPULATE THE COMPANY TABLE */
+/* PUPULATE COMPANY TABLE */
 INSERT INTO company (name, phone, email, website, company_type, notes, created_at) VALUES
-('ACME', '0362 22 44 77 88', 'acmegroup@acme.it', 'www.acme.com', 'Client', 'Client we supply with oil, gasoline, diesel.', '2025-06-03 20:56:42.163'),
-('BetaTech', '0211 45 66 12 33', 'contact@betatech.com', 'www.betatech.com', 'Supplier', 'IT and infrastructure supplier since 2020.', '2025-06-03 20:56:42.163'),
-('Gamma Consulting', '0345 98 77 11 44', 'info@gammaconsulting.it', 'www.gammaconsulting.it', 'Partner', 'Consulting partner for compliance and legal.', '2025-06-03 20:56:42.163'),
-('DeltaGroup', '0391 55 33 22 11', 'admin@deltagroup.eu', 'www.deltagroup.eu', 'Client', 'Provides logistics support for southern Italy.', '2025-06-03 20:56:42.163'),
-('Omega Srl', '0377 22 33 99 21', 'sales@omega-srl.com', 'www.omega-srl.com', 'Prospect', 'Potential future partner.', '2025-06-03 20:56:42.163'),
-('NextGen Marketing', '0321 11 22 33 44', 'hello@nextgenmarketing.it', 'www.nextgenmarketing.it', 'Supplier', 'Digital marketing and lead generation.', '2025-06-03 20:56:42.163'),
-('FusionWorks', '0388 66 44 55 66', 'info@fusionworks.com', 'www.fusionworks.com', 'Partner', 'Handles CRM development.', '2025-06-03 20:56:42.163'),
-('EcoGreen Ltd', '0355 88 77 66 55', 'support@ecogreen.it', 'www.ecogreen.it', 'Supplier', 'Supplies eco-sustainable packaging.', '2025-06-03 20:56:42.163'),
-('BlueOcean Spa', '0311 99 88 77 00', 'info@blueoceanspa.it', 'www.blueoceanspa.it', 'Competitor', 'Main competitor in the north.', '2025-06-03 20:56:42.163'),
-('NovaTrends', '0302 44 11 22 99', 'info@novatrends.it', 'www.novatrends.it', 'Client', 'Retail chain across Europe.', '2025-06-03 20:56:42.163');
+('TechWorld S.p.A.', '02 45678901', 'info@techworld.it', 'www.techworld.it', 'Cliente', 'Cliente storico nel settore bancario, progetti continui su cloud e cybersecurity.', '2025-09-01 09:00:00'),
+('GreenLife Solutions', '06 11223344', 'contatti@greenlifesol.it', 'www.greenlifesol.it', 'Prospect', 'Startup nel campo delle energie rinnovabili, potenziale cliente per sistemi ERP.', '2025-09-01 09:01:00'),
+('BizAdvance Consulting', '011 22334455', 'info@bizadvance.it', 'www.bizadvance.it', 'Partner', 'Società partner su progetti di digitalizzazione e formazione HR.', '2025-09-01 09:02:00'),
+('SmartChain SRL', '055 77889966', 'sales@smartchain.com', 'www.smartchain.com', 'Cliente', 'Azienda di logistica digitale, attiva su progetti di automazione magazzino.', '2025-09-01 09:03:00'),
+('Innovo S.r.l.', '081 33445566', 'admin@innovo.it', 'www.innovo.it', 'Fornitore', 'Fornitore di soluzioni software verticali per settore sanitario.', '2025-09-01 09:04:00');
 
-/* SELECT ALL FROM COMPANY */
-SELECT * FROM COMPANY ORDER BY name;
-
-/* POPULATE THE CONTACT TABLE */
+/* PUPULATE CONTACT TABLE */
 INSERT INTO contact (name, phone, email, role, company_id, details, created_at) VALUES
-('Lucia Ferrini', '349 27 34 561', 'lucia.ferrini@acme.it', 'Operations', 2, 'Oversees logistics and supply chain coordination.', '2025-06-03'),
-('Alessandro Greco', '349 27 34 562', 'agreco@gammaconsulting.it', 'Consultant', 7, 'Senior advisor on legal compliance and strategy.', '2025-06-03'),
-('Matteo Serra', '349 27 34 563', 'm.serra@omega-srl.com', 'Sales Rep', 5, 'Follow-up contact for commercial offers.', '2025-06-03'),
-('Elisa Marchetti', '349 27 34 564', 'emarchetti@nextgenmarketing.it', 'Marketing Lead', 6, 'Handles digital marketing campaigns and SEO.', '2025-06-03'),
-('Gabriele Conti', '349 27 34 565', 'gabriele@nextgenmarketing.it', 'Copywriter', 6, 'Responsible for advertising content and blog writing.', '2025-06-03'),
-('Matteo Galli', '349 27 34 566', 'matteogalli@libero.it', 'Account Manager', 9, 'Manages key client accounts in the retail sector.', '2025-06-04'),
-('Leone Magni', '349 27 34 567', 'leonemagni@libero.it', 'Sales Executive', 7, 'Handles B2B sales and partnership development.', '2025-06-06'),
-('Alessandro Terzi', '349 27 34 568', 'aleterzi@gmail.com', 'Technical Lead', 6, 'Leads backend development and infrastructure design.', '2025-06-06'),
-('Alessandro Terzi', '349 27 34 569', 'seo@gmail.com', 'SEO Specialist', 9, 'Optimizes website content for search engine visibility.', '2025-06-06'),
-('Alessandro Terzo', '349 27 34 570', 'test@gmail.com', 'Administrative Assistant', 8, 'Supports HR and finance with internal reporting.', '2025-06-09'),
-('Danilo Longoni', '349 27 34 571', 'danilo1@gmail.com', 'CEO', 8, 'Founder and executive leader responsible for strategy.', '2025-06-09'),
-('Clara Mauri', '349 27 34 572', 'claramauri@gmail.com', 'CEO', 6, 'Leads vision and growth initiatives for the company.', '2025-06-09'),
-('Anna Altani', '349 27 34 573', 'annaaltani@gmail.com', 'Secretary', 8, 'Coordinates meetings, documents, and client calls.', '2025-06-10');
+('Silvia Romano', '328 1234567', 's.romano@techworld.it', 'IT Manager', 1, 'Gestisce i progetti di infrastruttura cloud e sicurezza. Referente principale per le soluzioni enterprise.', '2025-09-01'),
+('Andrea Greco', '347 9876543', 'a.greco@greenlifesol.it', 'Responsabile Acquisti', 2, 'Si occupa della selezione di fornitori tecnologici e trattative commerciali.', '2025-09-01'),
+('Laura Ferrari', '334 3344556', 'l.ferrari@bizadvance.it', 'Consulente HR', 3, 'Supporta i clienti nei progetti di digitalizzazione HR, onboarding e formazione.', '2025-09-01'),
+('Roberto Galli', '340 2233445', 'r.galli@smartchain.com', 'Sales Executive', 4, 'Responsabile delle trattative per progetti IT logistici e CRM. Coordina il team sales.', '2025-09-01'),
+('Martina Rossi', '345 6677889', 'm.rossi@innovo.it', 'Account Manager', 5, 'Gestisce i rapporti commerciali e segue la personalizzazione dei software forniti.', '2025-09-01'),
+('Giovanni Conti', '333 2244668', 'g.conti@techworld.it', 'Specialista Cybersecurity', 1, 'Collabora su progetti di audit e implementazione policy di sicurezza. Relatore in eventi marketing.', '2025-09-02'),
+('Valeria Sanna', '392 4455667', 'v.sanna@greenlifesol.it', 'Marketing Manager', 2, 'Gestisce campagne digitali e relazioni con aziende partner. Interessata a servizi CRM.', '2025-09-02'),
+('Luca Marchetti', '366 8899001', 'l.marchetti@bizadvance.it', 'Formatore', 3, 'Eroga corsi su soft skills e strumenti HR digitali per clienti aziendali.', '2025-09-02'),
+('Claudio De Luca', '340 5566778', 'c.deluca@smartchain.com', 'HR Manager', 4, 'Responsabile della selezione IT, coordina piani di formazione tecnica interna.', '2025-09-02'),
+('Elena Grassi', '335 7788990', 'elena.grassi@innovo.it', 'Specialista prodotto', 5, 'Segue le implementazioni software e formazione clienti finali nel settore sanitario.', '2025-09-02');
 
 /* SELECT ALL FROM CONTACT */
-SELECT * FROM CONTACT ORDER BY name;
+SELECT * FROM contact ORDER BY name;
 
 /* SELECT ALL DATABASES ON POSTGRESQL FOR SANITY CHECK */
 SELECT datname, datallowconn, datacl FROM pg_database
@@ -84,14 +87,60 @@ FROM contact c
 LEFT JOIN company co
   ON c.company_id = co.id_company
 ORDER BY c.name;
-  /* test the view */
-  SELECT * FROM contacts_companies_view ORDER BY name;
-  SELECT * FROM contacts_companies_view WHERE id_contact = 13;
-  SELECT * FROM contacts_companies_view WHERE id_contact = $1; /* for dynamic research in the webapp only */
+/* test the view */
+SELECT * FROM contacts_companies_view ORDER BY name;
+SELECT * FROM contacts_companies_view WHERE id_contact = 13;
+SELECT * FROM contacts_companies_view WHERE id_contact = $1; /* for dynamic research in the webapp only */
 
-  /* VIEW OF COMPANIES : USE ONLY FOR VIEWS */
+/* VIEW OF COMPANIES : USE ONLY FOR VIEWS */
 CREATE OR REPLACE VIEW companies_view AS
 SELECT * FROM company;
-/* test the view */+
+/* test the view */
 SELECT * FROM companies_view ORDER BY name;
 
+
+/* PROJECTS TABLE */
+SELECT * FROM projects;
+
+CREATE TABLE projects (
+  id_project SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
+  company_id INTEGER REFERENCES company(id_company),
+  status VARCHAR(50) DEFAULT 'Attivo',
+  start_date DATE,
+  end_date DATE,
+  budget NUMERIC(12,2),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE projects
+ADD CONSTRAINT status_check
+CHECK (status IN ('Attivo', 'Chiuso', 'In attesa', 'Perso'));
+
+ALTER TABLE projects DROP CONSTRAINT projects_company_id_fkey;
+ALTER TABLE projects
+ADD CONSTRAINT projects_company_id_fkey
+FOREIGN KEY (company_id)
+REFERENCES company(id_company)
+ON DELETE SET NULL;
+
+/* CREATE projects_view */
+CREATE OR REPLACE VIEW projects_view AS
+SELECT * FROM projects;
+/* TEST THE PROJECTS VIEW */
+SELECT * FROM projects_view
+ORDER BY NAME;
+
+INSERT INTO projects (name, description, company_id, status, start_date, end_date, budget) VALUES
+('Migrazione Infrastruttura Cloud', 'Progetto di trasferimento dei servizi bancari di TechWorld S.p.A. su infrastruttura AWS con implementazione di misure avanzate di sicurezza.', 21, 'Attivo', '2025-09-05', NULL, 32000),
+('Implementazione ERP Green', 'Sviluppo e integrazione di una piattaforma ERP personalizzata per la gestione clienti e processi interni di GreenLife Solutions.', 22, 'In attesa', '2025-09-10', NULL, 18000),
+('Academy HR Digitale', 'Percorso formativo completo per il personale HR dei clienti BizAdvance Consulting per adozione di nuovi strumenti digitali.', 23, 'Chiuso', '2025-06-15', '2025-08-30', 9000),
+('Automazione Magazzino', 'Progetto per la digitalizzazione e automazione dei processi di logistica presso SmartChain SRL, con dashboard di monitoraggio in tempo reale.', 24, 'Attivo', '2025-08-20', NULL, 25000);
+
+/*
+  DANGER ZONE - DROP TABLES HERE!
+  DROP TABLE company;
+  DROP TABLE contact;
+  DROP TABLE projects;
+*/

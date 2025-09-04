@@ -53,7 +53,7 @@ const NewContact = () => {
                 <input
                     type="text"
                     name="name"
-                    placeholder="Name"
+                    placeholder="Nome"
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
@@ -71,7 +71,7 @@ const NewContact = () => {
                 <input
                     type="text"
                     name="role"
-                    placeholder="Role"
+                    placeholder="Ruolo"
                     required
                     value={role}
                     onChange={(e) => setRole(e.target.value)}
@@ -93,7 +93,7 @@ const NewContact = () => {
                     onChange={(e) => setCompanyId(e.target.value)}
                     required
                 >
-                    <option value="">Select company</option>
+                    <option value="">Azienda</option>
                     {companies.map((c) => (
                         <option key={c.id_company} value={c.id_company}>
                             {c.name}
@@ -101,8 +101,18 @@ const NewContact = () => {
                     ))}
                 </select>
 
-                <button type="submit" className="add">Save</button>
+                <button 
+                    type="submit"
+                >
+                    Salva
+                </button>
             </form>
+             <button
+                type="button"
+                onClick= {()=> navigate('/')}
+            >
+                Indietro
+            </button>
         </>
     );
 };

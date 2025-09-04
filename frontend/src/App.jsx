@@ -4,7 +4,9 @@ import NewContact from './pages/contacts/NewContact.jsx'
 import UpdateContact from "./pages/contacts/UpdateContact.jsx";
 import ContactView from "./pages/contacts/ContactView.jsx";
 import CompaniesList from "./pages/companies/CompaniesList.jsx";
-import LeadsList from "./pages/leads/LeadsList.jsx";
+import CompanyView from "./pages/companies/CompanyView.jsx";
+import NewCompany from "./pages/companies/NewCompany.jsx";
+import UpdateCompany from "./pages/companies/UpdateCompany.jsx";
 import ProjectsList from "./pages/projects/ProjectsList.jsx";
 import Layout from "./Layout.jsx";
 import './styles/app.css';
@@ -22,7 +24,9 @@ function App() {
             <Route path='/update-contact/:id' element={<UpdateContact/>}/> {/** ROUTE TO DISPLAY THE UPDATE-CONTACT FORM */}
             <Route path='/contact-view/:id' element={<ContactView/>}/>
             <Route path='/companies' element={<CompaniesList/>}/>
-            <Route path='/leads' element={<LeadsList/>}/>
+            <Route path='/new-company' element={<NewCompany/>}/>
+            <Route path='/update-company/:id' element={<UpdateCompany/>}/>
+            <Route path='/company-view/:id' element={<CompanyView/>}/>
             <Route path='/projects' element={<ProjectsList/>}/>   
           </Route>
         </Routes>

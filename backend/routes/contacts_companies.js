@@ -1,15 +1,26 @@
 import express from 'express';
 import { get_contacts, post_contact, get_single_contact, delete_contact, update_contact } from '../controllers/contacts.js';
-import { get_companies } from '../controllers/companies.js';
-
+import { get_companies, get_single_company, post_company ,update_company, delete_company} from '../controllers/companies.js';
+import { get_projects, post_project, get_single_project, delete_project } from '../controllers/projects.js';
 const router = express.Router();
-
+ // companies
 router.get('/companies/get', get_companies);    
+router.get('/company/get/:id', get_single_company);  
+router.post('/company/post', post_company);  
+router.put('/company/update/:id', update_company);
+router.delete('/company/delete/:id', delete_company);
+
+// contacts
 router.get('/contacts/get', get_contacts);
-router.post('/contact/post', post_contact);
-router.delete('/contact/delete/:id', delete_contact);
-router.put('/contact/update/:id', update_contact);
 router.get('/contact/get/:id', get_single_contact);              
+router.post('/contact/post', post_contact);
+router.put('/contact/update/:id', update_contact);
+router.delete('/contact/delete/:id', delete_contact);
+
+// projects
+router.get('/projects/get', get_projects);
+router.post('/project/post', post_project);
 
 export default router;
+
 

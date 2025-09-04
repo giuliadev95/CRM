@@ -40,7 +40,7 @@ export const get_single_company = async (req, res) => {
   const {id} = req.params;
   try {
     const result = await pool.query(
-      ` DELETE FROM  companies WHERE id_company = $1 `,
+      ` DELETE FROM company WHERE id_company = $1 `,
       [id]
     );
     if (result.rowCount === 0) {
