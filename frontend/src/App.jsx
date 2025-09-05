@@ -8,6 +8,7 @@ import CompanyView from "./pages/companies/CompanyView.jsx";
 import NewCompany from "./pages/companies/NewCompany.jsx";
 import UpdateCompany from "./pages/companies/UpdateCompany.jsx";
 import ProjectsList from "./pages/projects/ProjectsList.jsx";
+import ProjectView from "./pages/projects/ProjectView.jsx";
 import Layout from "./Layout.jsx";
 import './styles/app.css';
 
@@ -27,7 +28,8 @@ function App() {
             <Route path='/new-company' element={<NewCompany/>}/>
             <Route path='/update-company/:id' element={<UpdateCompany/>}/>
             <Route path='/company-view/:id' element={<CompanyView/>}/>
-            <Route path='/projects' element={<ProjectsList/>}/>   
+            <Route path='/projects' element={<ProjectsList/>}/>
+            <Route path='/project-view/:id' element={<ProjectView/>}/>   
           </Route>
         </Routes>
       </BrowserRouter>

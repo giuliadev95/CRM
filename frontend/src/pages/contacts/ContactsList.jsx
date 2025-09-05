@@ -11,13 +11,11 @@ const ContactsList = () => {
 
     // Store the search input value and handles the input change
     const [input, setInput] = useState("");
-
-      const [searchTerm, setSearchTerm] = useState("");
+    const [searchTerm, setSearchTerm] = useState("");
 
     // Hooks the redirecting useNavigate functionalities to the "navigate" variable
     const navigate = useNavigate();
-
-    
+ 
     useEffect(()=> {
         // Fetch all contacts from the backend when the DOM mounts
         fetch("http://localhost:3000/api/contacts/get")
@@ -127,26 +125,26 @@ const ContactsList = () => {
 
                                 {/* View single contact's page button that calls the delete function */}
                                 <button
-                                type="button"
-                                class="actions-button"
-                                onClick={ ()=> openContactView(contact.id_contact) }
+                                    type="button"
+                                    class="actions-button"
+                                    onClick={ ()=> openContactView(contact.id_contact) }
                                 >
                                 <IoMdEye/>
                                 </button>   
                                 {/* Delete button that calls the delete function */}
                                 <button
-                                type="button"
-                                class="actions-button"
-                                onClick={ ()=> deleteContact(contact.id_contact) }
+                                    type="button"
+                                    class="actions-button"
+                                    onClick={ ()=> deleteContact(contact.id_contact) }
                                 >
                                 <AiTwotoneDelete/>
                                 </button>   
 
                                 {/* Update button that calls the update function */}
                                 <button
-                                type="button"
-                                class="actions-button"
-                                onClick={ ()=> openContactPage(contact.id_contact) }
+                                    type="button"
+                                    class="actions-button"
+                                    onClick={ ()=> openContactPage(contact.id_contact) }
                                 >
                                 <FaPen/>
                                 </button>         

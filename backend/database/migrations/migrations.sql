@@ -100,7 +100,6 @@ SELECT * FROM companies_view ORDER BY name;
 
 
 /* PROJECTS TABLE */
-SELECT * FROM projects;
 
 CREATE TABLE projects (
   id_project SERIAL PRIMARY KEY,
@@ -125,9 +124,17 @@ FOREIGN KEY (company_id)
 REFERENCES company(id_company)
 ON DELETE SET NULL;
 
+/* LEFT JOIN ON PROJECTS AND COMPANY TABLES*/
+SELECT projects.*, company.name AS company_name
+FROM projects
+LEFT JOIN company ON projects.company_id = company.id_company
+ORDER BY projects.id_project
+
 /* CREATE projects_view */
 CREATE OR REPLACE VIEW projects_view AS
-SELECT * FROM projects;
+SELECT projects.*, company.name as company_name 
+FROM projects
+LEFT JOIN company ON company_id = company.id_company
 /* TEST THE PROJECTS VIEW */
 SELECT * FROM projects_view
 ORDER BY NAME;
