@@ -19,7 +19,7 @@ router.delete('/contact/delete/:id', delete_contact);
 
 // projects
 router.get('/projects/get', get_projects);
-router.get('project/get/:id', get_single_project);
+router.get('/project/get/:id', get_single_project);
 router.post('/project/post', post_project);
 
 export default router;

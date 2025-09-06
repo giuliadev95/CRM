@@ -100,6 +100,7 @@ SELECT * FROM companies_view ORDER BY name;
 
 
 /* PROJECTS TABLE */
+SELECT * FROM projects;
 
 CREATE TABLE projects (
   id_project SERIAL PRIMARY KEY,

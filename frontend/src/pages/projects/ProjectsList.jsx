@@ -38,9 +38,6 @@ const ProjectsList =()=>{
             <th scope="col">Descrizione</th>
             <th scope="col">Azienda</th>
             <th scope="col">Status</th>
-            <th scope="col">Data inizio</th>
-            <th scope="col">Data fine</th>
-            <th scope="col">Opzioni</th>
           </tr>
         <tbody>     
         {projects.map((project)=> {
@@ -50,8 +47,6 @@ const ProjectsList =()=>{
             <td>{project.description}</td>
             <td>{project.company_name}</td>
             <td>{project.status}</td>
-            <td>{project.start_date}</td>
-            <td>{project.end_date}</td>
             <td>
               <button
               type="button"
