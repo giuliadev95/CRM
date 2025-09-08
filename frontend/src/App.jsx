@@ -9,10 +9,12 @@ import NewCompany from "./pages/companies/NewCompany.jsx";
 import UpdateCompany from "./pages/companies/UpdateCompany.jsx";
 import ProjectsList from "./pages/projects/ProjectsList.jsx";
 import ProjectView from "./pages/projects/ProjectView.jsx";
+import UpdateProject from "./pages/projects/UpdateProject.jsx";
+import NewProject from "./pages/projects/NewProject.jsx";
 import Layout from "./Layout.jsx";
 import './styles/app.css';
 
-// 3 ROUTES: Homepage with the contact list, Page to add a new contact, Page to update an existent contact
+// ROUTER 
 function App() {
   return (
     <> 
@@ -20,16 +22,28 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<Layout/>}>
+
+            {/** Home */}
+            <Route path='/' element={<ContactsList/>}/>
+
+            {/** Contacts */}
             <Route path='/' element={<ContactsList/>}/>
             <Route path='/new-contact' element={<NewContact />} />
-            <Route path='/update-contact/:id' element={<UpdateContact/>}/> {/** ROUTE TO DISPLAY THE UPDATE-CONTACT FORM */}
+            <Route path='/update-contact/:id' element={<UpdateContact/>}/>
             <Route path='/contact-view/:id' element={<ContactView/>}/>
+
+            {/** Companies */}
             <Route path='/companies' element={<CompaniesList/>}/>
-            <Route path='/new-company' element={<NewCompany/>}/>
-            <Route path='/update-company/:id' element={<UpdateCompany/>}/>
             <Route path='/company-view/:id' element={<CompanyView/>}/>
+            <Route path='/update-company/:id' element={<UpdateCompany/>}/>
+            <Route path='/new-company' element={<NewCompany/>}/>
+
+            {/** Projects */}
             <Route path='/projects' element={<ProjectsList/>}/>
             <Route path='/project-view/:id' element={<ProjectView/>}/>   
+            <Route path='/update-project/:id' element={<UpdateProject/>}/>
+            <Route path='/new-project' element={<NewProject/>}/>
+
           </Route>
         </Routes>
       </BrowserRouter>

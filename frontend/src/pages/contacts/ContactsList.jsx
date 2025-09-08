@@ -13,11 +13,11 @@ const ContactsList = () => {
     const [input, setInput] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
 
-    // Hooks the redirecting useNavigate functionalities to the "navigate" variable
+    // This constant hooks the "useNavigate()" functionalities to the "navigate" variable
     const navigate = useNavigate();
  
+    // useEffect() hook to fetch all contacts from the backend endpoint, when the DOM mounts
     useEffect(()=> {
-        // Fetch all contacts from the backend when the DOM mounts
         fetch("http://localhost:3000/api/contacts/get")
         .then ( (response) => response.json() )
         .then( (data) => {
@@ -32,7 +32,7 @@ const ContactsList = () => {
     },[]);
     
     
-    // Contacts filtered by the "Search" bar
+    // Contacts filtered by the "Search" bar +
     // Filter companies' names when you press the Search button
         const filteredContacts = contacts.filter((contact) => {
         const normalizedSearch = searchTerm.toLowerCase().replace(/\s+/g, '');
@@ -40,6 +40,7 @@ const ContactsList = () => {
         return normalizedName.includes(normalizedSearch);
     });
 
+    // Function to handle the submit of the "searchbar" form
     function handleSubmit(e) {
     e.preventDefault();
     // Sanitize input with regex: trims whitespaces and Lowercases everything
@@ -90,8 +91,8 @@ const ContactsList = () => {
                         onChange = {(e) => setInput(e.target.value)}
                     />   
                     <button type="submit">Cerca</button>
-                {/* Button to add a new contact */}
             </form>
+            {/* Button to add a new contact */}
             <button 
                 type="button"
                 onClick={ ()=> openForm()}

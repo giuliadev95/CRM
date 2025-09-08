@@ -21,7 +21,7 @@ router.delete('/contact/delete/:id', delete_contact);
 router.get('/projects/get', get_projects);
 router.get('/project/get/:id', get_single_project);
 router.post('/project/post', post_project);
-
+router.delete('/project/delete/:id,', delete_project)
 export default router;
 
 
