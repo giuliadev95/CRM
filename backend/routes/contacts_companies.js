@@ -1,7 +1,7 @@
 import express from 'express';
 import { get_contacts, post_contact, get_single_contact, delete_contact, update_contact } from '../controllers/contacts.js';
 import { get_companies, get_single_company, post_company ,update_company, delete_company} from '../controllers/companies.js';
-import { get_projects, post_project, get_single_project, delete_project } from '../controllers/projects.js';
+import { get_projects, post_project, get_single_project, update_project, delete_project } from '../controllers/projects.js';
 const router = express.Router();
  // companies
 router.get('/companies/get', get_companies);    
@@ -21,7 +21,8 @@ router.delete('/contact/delete/:id', delete_contact);
 router.get('/projects/get', get_projects);
 router.get('/project/get/:id', get_single_project);
 router.post('/project/post', post_project);
-router.delete('/project/delete/:id,', delete_project)
+router.put('/project/update/:id', update_project);
+router.delete('/project/delete/:id', delete_project)
 export default router;
 
 

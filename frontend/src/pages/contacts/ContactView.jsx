@@ -17,6 +17,7 @@ const ContactView = () => {
             .catch((err) => console.error(err));
     }, [id]);
 
+    // Function to delete the contact
     function deleteContact(id) {
         if (!id) return console.error("The ID is missing to perform the deletion.");
         fetch(`http://localhost:3000/api/contact/delete/${id}`, {
@@ -24,7 +25,7 @@ const ContactView = () => {
         })
         .then((res) => {
             if (!res.ok) throw new Error("Error during the deletion.");
-            navigate("/"); // Torna alla home o dove preferisci dopo la cancellazione
+            navigate("/"); // Navigate back to the Homepage
         })
         .catch((err) => console.error(`Error: ${err}`));
     }

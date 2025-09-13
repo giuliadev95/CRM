@@ -38,6 +38,31 @@ const ProjectView=()=>{
         }
     }, [id]);
 
+    // Function to delete the project
+    function deleteProject(id) {
+        if (!id) return console.error("The ID is missing to perform the deletion.");
+        fetch(`http://localhost:3000/api/project/delete/${id}`, {
+            method: "DELETE",
+        })
+        .then((res) => {
+            if (!res.ok) throw new Error("Error during the deletion.");
+            navigate("/projects"); // Navigate back to the Homepage
+        })
+        .catch((err) => console.error(`Error: ${err}`));
+    }
+
+    // Function to format the data from Iso to the timezone stored in the client's browser
+    function formatDate(isoString) {
+    if (!isoString) return '';
+    // Trasforma in locale 'it-IT' → dd/mm/yyyy
+    return new Date(isoString).toLocaleDateString('it-IT');
+    }
+
+    // Navigate to the "Update Project" page, to update it
+    const openProjectPage = (id) => {
+        navigate(`/update-project/${id}`);
+    }
+
     // return the JSX content
     return(
         <>
@@ -54,6 +79,7 @@ const ProjectView=()=>{
                     <th scope="col">Status</th>
                     <th scope="col">Data inizio</th>
                     <th scope="col">Data fine</th>
+                    <th scope="col">Budget</th>
                     <th scope="col">Opzioni</th>
                     </tr>
                 <tbody>   
@@ -61,14 +87,33 @@ const ProjectView=()=>{
                     <td>{project.description}</td>
                     <td>{project.company_name}</td>
                     <td>{project.status}</td>
-                    <td>{project.start_date}</td>
-                    <td>{project.end_date}</td>
                     <td>
-                        <button>
-                        <AiTwotoneDelete/>
+                        {
+                            project.start_date && formatDate(project.start_date)
+                            ? formatDate(project.start_date)
+                            : "Non disponibile"
+                        }
+                    </td>
+                    <td>
+                        {
+                            project.end_date && formatDate(project.end_date)
+                            ? formatDate(project.end_date)
+                            : "Non disponibile"
+                        }
+                    </td>
+                    <td>{project.budget}</td>
+                    <td>
+                        <button
+                            type="button"   
+                            onClick={()=> deleteProject(project.id_project)} 
+                        >
+                            <AiTwotoneDelete/>
                         </button>
-                        <button>
-                        <FaPen/>
+                        <button
+                            type="button"
+                            onClick={ (e)=> openProjectPage(project.id_project)}
+                        >
+                            <FaPen/>
                         </button>
                     </td>  
                 </tbody>

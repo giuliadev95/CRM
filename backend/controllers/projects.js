@@ -15,18 +15,16 @@ export const get_projects = async (req, res) => {
 
 // POST a new project
 export const post_project = async (req, res) => {
-  const { name, description, company_id, status, details, start_date, end_date, budget} = req.body;
-  // try catch block: insert the record and use $int placeholders to establish the values' counting
+  const { name, description, company_id, status, start_date, end_date, budget } = req.body;
   try {
     await pool.query(
-      `INSERT INTO contact (name, description, company_id, status, details, start_date, end_date, budget)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
+      `INSERT INTO projects (name, description, company_id, status, start_date, end_date, budget)
+       VALUES ($1, $2, $3, $4, $5, $6, $7)`,
       [
         name, 
         description, 
         company_id, 
         status, 
-        details, 
         start_date, 
         end_date, 
         budget    
@@ -34,10 +32,11 @@ export const post_project = async (req, res) => {
     );
     res.status(201).send({ message: "Project created successfully." });
   } catch (err) {
-    console.error(`Error creating the project: ${error}`);
+    console.error(`Error creating the project: ${err}`);
     res.status(500).send({ error: "Internal server error: The creation of the project failed. Check the syntax and logic of the query in the backend." });
   }
 };
+
 
 // GET a single project by ID
 export const get_single_project = async (req, res) => {
@@ -83,14 +82,14 @@ export const delete_project = async (req, res) => {
 // UPDATE a single project by ID
 export const update_project = async (req, res) => {
   const { id } = req.params;
-  const { name, description, company_id, status, details, start_date, end_date, budget } = req.body;
+  const { name, description, company_id, status, start_date, end_date, budget } = req.body;
   
   try {
     const result = await pool.query(
-      `UPDATE contact
-       SET name = $1, description = $2, company_id = $3, status = $4, details = $5, start_date = $6, end_date = $7, budget = $8
-       WHERE id_project = $9`, // where the ID of the project is equal to the req. params id. ATTENTION: The comparison is possible because PostgreSQL automatically converts the req.params to an integer while trying to compare it with the project_id serial primary key.
-      [name, description, company_id, status, details, start_date, end_date, budget] // Here, each value gets associated with the respective $placeholder.
+      `UPDATE projects
+       SET name = $1, description = $2, company_id = $3, status = $4, start_date = $5, end_date = $6, budget = $7
+       WHERE id_project = $8`,
+      [name, description, company_id, status, start_date, end_date, budget, id]
     );
 
     if (result.rowCount === 0) {
@@ -99,8 +98,9 @@ export const update_project = async (req, res) => {
 
     res.send({message: `Project with id: ${id} updated successfully.`});
   } catch (err) {
-    console.error("Error updating the contact: ", err);
+    console.error("Error updating the project: ", err);
     res.status(500).send({ error: "Error updating the project."});
   }
 };
+
 

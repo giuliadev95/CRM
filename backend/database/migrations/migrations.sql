@@ -152,3 +152,4 @@ INSERT INTO projects (name, description, company_id, status, start_date, end_dat
   DROP TABLE contact;
   DROP TABLE projects;
 */
+

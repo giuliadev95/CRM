@@ -68,14 +68,15 @@ const ProjectsList =()=>{
   // Delete project
   function deleteProject(id) {
       if (!id) return console.error("The ID is missing to perform the deletion.");
-      fetch(`http://localhost:3000/api/project/delete/${id}`, {
-          method: "DELETE",
+      console.log(id)
+        fetch(`http://localhost:3000/api/project/delete/${id}`, {
+        method: "DELETE",
       })
       .then((res) => {
           if (!res.ok) throw new Error("Error during the deletion.");
           console.log(`Project with ID: ${id} deleted successfully.`);
           // Avoid mapping and filtering the deleted contact, as its ID will be missing.
-          setContacts(projects.filter((project) => project.id_project !== id));
+          setProjects(projects.filter((project) => project.id_project !== id));
       })
       .catch((err) => console.error(`Error: ${err}`));
   }
