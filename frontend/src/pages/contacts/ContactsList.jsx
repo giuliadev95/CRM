@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate to redirec
 import { AiTwotoneDelete } from "react-icons/ai"; // bin icon to delete a contact
 import { FaPen } from "react-icons/fa"; // pen to update a contact
 import { IoMdEye } from "react-icons/io";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import '@styles/app.css'
+import Table from 'react-bootstrap/Table';
 
 const ContactsList = () => {
     // Store all contacts fetched from the PostgreSQL database 
@@ -81,7 +83,7 @@ const ContactsList = () => {
     // return:
     return (
         <>   
-        <div class="top-actions-container">
+        <div>
             <form onSubmit={handleSubmit}>
                 {/* Searchbar*/}
                 <input 
@@ -95,21 +97,21 @@ const ContactsList = () => {
             {/* Button to add a new contact */}
             <button 
                 type="button"
-                onClick={ ()=> openForm()}
+                onClick={()=> openForm()}
                 >
                 + Nuovo
             </button>
         </div>
         {/* Contact list table */}
-        <table>
+        <Table hover>
             <thead>
                 <tr>
                     <th scope="col"> Nome </th>
-                    <th scope="col"> Telefono</th>
-                    <th scope="col"> Email </th>
-                    <th scope="col"> Ruolo</th>
-                    <th scope="col"> Azienda</th>
-                    <th scope="col"> Opzioni</th>
+                    <th className="d-none d-md-table-cell"> Telefono</th>
+                    <th className="d-none d-md-table-cell"> Email </th>
+                    <th className="d-none d-md-table-cell"> Ruolo</th>
+                    <th className="d-none d-md-table-cell"> Azienda</th>
+                    {/*<th className="d-none d-md-table-cell"> Opzioni</th>*/}
                 </tr>
             </thead>
             <tbody>
@@ -117,46 +119,67 @@ const ContactsList = () => {
                 {filteredContacts.length > 0 ? (
                     filteredContacts.map((contact) => (  
                         <tr key={contact.id_contact}>
-                            <td>{contact.name}</td>
-                            <td>{contact.phone}</td>
-                            <td>{contact.email}</td>
-                            <td>{contact.role}</td>
-                            <td>{contact.company_name || "-"}</td>
-                            <td class="actions-button-container"> 
-
-                                {/* View single contact's page button that calls the delete function */}
-                                <button
-                                    type="button"
-                                    class="actions-button"
-                                    onClick={ ()=> openContactView(contact.id_contact) }
-                                >
-                                <IoMdEye/>
-                                </button>   
-                                {/* Delete button that calls the delete function */}
-                                <button
-                                    type="button"
-                                    class="actions-button"
-                                    onClick={ ()=> deleteContact(contact.id_contact) }
-                                >
-                                <AiTwotoneDelete/>
-                                </button>   
-
-                                {/* Update button that calls the update function */}
-                                <button
-                                    type="button"
-                                    class="actions-button"
-                                    onClick={ ()=> openContactPage(contact.id_contact) }
-                                >
-                                <FaPen/>
-                                </button>         
-                            </td>      
+                            <td
+                                className="flex justify-between items-start align-top gap-2 py-2"
+                            >
+                                <div
+                                    style={{
+                                        display: 'grid',
+                                        gridTemplateColumns: '1fr auto', // Prima colonna flessibile, seconda solo quanto serve
+                                        alignItems: 'start', // Allinea tutto in alto
+                                        gap: '8px', // Spaziatura tra colonne
+                                    }}>
+                                    <div className="flex flex-col">
+                                        {contact.name}
+                                        <br/>
+                                        {contact.email}
+                                    </div>
+                                </div>
+                            </td>
+                            
+                            <td className="d-none d-md-table-cell">{contact.phone}</td>
+                            <td className="d-none d-md-table-cell">{contact.email}</td>
+                            <td className="d-none d-md-table-cell">{contact.role}</td>
+                            <td className="d-none d-md-table-cell">{contact.company_name || "-"}</td>
+                            {/**
+                            <td className="d-none d-md-table-cell"> 
+                            <button
+                            type="button"
+                            onClick={ ()=> openContactView(contact.id_contact) }
+                            >
+                            <IoMdEye/>
+                            </button>   
+                            
+                            <button
+                            type="button"
+                            onClick={ ()=> deleteContact(contact.id_contact) }
+                            >
+                            <AiTwotoneDelete/>
+                            </button>   
+                            
+                            
+                            <button
+                            type="button"
+                            onClick={ ()=> openContactPage(contact.id_contact) }
+                            >
+                            <FaPen/>
+                            </button>         
+                            </td>
+                            * 
+                            */}
+                            <td>
+                                <div  
+                                    className="bg-transparent border-none shadow-none p-0 m-0 outline-none">
+                                    <BsThreeDotsVertical/>
+                                </div>
+                            </td>
                         </tr>
                     ))
                 ) : (
                     <p>Nessun contatto trovato</p>
                 )}
             </tbody>
-        </table>
+        </Table>
         </>
     );
 };
