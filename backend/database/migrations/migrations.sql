@@ -63,6 +63,17 @@ INSERT INTO contact (name, phone, email, role, company_id, details, created_at) 
 ('Claudio De Luca', '340 5566778', 'c.deluca@smartchain.com', 'HR Manager', 4, 'Responsabile della selezione IT, coordina piani di formazione tecnica interna.', '2025-09-02'),
 ('Elena Grassi', '335 7788990', 'elena.grassi@innovo.it', 'Specialista prodotto', 5, 'Segue le implementazioni software e formazione clienti finali nel settore sanitario.', '2025-09-02');
 
+/* ALTER CONTACT TABLE AND ADD THE COLUMN: "SURNAME" AS A STRING FIELD*/
+ALTER TABLE contact
+ADD surname VARCHAR(255);
+
+/* UPDATE THE EXISTING RECORDS BY SETTING A SURNAME FOR THEM */
+UPDATE contact
+SET name = 'Valeria', surname = 'Sanna'
+WHERE id_contact = 59
+RETURNING *;
+
+
 /* SELECT ALL FROM CONTACT */
 SELECT * FROM contact ORDER BY name;
 
@@ -75,6 +86,7 @@ CREATE VIEW contacts_companies_view AS
 SELECT
   c.id_contact,
   c.name,
+  c.surname,
   c.phone,
   c.email,
   c.role,
