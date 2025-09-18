@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate to redirect to configured routes without refreshing the page thanks to SPA
-import { AiTwotoneDelete } from "react-icons/ai"; // bin icon to delete a contact
-import { FaPen } from "react-icons/fa"; // pen to update a contact
+//import { AiTwotoneDelete } from "react-icons/ai"; // bin icon to delete a contact
+//import { FaPen } from "react-icons/fa"; // pen to update a contact
 import { IoMdEye } from "react-icons/io";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import '@styles/app.css'
@@ -51,34 +51,38 @@ const ContactsList = () => {
     }
 
     // Delete contact
-    function deleteContact(id) {
-        if (!id) return console.error("The ID is missing to perform the deletion.");
+    /*
+        function deleteContact(id) {
+            if (!id) return console.error("The ID is missing to perform the deletion.");
 
-        fetch(`http://localhost:3000/api/contact/delete/${id}`, {
-            method: "DELETE",
-        })
-        .then((res) => {
-            if (!res.ok) throw new Error("Error during the deletion.");
-            console.log(`Contact with ID: ${id} deleted successfully.`);
-            // Avoid mapping and filtering the deleted contact, as its ID will be missing.
-            setContacts(contacts.filter((contact) => contact.id_contact !== id));
-        })
-        .catch((err) => console.error(`Error: ${err}`));
-    }
+            fetch(`http://localhost:3000/api/contact/delete/${id}`, {
+                method: "DELETE",
+            })
+            .then((res) => {
+                if (!res.ok) throw new Error("Error during the deletion.");
+                console.log(`Contact with ID: ${id} deleted successfully.`);
+                // Avoid mapping and filtering the deleted contact, as its ID will be missing.
+                setContacts(contacts.filter((contact) => contact.id_contact !== id));
+            })
+            .catch((err) => console.error(`Error: ${err}`));
+        }
+    */
 
     // Open the page to create a new contact
     function openForm() {
         navigate("/new-contact")
     }
 
-    // Open the page to update the contact
-    const openContactPage = (id) => {
-        navigate(`/update-contact/${id}`);
-    }
+    /* 
+        Open the page to update the contact
+        const openContactPage = (id) => {
+            navigate(`/update-contact/${id}`);
+        }
 
-    const openContactView = (id) => {
-        navigate(`/contact-view/${id}`);
-    }
+        const openContactView = (id) => {
+            navigate(`/contact-view/${id}`);
+        }
+    */
     
     // return:
     return (
@@ -107,11 +111,12 @@ const ContactsList = () => {
             <thead>
                 <tr>
                     <th scope="col"> Nome </th>
+                    <th scope="col">Cognome</th>
                     <th className="d-none d-md-table-cell"> Telefono</th>
                     <th className="d-none d-md-table-cell"> Email </th>
                     <th className="d-none d-md-table-cell"> Ruolo</th>
                     <th className="d-none d-md-table-cell"> Azienda</th>
-                    {/*<th className="d-none d-md-table-cell"> Opzioni</th>*/}
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -119,24 +124,8 @@ const ContactsList = () => {
                 {filteredContacts.length > 0 ? (
                     filteredContacts.map((contact) => (  
                         <tr key={contact.id_contact}>
-                            <td
-                                className="flex justify-between items-start align-top gap-2 py-2"
-                            >
-                                <div
-                                    style={{
-                                        display: 'grid',
-                                        gridTemplateColumns: '1fr auto', // Prima colonna flessibile, seconda solo quanto serve
-                                        alignItems: 'start', // Allinea tutto in alto
-                                        gap: '8px', // Spaziatura tra colonne
-                                    }}>
-                                    <div className="flex flex-col">
-                                        {contact.name}
-                                        <br/>
-                                        {contact.email}
-                                    </div>
-                                </div>
-                            </td>
-                            
+                            <td>{contact.name}</td>
+                            <td>{contact.surname}</td>  
                             <td className="d-none d-md-table-cell">{contact.phone}</td>
                             <td className="d-none d-md-table-cell">{contact.email}</td>
                             <td className="d-none d-md-table-cell">{contact.role}</td>

@@ -6,6 +6,7 @@ const NewContact = () => {
     const navigate = useNavigate();
 
     const [name, setName] = useState("");
+    const [surname, setSurname] = useState("");
     const [email, setEmail] = useState("");
     const [role, setRole] = useState("");
     const [companyId, setCompanyId] = useState("");
@@ -27,6 +28,7 @@ const NewContact = () => {
 
         const newContact = {
             name,
+            surname,
             email,
             role,
             company_id: parseInt(companyId),
@@ -57,6 +59,15 @@ const NewContact = () => {
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                />
+
+                <input
+                    type="text"
+                    name="surname"
+                    placeholder="Cognome"
+                    required
+                    value={surname}
+                    onChange={(e) => setSurname(e.target.value)}
                 />
 
                 <input

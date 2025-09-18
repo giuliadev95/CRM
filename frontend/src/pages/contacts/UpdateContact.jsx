@@ -6,6 +6,7 @@ const UpdateContact = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [name, setName] = useState("");
+    const [surname, setSurname] = useState("");
     const [email, setEmail] = useState("");
     const [role, setRole] = useState("");
     const [details, setDetails] = useState(""); // Add details row to be modified
@@ -18,6 +19,7 @@ const UpdateContact = () => {
             .then((res) => res.json())
             .then((data) => {
                 setName(data.name || "");
+                setSurname(data.surname || "");
                 setEmail(data.email || "");
                 setRole(data.role || "");
                 setDetails(data.details || "");
@@ -40,6 +42,7 @@ const UpdateContact = () => {
 
         const updatedContact = {
             name,
+            surname,
             email,
             role,
             company_id: parseInt(companyId),
@@ -67,10 +70,18 @@ const UpdateContact = () => {
                 <input
                     type="text"
                     name="name"
-                    placeholder="Name"
+                    placeholder="Nome"
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                />
+                <input
+                    type="text"
+                    name="surname"
+                    placeholder="Cognome"
+                    required
+                    value={surname}
+                    onChange={(e) => setSurname(e.target.value)}
                 />
 
                 <input
@@ -85,7 +96,7 @@ const UpdateContact = () => {
                 <input
                     type="text"
                     name="role"
-                    placeholder="Role"
+                    placeholder="Ruolo"
                     required
                     value={role}
                     onChange={(e) => setRole(e.target.value)}
@@ -93,7 +104,7 @@ const UpdateContact = () => {
                 <input
                     type="text"
                     name="details"
-                    placeholder="Details"
+                    placeholder="Dettagli"
                     
                     value={details}
                     onChange={(e) => setDetails(e.target.value)}
@@ -106,7 +117,7 @@ const UpdateContact = () => {
                     onChange={(e) => setCompanyId(e.target.value)}
                     required
                 >
-                    <option value="">Select company</option>
+                    <option value="">Seleziona Azienda</option>
                     {companies.map((c) => (
                         <option key={c.id_company} value={c.id_company}>
                             {c.name}
@@ -115,7 +126,7 @@ const UpdateContact = () => {
                 </select>
                 <button
                     type="button"
-                    onClick={(e)=> navigate("/new-company")}
+                    onClick={()=> navigate("/new-company")}
                 >
                     Aggiungi nuova
                 </button>
@@ -127,7 +138,7 @@ const UpdateContact = () => {
                 </button>
                 <button 
                     type="button"
-                    onClick= {(e)=>  navigate("/")}
+                    onClick= {()=>  navigate("/")}
                 >
                     Indietro
                 </button>
