@@ -1,7 +1,9 @@
 import React from "react";
-import { AiFillHome, AiOutlineClose } from 'react-icons/ai';
-import { FaCartPlus } from 'react-icons/fa';
-import { IoIosPaper, IoMdPerson } from "react-icons/io";
+import { AiFillHome } from 'react-icons/ai';
+import { RiContactsBook2Fill } from "react-icons/ri";
+import { FaRocket } from "react-icons/fa";
+import { MdBusinessCenter } from "react-icons/md";
+
 
 
 export const SidebarData = [
@@ -14,19 +16,19 @@ export const SidebarData = [
     { 
         title: 'Contatti',
         path: '/',
-        icon: <FaCartPlus/>,
+        icon: <RiContactsBook2Fill/>,
         cName: 'nav-text'
     },
     { 
         title: 'Aziende',
         path: '/companies',
-        icon: <IoMdPerson/>,
+        icon: <MdBusinessCenter/>,
         cName: 'nav-text'
     },
     { 
         title: 'Progetti',
         path: '/projects',
-        icon: <IoIosPaper/>,
+        icon: <FaRocket/>,
         cName: 'nav-text'
     }
 ]

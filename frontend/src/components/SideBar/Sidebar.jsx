@@ -1,11 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
+import { IconContext } from 'react-icons';
 import { Link } from 'react-router-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import { FaBars } from 'react-icons/fa';
 import { SidebarData } from './SidebarData';
 import '../../styles/app.css';
-import { IconContext } from 'react-icons';
 
 function SideBar() {
   const [sidebar, setSidebar] = useState(false);
@@ -13,10 +13,11 @@ function SideBar() {
   const showSidebar = () => setSidebar(!sidebar);
   return(
     <>
-      <IconContext.Provider value={{color: '#fff'}}>
+      <IconContext.Provider value={{color: ''}}>
         <div className="navbar">
           <button className="menu-bars">
             <FaBars
+              className="text-white"
               onClick={showSidebar}
               />
           </button>
@@ -28,6 +29,7 @@ function SideBar() {
             <li className='navbar-toggle'>
               <button className="menu-bars">
                 <AiOutlineClose
+                className='text-blue-950'
                 onClick={showSidebar}
                 />
               </button>
