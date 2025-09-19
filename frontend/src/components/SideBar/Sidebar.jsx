@@ -21,6 +21,7 @@ function SideBar() {
               onClick={showSidebar}
               />
           </button>
+         
         </div>
         <nav className={sidebar?'nav-menu active' : 'nav-menu'}>
           <ul 

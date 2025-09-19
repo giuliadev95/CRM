@@ -2,8 +2,10 @@
 
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+}
+
+body {
+  background-color: #f6f7f9 ;
 }
 
 /*
@@ -44,7 +46,8 @@
 .nav-menu.active {
   left:0;
   transition: 350ms;
-  background-color: #f6f7f9;;
+  background-color: #f6f7f9;
+  border: 0.5px solid #aaaab0;
 }
 
 .nav-text {
