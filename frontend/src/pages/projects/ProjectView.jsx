@@ -28,6 +28,7 @@ const ProjectView=()=>{
                         setError("Si è verificato un errore, riprova.")
                     }
                     console.error(`Error fetching the project with the id ${id}: ${error}`);
+                    console.log(error);
                 } finally {
                     setLoader(false);
                 }
@@ -121,7 +122,7 @@ const ProjectView=()=>{
         )}
         <button
             type="button"
-            onClick={ (e)=> navigate ("/projects")}
+            onClick={ ()=> navigate ("/projects")}
         >
             Indietro
         </button>
