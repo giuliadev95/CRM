@@ -27,7 +27,7 @@ const ContactsList = () => {
     //const [records, setRecords] = useState([]);
     // Set initial page
     const [page, setPage] = useState(1);
-    const [contactsPerPage, setContactsPerPage] = useState(10);
+    const [contactsPerPage] = useState(10);
     // This constant hooks the "useNavigate()" functionalities to the "navigate" variable
     const navigate = useNavigate();
  
@@ -131,8 +131,8 @@ const ContactsList = () => {
     // Get current contacts
     const indexOfLastContact = page * contactsPerPage;
     const indexOfFirstContact = indexOfLastContact - contactsPerPage;
-    const currentContacts = contacts.slice(indexOfFirstContact, indexOfLastContact)
-
+    const currentContacts = contacts.slice(indexOfFirstContact, indexOfLastContact);
+    const paginate = (number) => setPage(number);
 
     // return:
     return (
@@ -141,7 +141,7 @@ const ContactsList = () => {
                 contacts={currentContacts} loading={loading}
             />
             <Pagination
-                contactsPerPage={contactsPerPage} totalContacts={contacts.length}
+                contactsPerPage={contactsPerPage} totalContacts={contacts.length} paginate={paginate}
             />
             <div className="mx-8">
                 <nav aria-label="breadcrumb">

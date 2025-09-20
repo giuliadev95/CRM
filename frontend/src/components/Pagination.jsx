@@ -1,6 +1,6 @@
 import React from "react";
 
-const Pagination = ({contactsPerPage, totalContacts})=> {
+const Pagination = ({contactsPerPage, totalContacts, paginate})=> {
 
     const pageNumbers=[];
 
@@ -15,7 +15,10 @@ const Pagination = ({contactsPerPage, totalContacts})=> {
                         return(
                             <>
                                 <li key={number} className="page-item">
-                                    <a href="!#" className="page-link">
+                                    <a          
+                                        className="page-link"
+                                        onClick={()=> paginate(number)}
+                                    >
                                         {number}
                                     </a>
                                 </li>
