@@ -6,16 +6,14 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 const Contacts = ({ contacts, loading }) => { 
-
   // constants I need, moved here  rom the ContactsList.jsx component
   const [input, setInput] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
   const [filteredContacts, setFilteredContacts]= useState([]);
 
   async function handleSubmit(e) {
     e.preventDefault();
     const cleanedInput = input.trim().toLowerCase().replace(/\s+/g, '');
-    setSearchTerm(cleanedInput);
+    
 
     try {
       const res = await axios.get("http://localhost:3000/api/contacts/search/contact", {
@@ -42,6 +40,7 @@ const Contacts = ({ contacts, loading }) => {
 
   return (
     <div>  
+      {/* Insert Ref here, so it prints this table */}
       <table className="table border table-hover">
           <thead>
             <tr>

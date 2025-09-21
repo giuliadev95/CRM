@@ -1,10 +1,10 @@
 import React from "react";
 
-const Pagination = ({contactsPerPage, totalContacts, paginate})=> {
+const Pagination = ({recordsPerPage, totalRecords, paginate})=> {
 
     const pageNumbers=[];
 
-    for(let i=1; i <= Math.ceil(totalContacts / contactsPerPage); i++){
+    for(let i=1; i <= Math.ceil(totalRecords / recordsPerPage); i++){
         pageNumbers.push(i);
     }
     return(

@@ -8,6 +8,8 @@ body {
   background-color: #f6f7f9 ;
 }
 
+
+
 /*
   Style for the sidebar here
 */
@@ -48,6 +50,7 @@ body {
   transition: 350ms;
   background-color: #f6f7f9;
   border: 0.5px solid #aaaab0;
+  z-index:100;
 }
 
 .nav-text {

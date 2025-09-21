@@ -105,3 +105,44 @@ export const update_contact = async (req, res) => {
   }
 };
 
+// Get searched contact
+export const search_contact = async (req, res) => {
+  try {
+    const { q } = req.query;
+
+    // 1) Basic server-side validation
+    if (typeof q !== "string") {
+      return res.status(400).send("Invalid query"); // query is not a string
+    }
+
+    const trimmed = q.trim();
+
+    // 2) Reject empty or too-long queries
+    if (trimmed.length > 100) {
+      `SELECT * FROM contacts_companies_view`
+      return res.status(400).send("Invalid query, too long."); // troppo corta o troppo lunga
+    }
+
+    // 3) Normalizzazione (case-insensitive)
+    const like = `%${trimmed.toLowerCase()}%`;
+
+    // 4) Query parametrizzata (sicura contro SQLi)
+    const result = await pool.query(
+      `SELECT * FROM contacts_companies_view
+       WHERE LOWER(name) LIKE $1
+          OR LOWER(surname) LIKE $1
+          OR LOWER(role) LIKE $1
+          OR LOWER(email) LIKE $1
+          OR LOWER(phone) LIKE $1
+          OR LOWER(company_name) LIKE $1
+       ORDER BY name
+       LIMIT 100`, // set a limit to the returned contacts number
+      [like]
+    );
+
+    return res.json(result.rows);
+  } catch (err) {
+    console.error("Error in the query: ", err.message);
+    return res.status(500).send("500: Internal Server Error");
+  }
+};

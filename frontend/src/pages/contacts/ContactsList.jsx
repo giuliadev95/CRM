@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate to redirect to configured routes without refreshing the page thanks to SPA
+import { href, useNavigate } from "react-router-dom"; // Import useNavigate to redirect to configured routes without refreshing the page thanks to SPA
 import Contacts from "@/components/Contacts";
 import Pagination from "@/components/Pagination";
 import '@styles/app.css'
+import ExportPDF from "@/components/ExportPDF";
+import Breadcrumb from "@/components/Global/BreadCrumb";
 
 const ContactsList = () => {
 
@@ -18,6 +20,12 @@ const ContactsList = () => {
     // Set initial page
     const [page, setPage] = useState(1);
     const [contactsPerPage] = useState(10);
+
+    // BreadCrumb items imported from breadCrumb.jsx
+    const breadCrumbitems= [
+        { label: "Home", href: "/" },
+        {label: "Contatti"}
+    ]
 
     // This constant hooks the "useNavigate()" functionalities to the "navigate" variable
     const navigate = useNavigate();
@@ -68,12 +76,8 @@ const ContactsList = () => {
     return (
         <>  
             <div className="mx-8">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Contatti</li>
-                    </ol>
-                </nav>
+                <Breadcrumb items={breadCrumbitems}
+                />
                 <div className="flex flex-col md:flex md:flex-row md:justify-between">
                     <h1 className="h2">Contatti</h1>
                     <div className="flex md:gap-2 justify-start gap-4 md:justify-between items-center my-4 md:hidden">
@@ -84,12 +88,7 @@ const ContactsList = () => {
                         >
                             Nuovo
                         </button>
-                        <button 
-                            type="button" 
-                            class="btn btn-success"
-                        >
-                            Esporta
-                        </button>
+                        <ExportPDF contacts={contacts}/>
                     </div>
                     <div className="hidden md:flex gap-4 justify-between items-center mb-2">
                         <button 
@@ -99,12 +98,7 @@ const ContactsList = () => {
                         >
                             Nuovo
                         </button>
-                        <button 
-                            type="button" 
-                            class="btn btn-success"
-                        >
-                            Esporta
-                        </button>
+                        <ExportPDF contacts={contacts}/>
                     </div>
                 </div>
             </div>
@@ -113,7 +107,7 @@ const ContactsList = () => {
                     contacts={currentContacts} loading={loading}
                 />
                 <Pagination
-                    contactsPerPage={contactsPerPage} totalContacts={contacts.length} paginate={paginate}
+                    recordsPerPage={contactsPerPage} totalRecords={contacts.length} paginate={paginate}
                 />
             </div>
         </>
