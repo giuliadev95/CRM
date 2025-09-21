@@ -1,12 +1,9 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { AiTwotoneDelete } from "react-icons/ai"; // bin icon to delete a contact
-import { FaPen } from "react-icons/fa"; // pen to update a contact
-import { IoMdEye } from "react-icons/io";
-import Companies from "@/components/Specific/Companies";
+import Companies from "@/components/Specific/companies/Companies";
 import Pagination from "@/components/Global/Pagination";
-import ExportPDF_companies from "@/components/Specific/ExportPDF_companies";
+import ExportPDF_companies from "@/components/Specific/ExportPDF/ExportPDF_companies";
 import Breadcrumb from "@/components/Global/BreadCrumb";
 import '@/styles/app.css';
 
