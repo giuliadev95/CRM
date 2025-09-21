@@ -100,3 +100,45 @@ export const update_company = async (req, res) => {
     res.status(500).send({ error: "Error updating the company."});
   }
 }; 
+
+// Get searched company
+export const search_company = async (req, res) => {
+  try {
+    const { q } = req.query;
+
+    // 1) Basic server-side validation
+    if (typeof q !== "string") {
+      return res.status(400).send("Invalid query"); // query is not a string
+    }
+
+    const trimmed = q.trim();
+
+    // 2) Reject too-long queries
+    if (trimmed.length > 100) {
+      `SELECT * FROM companies_view `
+      return res.status(400).send("Invalid query, too long."); // too long
+    }
+
+    // 3)To lower case for the [like] values
+    const like = `%${trimmed.toLowerCase()}%`;
+
+    // 4) Query parametrizzata (sicura contro SQLi)
+    const result = await pool.query(
+      `SELECT * FROM companies_view
+       WHERE LOWER(name) LIKE $1
+          OR LOWER(email) LIKE $1
+          OR LOWER(phone) LIKE $1
+          OR LOWER(website) LIKE $1
+          OR LOWER(company_type) LIKE $1
+          OR LOWER(notes) LIKE $1
+       ORDER BY name
+       LIMIT 100`, // set a limit to the returned contacts number
+      [like]
+    );
+
+    return res.json(result.rows);
+  } catch (err) {
+    console.error("Error in the query: ", err.message);
+    return res.status(500).send("500: Internal Server Error");
+  }
+};

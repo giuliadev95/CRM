@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate to redirect to configured routes without refreshing the page thanks to SPA
 import Contacts from "@/components/Specific/Contacts";
 import Pagination from "@/components/Global/Pagination";
-import '@styles/app.css'
-import ExportPDF from "@/components/Global/ExportPDF";
+import ExportPDF_contacts from "@/components/Specific/ExportPDF_contacts";
 import Breadcrumb from "@/components/Global/BreadCrumb";
+import '@styles/app.css'
 
 const ContactsList = () => {
 
@@ -60,17 +60,17 @@ const ContactsList = () => {
         };
         fetchContacts();
     },[]);
-
-    // Open the page to create a new contact
-    function openForm() {
-        navigate("/new-contact")
-    }
-
+    
     // Get current contacts
     const indexOfLastContact = page * contactsPerPage;
     const indexOfFirstContact = indexOfLastContact - contactsPerPage;
     const currentContacts = contacts.slice(indexOfFirstContact, indexOfLastContact);
     const paginate = (number) => setPage(number);
+
+    // Open the page to create a new contact
+    function openForm() {
+        navigate("/new-contact")
+    }
 
     // return:
     return (
@@ -88,7 +88,7 @@ const ContactsList = () => {
                         >
                             Nuovo
                         </button>
-                        <ExportPDF contacts={contacts}/>
+                        <ExportPDF_contacts contacts={contacts}/>
                     </div>
                     <div className="hidden md:flex gap-4 justify-between items-center mb-2">
                         <button 
@@ -98,7 +98,7 @@ const ContactsList = () => {
                         >
                             Nuovo
                         </button>
-                        <ExportPDF contacts={contacts}/>
+                        <ExportPDF_contacts contacts={contacts}/>
                     </div>
                 </div>
             </div>

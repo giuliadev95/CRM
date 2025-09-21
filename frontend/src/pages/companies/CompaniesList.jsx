@@ -1,8 +1,13 @@
+import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiTwotoneDelete } from "react-icons/ai"; // bin icon to delete a contact
 import { FaPen } from "react-icons/fa"; // pen to update a contact
 import { IoMdEye } from "react-icons/io";
+import Companies from "@/components/Specific/Companies";
+import Pagination from "@/components/Global/Pagination";
+import ExportPDF_companies from "@/components/Specific/ExportPDF_companies";
+import Breadcrumb from "@/components/Global/BreadCrumb";
 import '@/styles/app.css';
 
 export default function CompaniesList() {
@@ -10,17 +15,54 @@ export default function CompaniesList() {
   const [companies, setCompanies] = useState([]);
   const [input, setInput] = useState("");         
   const [searchTerm, setSearchTerm] = useState("");
+  // setError
+  const [theError, setTheError] = useState(null);
+
+  // Set loader
+  const [loading, setLoading] = useState(false);
+
+  // Set initial page
+  const [page, setPage] = useState(1);
+  const [companiesPerPage] = useState(10);
+
+  // BreadCrumb items imported from breadCrumb.jsx
+  const breadCrumbitems= [
+      { label: "Home", href: "/" },
+      {label: "Aziende"}
+  ]
+
   const navigate = useNavigate();
 
-  // Fetch companies: get
-  useEffect(() => {
-    fetch("http://localhost:3000/api/companies/get")
-      .then((response) => response.json())
-      .then((data) => {
-        setCompanies(data);
-      })
-      .catch((err) => console.error(`There was an error fetching the companies: ${err}`));
-  }, []);
+    // useEffect to fetch the contacts from the PostgreSQL database, and to set the Loader
+       useEffect(()=> {
+        const fetchCompanies = async()=> {
+            try{
+                setLoading(true);
+                const response = await axios.get("http://localhost:3000/api/companies/get");
+                console.log(response)
+                console.log(response.data)
+                // The fetched data update the content of the contact variable. This happens even after the deletion of a single contact.
+                setCompanies(response.data);
+    
+                // EXPECTED OUTPUT: [ An array of objects { }, { },... ] , "object".
+                console.log(response.data, typeof response.data);
+                setLoading(false);
+
+            } catch(error){
+                 if(error.response && error.response.status === 404) {
+                        setTheError("Companies not found");
+                        console.error(error);
+                    } else {
+                        setTheError("Error.")
+                    }
+                    console.error(`Error fetching the companies with the axios get method: ${error}`);
+                    console.log(theError);
+            } finally {
+                setLoading(false);
+            }              
+        };
+        fetchCompanies();
+    },[]);
 
 // Filter companies' names when you press the Search button
   const filteredCompanies = companies.filter((company) => {
@@ -29,124 +71,61 @@ export default function CompaniesList() {
   return normalizedName.includes(normalizedSearch);
 });
 
-function handleSubmit(e) {
+ // Get current contacts
+  const indexOfLastContact = page * companiesPerPage;
+  const indexOfFirstContact = indexOfLastContact - companiesPerPage;
+  const currentCompanies = companies.slice(indexOfFirstContact, indexOfLastContact);
+  const paginate = (number) => setPage(number);
+
+  function handleSubmit(e) {
   e.preventDefault();
   // Sanitize input with regex: trims whitespaces and Lowercases everything
   const cleanedInput = input.trim().toLowerCase().replace(/\s+/g, '');
   setSearchTerm(cleanedInput);
-}
-
-// Delete company
-function deleteCompany(id) {
-    if (!id) return console.error("The ID is missing to perform the deletion.");
-
-    fetch(`http://localhost:3000/api/company/delete/${id}`, {
-        method: "DELETE",
-    })
-    .then((res) => {
-        if (!res.ok) throw new Error("Error during the deletion.");
-        console.log(`Contact with ID: ${id} deleted successfully.`);
-        // Avoid mapping and filtering the deleted company, as its ID will be missing.
-        setCompanies(companies.filter((company) => company.id_company !== id));
-
-    })
-    .catch((err) => console.error(`Error: ${err}`));
   }
 
-      // Open the page to create a new company
-    function openForm() {
-        navigate("/new-company")
-    }
+  // Open the page to create a new company
+  function openForm() {
+      navigate("/new-company")
+  }
 
-    // Open the page to update the contact
-    const openCompanyPage = (id) => {
-        navigate(`/update-company/${id}`);
-    }
-
-    const openCompanyView = (id) => {
-        navigate(`/company-view/${id}`);
-    }
-
-  return (
-    <>
-    <div class="top-actions-container">
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Nome azienda"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
-        <button type="submit">Cerca</button>
-      </form>
-      <button
-        type='button'
-        onClick={ ()=> openForm()}
-      >
-        + New
-      </button>
-    </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Telefono</th>
-            <th>Sito web</th>
-            <th>Tipologia</th>
-            <th>Dettagli</th>
-            <th>Opzioni</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredCompanies.length > 0 ? (
-            filteredCompanies.map((company) => (
-              <tr key={company.id_company}>
-                <td>{company.name}</td>
-                <td>{company.email}</td>
-                <td>{company.phone}</td>
-                <td>{company.website}</td>
-                <td>{company.company_type}</td>
-                <td>{company.notes}</td>
-
-                <td class="actions-button-container"> 
-                  {/* View single contact's page button that calls the delete function */}
-                  <button
-                  type="button"
-                  class="actions-button"
-                  onClick={ ()=> openCompanyView(company.id_company) }
-                  >
-                  <IoMdEye/>
-                  </button>   
-                  {/* Delete button that calls the delete function */}
-                  <button
-                  type="button"
-                  class="actions-button"
-                  onClick={ ()=> deleteCompany(company.id_company) }
-                  >
-                  <AiTwotoneDelete/>
-                  </button>   
-
-                  {/* Update button that calls the update function */}
-                  <button
-                  type="button"
-                  class="actions-button"
-                  onClick={ ()=> openCompanyPage(company.id_company) }
-                  >
-                  <FaPen/>
-                  </button>         
-                </td>      
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="3" style={{ textAlign: "center" }}>
-                Nessuna azienda trovata
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    </>
-  );
+ return (
+      <>  
+        <div className="mx-8">
+            <Breadcrumb items={breadCrumbitems}
+            />
+            <div className="flex flex-col md:flex md:flex-row md:justify-between">
+                <h1 className="h2">Aziende</h1>
+                <div className="flex md:gap-2 justify-start gap-4 md:justify-between items-center my-4 md:hidden">
+                    <button 
+                        type="button" 
+                        class="btn btn-primary" 
+                        onClick={()=> openForm()}
+                    >
+                        Nuovo
+                    </button>
+                    <ExportPDF_companies contacts={companies}/>
+                </div>
+                <div className="hidden md:flex gap-4 justify-between items-center mb-2">
+                    <button 
+                        type="button" 
+                        class="btn btn-primary" 
+                        onClick={()=> openForm()}
+                    >
+                        Nuovo
+                    </button>
+                    <ExportPDF_companies companies={companies}/>
+                </div>
+            </div>
+        </div>
+        <div className="mx-8">
+            <Companies
+                companies={currentCompanies} loading={loading}
+            />
+            <Pagination
+                recordsPerPage={companiesPerPage} totalRecords={companies.length} paginate={paginate}
+            />
+        </div>
+      </>
+    );
 }

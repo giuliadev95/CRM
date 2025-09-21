@@ -1,7 +1,7 @@
 import React from "react";
 import jsPDF from "jspdf";
 
-const ExportPDF = ({ contacts }) => {
+const ExportPDF_companies = ({ companies }) => {
 
   const generatePDF = ({ title, columns, rows }) => {
     const doc = new jsPDF();
@@ -73,24 +73,24 @@ const ExportPDF = ({ contacts }) => {
   };
 
   const handleDownloadPDF = () => {
-    if (!contacts || contacts.length === 0) return;
+    if (!companies || companies.length === 0) return;
 
-    const title = "Contatti";
-    const columns = ["Cognome", "Nome", "Telefono", "Email", "Azienda"]
+    const title = "Aziende";
+    const columns = ["Nome", "Email", "Telefono", "Sito Web", "Tipo"]
     
     // ORDER CONTACTS BY SURNAME
-    const sortedContacts = [...contacts].sort((a, b) => {
-      const nameA = a.surname ? a.surname.toLowerCase() : "";
-      const nameB = b.surname ? b.surname.toLowerCase() : "";
+    const sortedCompanies = [...companies].sort((a, b) => {
+      const nameA = a.name ? a.name.toLowerCase() : "";
+      const nameB = b.name ? b.name.toLowerCase() : "";
       return nameA.localeCompare(nameB);
     });
 
-    const rows = sortedContacts.map(c => [
-        c.surname || "-",
+    const rows = sortedCompanies.map(c => [
         c.name || "-",
-        c.phone || "-",
         c.email || "-",
-        c.company_name || "-"
+        c.phone || "-",
+        c.website || "-",
+        c.company_type || "-"
     ]);
 
     generatePDF({ title, columns, rows });
@@ -107,4 +107,4 @@ const ExportPDF = ({ contacts }) => {
   );
 };
 
-export default ExportPDF;
+export default ExportPDF_companies;
