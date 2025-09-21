@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate to redirect to configured routes without refreshing the page thanks to SPA
-import Contacts from "@/components/Contacts";
+import Contacts from "@/components/Specific/Contacts";
 import Pagination from "@/components/Global/Pagination";
 import '@styles/app.css'
 import ExportPDF from "@/components/Global/ExportPDF";
