@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { href, useNavigate } from "react-router-dom"; // Import useNavigate to redirect to configured routes without refreshing the page thanks to SPA
+import { useNavigate } from "react-router-dom"; // Import useNavigate to redirect to configured routes without refreshing the page thanks to SPA
 import Contacts from "@/components/Contacts";
-import Pagination from "@/components/Pagination";
+import Pagination from "@/components/Global/Pagination";
 import '@styles/app.css'
-import ExportPDF from "@/components/ExportPDF";
+import ExportPDF from "@/components/Global/ExportPDF";
 import Breadcrumb from "@/components/Global/BreadCrumb";
 
 const ContactsList = () => {

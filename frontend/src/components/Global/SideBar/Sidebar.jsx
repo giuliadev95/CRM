@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import { FaBars } from 'react-icons/fa';
 import { SidebarData } from './SidebarData';
-import '../../styles/app.css';
+import '../../../styles/app.css';
 
 function SideBar() {
   const [sidebar, setSidebar] = useState(false);

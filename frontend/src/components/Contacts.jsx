@@ -14,7 +14,6 @@ const Contacts = ({ contacts, loading }) => {
     e.preventDefault();
     const cleanedInput = input.trim().toLowerCase().replace(/\s+/g, '');
     
-
     try {
       const res = await axios.get("http://localhost:3000/api/contacts/search/contact", {
         params: { q: cleanedInput }, 
