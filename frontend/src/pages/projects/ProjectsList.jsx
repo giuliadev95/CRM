@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate to redirect to configured routes without refreshing the page thanks to SPA
 import Projects from "@/components/Specific/projects/Projects";
 import Pagination from "@/components/Global/Pagination";
-import ExportPDF_contacts from "@/components/Specific/ExportPDF/ExportPDF_contacts";
+import ExportPDF_projects from "@/components/Specific/ExportPDF/ExportPDF_projects";
 import Breadcrumb from "@/components/Global/BreadCrumb";
 import '../../styles/app.css';
 
@@ -87,7 +87,7 @@ const ProjectsList = () => {
                         >
                             Nuovo
                         </button>
-                        <ExportPDF_contacts contacts={projects}/>
+                        <ExportPDF_projects projects={projects}/>
                     </div>
                     <div className="hidden md:flex gap-4 justify-between items-center mb-2">
                         <button 
@@ -97,7 +97,7 @@ const ProjectsList = () => {
                         >
                             Nuovo
                         </button>
-                        <ExportPDF_contacts contacts={projects}/>
+                        <ExportPDF_projects projects={projects}/>
                     </div>
                 </div>
             </div>
