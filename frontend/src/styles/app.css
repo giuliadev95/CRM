@@ -75,7 +75,8 @@ body {
 }
 
 .nav-text a:hover {
-  background-color: #f6f7f9;
+  background-color: rgb(52,108,166);
+  color: white;
 }
 
 .nav-menu-items{

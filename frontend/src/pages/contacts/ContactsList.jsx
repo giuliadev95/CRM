@@ -5,14 +5,12 @@ import Contacts from "@/components/Specific/contacts/Contacts";
 import Pagination from "@/components/Global/Pagination";
 import ExportPDF_contacts from "@/components/Specific/ExportPDF/ExportPDF_contacts";
 import Breadcrumb from "@/components/Global/BreadCrumb";
-import '@styles/app.css'
+import '../../styles/app.css';
 
 const ContactsList = () => {
 
     // Store all contacts fetched from the PostgreSQL database 
     const [ contacts, setContacts ] = useState([]);
-    // setError
-    const [theError, setTheError] = useState(null);
 
     // Set loader
     const [loading, setLoading] = useState(false);
@@ -46,14 +44,15 @@ const ContactsList = () => {
                 setLoading(false);
 
             } catch(error){
-                 if(error.response && error.response.status === 404) {
-                        setTheError("Contatti non trovati");
+                if(error.response && error.response.status === 404) {
                         console.error(error);
+                        console.log(`404 - Contacts not found: ${error}`);
                     } else {
-                        setTheError("Si è verificato un errore, riprova.")
+                        console.error(error);
+                        console.log(error);
                     }
                     console.error(`Error fetching the contacts with the axios get method: ${error}`);
-                    console.log(theError);
+                    console.log(error);
             } finally {
                 setLoading(false);
             }              

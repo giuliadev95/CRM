@@ -59,12 +59,12 @@ const Companies = ({ companies, loading }) => {
             </tr>
             <tr>
               <th scope="col">Nome</th>
-              <th scope="col">Email</th>
+              <th scope="d-none d-md-table-cell">Email</th>
               <th className="d-none d-md-table-cell" scope="col">Telefono</th>
               <th className="d-none d-md-table-cell" scope="col">Sito Web</th>
               <th className="d-none d-md-table-cell" scope="col">Tipo</th>
               <th className="d-none d-md-table-cell" scope="col">Dettagli</th>
-              <th></th>
+              <th className="d-none d-md-table-cell" scope="col"></th>
             </tr>
           </thead>
           {/* Map the fetched contacts to display each of them in a table row */}
@@ -73,7 +73,7 @@ const Companies = ({ companies, loading }) => {
               filteredCompanies.map((company) => (
               <tr key={company.id_company}>
                 <td className="hover:underline cursor-pointer">{company.name}</td>
-                <td className="hover:underline cursor-pointer">{company.email}</td>
+                <td className="d-none d-md-table-cell hover:underline cursor-pointer">{company.email}</td>
                 <td className="d-none d-md-table-cell hover:underline cursor-pointer">{company.phone}</td>
                 <td className="d-none d-md-table-cell hover:underline cursor-pointer">{company.website}</td>
                 <td className="d-none d-md-table-cell hover:underline cursor-pointer">{company.company_type}</td>

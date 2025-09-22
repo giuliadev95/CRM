@@ -5,32 +5,30 @@ import Companies from "@/components/Specific/companies/Companies";
 import Pagination from "@/components/Global/Pagination";
 import ExportPDF_companies from "@/components/Specific/ExportPDF/ExportPDF_companies";
 import Breadcrumb from "@/components/Global/BreadCrumb";
-import '@/styles/app.css';
+import '../../styles/app.css';
 
 export default function CompaniesList() {
   
-  const [companies, setCompanies] = useState([]);
-  const [input, setInput] = useState("");         
-  const [searchTerm, setSearchTerm] = useState("");
-  // setError
-  const [theError, setTheError] = useState(null);
+    // Store all companies fetched from the PostgreSQL database 
+    const [companies, setCompanies] = useState([]);
 
-  // Set loader
-  const [loading, setLoading] = useState(false);
+    // Set loader
+    const [loading, setLoading] = useState(false);
 
-  // Set initial page
-  const [page, setPage] = useState(1);
-  const [companiesPerPage] = useState(10);
+    // Set initial page
+    const [page, setPage] = useState(1);
+    const [companiesPerPage] = useState(10);
 
-  // BreadCrumb items imported from breadCrumb.jsx
-  const breadCrumbitems= [
-      { label: "Home", href: "/" },
-      {label: "Aziende"}
-  ]
+    // BreadCrumb items imported from breadCrumb.jsx
+    const breadCrumbitems= [
+        { label: "Home", href: "/" },
+        {label: "Aziende"}
+    ]
 
-  const navigate = useNavigate();
+    // Hook the "useNavigate()" functionalities to the "navigate" variable
+    const navigate = useNavigate();
 
-    // useEffect to fetch the contacts from the PostgreSQL database, and to set the Loader
+    // useEffect to fetch the companies from the PostgreSQL database, and to set the Loader
        useEffect(()=> {
         const fetchCompanies = async()=> {
             try{
@@ -38,7 +36,7 @@ export default function CompaniesList() {
                 const response = await axios.get("http://localhost:3000/api/companies/get");
                 console.log(response)
                 console.log(response.data)
-                // The fetched data update the content of the contact variable. This happens even after the deletion of a single contact.
+                // The fetched data update the content of the company variable. This happens even after the deletion of a single company.
                 setCompanies(response.data);
     
                 // EXPECTED OUTPUT: [ An array of objects { }, { },... ] , "object".
@@ -47,39 +45,27 @@ export default function CompaniesList() {
 
             } catch(error){
                  if(error.response && error.response.status === 404) {
-                        setTheError("Companies not found");
                         console.error(error);
+                        console.log(`404 - Companies not found: ${error}`);
                     } else {
-                        setTheError("Error.")
+                        console.error(error);
+                        console.log(error);
                     }
                     console.error(`Error fetching the companies with the axios get method: ${error}`);
-                    console.log(theError);
-            } finally {
+                    console.log(error);
+                } finally {
                 setLoading(false);
             }              
         };
         fetchCompanies();
     },[]);
 
-// Filter companies' names when you press the Search button
-  const filteredCompanies = companies.filter((company) => {
-  const normalizedSearch = searchTerm.toLowerCase().replace(/\s+/g, '');
-  const normalizedName = company?.name?.toLowerCase().replace(/\s+/g, '');
-  return normalizedName.includes(normalizedSearch);
-});
 
- // Get current contacts
+ // Get current companies
   const indexOfLastContact = page * companiesPerPage;
   const indexOfFirstContact = indexOfLastContact - companiesPerPage;
   const currentCompanies = companies.slice(indexOfFirstContact, indexOfLastContact);
   const paginate = (number) => setPage(number);
-
-  function handleSubmit(e) {
-  e.preventDefault();
-  // Sanitize input with regex: trims whitespaces and Lowercases everything
-  const cleanedInput = input.trim().toLowerCase().replace(/\s+/g, '');
-  setSearchTerm(cleanedInput);
-  }
 
   // Open the page to create a new company
   function openForm() {
