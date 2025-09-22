@@ -115,14 +115,13 @@ export const search_company = async (req, res) => {
 
     // 2) Reject too-long queries
     if (trimmed.length > 100) {
-      `SELECT * FROM companies_view `
       return res.status(400).send("Invalid query, too long."); // too long
     }
 
     // 3)To lower case for the [like] values
     const like = `%${trimmed.toLowerCase()}%`;
 
-    // 4) Query parametrizzata (sicura contro SQLi)
+    // 4) Set Parametres against SQL injections
     const result = await pool.query(
       `SELECT * FROM companies_view
        WHERE LOWER(name) LIKE $1

@@ -119,14 +119,13 @@ export const search_contact = async (req, res) => {
 
     // 2) Reject empty or too-long queries
     if (trimmed.length > 100) {
-      `SELECT * FROM contacts_companies_view`
       return res.status(400).send("Invalid query, too long."); // troppo corta o troppo lunga
     }
 
-    // 3) Normalizzazione (case-insensitive)
+    // 3) To Lower Case (case-insensitive)
     const like = `%${trimmed.toLowerCase()}%`;
 
-    // 4) Query parametrizzata (sicura contro SQLi)
+    // 4) Set Parametres against SQL injections
     const result = await pool.query(
       `SELECT * FROM contacts_companies_view
        WHERE LOWER(name) LIKE $1

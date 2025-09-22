@@ -63,7 +63,6 @@ const Companies = ({ companies, loading }) => {
               <th className="d-none d-md-table-cell" scope="col">Telefono</th>
               <th className="d-none d-md-table-cell" scope="col">Sito Web</th>
               <th className="d-none d-md-table-cell" scope="col">Tipo</th>
-              <th className="d-none d-md-table-cell" scope="col">Dettagli</th>
               <th className="d-none d-md-table-cell" scope="col"></th>
             </tr>
           </thead>
@@ -73,11 +72,10 @@ const Companies = ({ companies, loading }) => {
               filteredCompanies.map((company) => (
               <tr key={company.id_company}>
                 <td className="hover:underline cursor-pointer">{company.name}</td>
-                <td className="d-none d-md-table-cell hover:underline cursor-pointer">{company.email}</td>
-                <td className="d-none d-md-table-cell hover:underline cursor-pointer">{company.phone}</td>
-                <td className="d-none d-md-table-cell hover:underline cursor-pointer">{company.website}</td>
-                <td className="d-none d-md-table-cell hover:underline cursor-pointer">{company.company_type}</td>
-                <td className="d-none d-md-table-cell hover:underline cursor-pointer">{company.notes || "-"}</td>
+                <td className="d-none d-md-table-cell hover:underline cursor-pointer">{company.email || "-"}</td>
+                <td className="d-none d-md-table-cell hover:underline cursor-pointer">{company.phone || "-"}</td>
+                <td className="d-none d-md-table-cell hover:underline cursor-pointer">{company.website || "-"}</td>
+                <td className="d-none d-md-table-cell hover:underline cursor-pointer">{company.company_type || "-"}</td>
                 <td>
                   <div  
                       className="bg-transparent border-none shadow-none p-0 m-0 outline-none">

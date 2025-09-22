@@ -19,7 +19,7 @@ function SideBar() {
             <FaBars
               className="text-white"
               onClick={showSidebar}
-              />
+            />
           </button>
          
         </div>

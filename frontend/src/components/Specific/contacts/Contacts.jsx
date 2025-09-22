@@ -30,16 +30,15 @@ const Contacts = ({ contacts, loading }) => {
   }, [contacts]);
 
   if (loading) {
-    return <h2>Loading...</h2>;
+    return <h2>Loading...</h2>
   }
 
   if (!contacts || contacts.length === 0) {
-    return <p>Nessun contatto trovato</p>;
+    return <p>Nessun contatto trovato</p>
   }
 
   return (
     <div>  
-      {/* Insert Ref here, so it prints this table */}
       <table className="table border table-hover">
           <thead>
             <tr>
@@ -73,10 +72,10 @@ const Contacts = ({ contacts, loading }) => {
               filteredContacts.map((contact) => (
               <tr key={contact.id_contact}>
                 <td className="hover:underline cursor-pointer">{contact.name}</td>
-                <td className="hover:underline cursor-pointer">{contact.surname}</td>
-                <td className="d-none d-md-table-cell hover:underline cursor-pointer">{contact.phone}</td>
-                <td className="d-none d-md-table-cell hover:underline cursor-pointer">{contact.email}</td>
-                <td className="d-none d-md-table-cell hover:underline cursor-pointer">{contact.role}</td>
+                <td className="hover:underline cursor-pointer">{contact.surname || "-"}</td>
+                <td className="d-none d-md-table-cell hover:underline cursor-pointer">{contact.phone || "-"}</td>
+                <td className="d-none d-md-table-cell hover:underline cursor-pointer">{contact.email || "-"}</td>
+                <td className="d-none d-md-table-cell hover:underline cursor-pointer">{contact.role || "-"}</td>
                 <td className="d-none d-md-table-cell hover:underline cursor-pointer">{contact.company_name || "-"}</td>
                 <td>
                   <div  

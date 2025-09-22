@@ -9,22 +9,20 @@ const Breadcrumb = ({items}) => {
                     {items.map((item, index)=> {
                         const isLast = index === items.length - 1; // If the position of the element is (2 - 1) = 1, show the element as an active Link, with an aria
                         return(
-                            <>
-                                <li key = {index} 
-                                    className={isLast? "active" : ""} 
-                                    aria-current = {isLast? "page" : null}
-                                >
-                                    {isLast? (item.label) : (
-                                        <>
-                                            <Link to={item.href}>
-                                                {item.label}
-                                            </Link>
-                                            {" /"}  
-                                        </>
-                                    ) 
-                                }
-                                </li>
-                            </>
+                            <li key = {index} 
+                                className={isLast? "active" : ""} 
+                                aria-current = {isLast? "page" : null}
+                            >
+                                {isLast? (item.label) : (
+                                    <>
+                                        <Link to={item.href}>
+                                            {item.label}
+                                        </Link>
+                                        {" /"}  
+                                    </>
+                                ) 
+                            }
+                            </li>
                         );
                     })}
                 </ol>

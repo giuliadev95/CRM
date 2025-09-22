@@ -13,7 +13,7 @@ const Pagination = ({recordsPerPage, totalRecords, paginate})=> {
                 <ul className="pagination">
                     {pageNumbers.map(number => {
                         return(
-                            <>
+                       
                                 <li key={number} className="page-item">
                                     <a          
                                         className="page-link"
@@ -22,7 +22,7 @@ const Pagination = ({recordsPerPage, totalRecords, paginate})=> {
                                         {number}
                                     </a>
                                 </li>
-                            </>
+                          
                         )
                     })}
                 </ul>

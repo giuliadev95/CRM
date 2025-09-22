@@ -103,4 +103,45 @@ export const update_project = async (req, res) => {
   }
 };
 
+// Get searched project
+export const search_project = async (req, res) => {
+  try {
+    const { q } = req.query;
+
+    // 1) Basic server-side validation
+    if (typeof q !== "string") {
+      return res.status(400).send("Invalid query"); // query is not a string
+    }
+
+    const trimmed = q.trim();
+
+    // 2) Reject empty or too-long queries
+    if (trimmed.length > 100) {
+      return res.status(400).send("Invalid query, too long."); // troppo corta o troppo lunga
+    }
+
+    // 3) To Lower Case (case-insensitive)
+    const like = `%${trimmed.toLowerCase()}%`;
+
+    // 4) Set Parametres against SQL injections
+    const result = await pool.query(
+      `SELECT * FROM projects_view
+       WHERE LOWER(name) LIKE $1
+          OR LOWER(company_name) LIKE $1
+          OR LOWER(status) LIKE $1
+          OR TO_CHAR(start_date, 'DD/MM/YYYY') LIKE $1
+          OR TO_CHAR(end_date, 'DD/MM/YYYY') LIKE $1
+          OR LOWER(CAST(budget AS TEXT)) LIKE $1
+          OR LOWER(description) LIKE $1
+       ORDER BY name
+       LIMIT 100`, // Set a limit to the returned project number
+      [like]
+    );
+
+    return res.json(result.rows);
+  } catch (err) {
+    console.error("Error in the query: ", err.message);
+    return res.status(500).send("500: Internal Server Error");
+  }
+};
 
