@@ -6,11 +6,14 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { MdModeEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import '../../../styles/app.css';
 
 const Contacts = ({ contacts, loading }) => { 
+
   // constants I need, moved here  rom the ContactsList.jsx component
   const [input, setInput] = useState("");
   const [filteredContacts, setFilteredContacts]= useState([]);
+
   // This constant hooks the "useNavigate()" functionalities to the "navigate" variable
   const navigate = useNavigate();
 
@@ -23,21 +26,24 @@ const Contacts = ({ contacts, loading }) => {
       navigate(`/contact-view/${id}`);
   }
 
-    // Delete contact
-    function deleteContact(id) {
-        if (!id) return console.error("The ID is missing to perform the deletion.");
+  // Loader timer
 
-        fetch(`http://localhost:3000/api/contact/delete/${id}`, {
-            method: "DELETE",
-        })
-        .then((res) => {
-            if (!res.ok) throw new Error("Error during the deletion.");
-            console.log(`Contact with ID: ${id} deleted successfully.`);
-            // Avoid mapping and filtering the deleted contact, as its ID will be missing.
-            setFilteredContacts(contacts.filter((contact) => contact.id_contact !== id));
-        })
-        .catch((err) => console.error(`Error: ${err}`));
-    }
+
+  // Delete contact
+  function deleteContact(id) {
+    if (!id) return console.error("The ID is missing to perform the deletion.");
+
+    fetch(`http://localhost:3000/api/contact/delete/${id}`, {
+        method: "DELETE",
+    })
+    .then((res) => {
+        if (!res.ok) throw new Error("Error during the deletion.");
+        console.log(`Contact with ID: ${id} deleted successfully.`);
+        // Avoid mapping and filtering the deleted contact, as its ID will be missing.
+        setFilteredContacts(contacts.filter((contact) => contact.id_contact !== id));
+    })
+    .catch((err) => console.error(`Error: ${err}`));
+  }
     
   async function handleSubmit(e) {
     e.preventDefault();
@@ -57,7 +63,7 @@ const Contacts = ({ contacts, loading }) => {
   }, [contacts]);
 
   if (loading) {
-    return <h2>Loading...</h2>
+    return <div class="spinner"></div>
   }
 
   if (!contacts || contacts.length === 0) {

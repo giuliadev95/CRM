@@ -31,19 +31,23 @@ const ContactsList = () => {
     // useEffect to fetch the contacts from the PostgreSQL database, and to set the Loader
        useEffect(()=> {
         const fetchContacts = async()=> {
-            try{
+            try {
+
                 setLoading(true);
+
                 const response = await axios.get("http://localhost:3000/api/contacts/get");
                 console.log(response)
                 console.log(response.data)
+                console.log(response.data, typeof response.data); // EXPECTED OUTPUT: [ An array of objects { }, { },... ] , "object".     
                 // The fetched data update the content of the contact variable. This happens even after the deletion of a single contact.
                 setContacts(response.data);
-    
-                // EXPECTED OUTPUT: [ An array of objects { }, { },... ] , "object".
-                console.log(response.data, typeof response.data);
-                setLoading(false);
+                
+                // Set a 2 secs timeout, during which the Loader must fire
+                setTimeout(()=> {
+                    setLoading(false);
+                }, 1000);  
 
-            } catch(error){
+            } catch (error) {
                 if(error.response && error.response.status === 404) {
                         console.error(error);
                         console.log(`404 - Contacts not found: ${error}`);
@@ -53,9 +57,10 @@ const ContactsList = () => {
                     }
                     console.error(`Error fetching the contacts with the axios get method: ${error}`);
                     console.log(error);
-            } finally {
-                setLoading(false);
-            }              
+                    setTimeout(()=> {
+                    setLoading(false);
+                }, 1000);
+            }            
         };
         fetchContacts();
     },[]);

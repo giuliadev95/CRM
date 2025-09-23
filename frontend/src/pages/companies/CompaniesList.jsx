@@ -41,33 +41,38 @@ export default function CompaniesList() {
     
                 // EXPECTED OUTPUT: [ An array of objects { }, { },... ] , "object".
                 console.log(response.data, typeof response.data);
-                setLoading(false);
+                  // Set a 2 secs timeout, during which the Loader must fire
+                setTimeout(()=> {
+                    setLoading(false);
+                }, 1000);  
 
-            } catch(error){
-                 if(error.response && error.response.status === 404) {
-                        console.error(error);
-                        console.log(`404 - Companies not found: ${error}`);
-                    } else {
-                        console.error(error);
-                        console.log(error);
-                    }
-                    console.error(`Error fetching the companies with the axios get method: ${error}`);
+            } catch (error) {
+                if(error.response && error.response.status === 404) {
+                    console.error(error);
+                    console.log(`404 - Companies not found: ${error}`);
+                } else {
+                    console.error(error);
                     console.log(error);
-                } finally {
-                setLoading(false);
-            }              
+                }
+                console.error(`Error fetching the companies with the axios get method: ${error}`);
+                console.log(error);
+                // Set a 2 secs timeout, during which the Loader must fire
+                setTimeout(()=> {
+                    setLoading(false);
+                }, 1000);       
+            }   
         };
         fetchCompanies();
-    },[]);
+},[]);
 
 
- // Get current companies
-  const indexOfLastContact = page * companiesPerPage;
-  const indexOfFirstContact = indexOfLastContact - companiesPerPage;
-  const currentCompanies = companies.slice(indexOfFirstContact, indexOfLastContact);
-  const paginate = (number) => setPage(number);
+// Get current companies
+const indexOfLastContact = page * companiesPerPage;
+const indexOfFirstContact = indexOfLastContact - companiesPerPage;
+const currentCompanies = companies.slice(indexOfFirstContact, indexOfLastContact);
+const paginate = (number) => setPage(number);
 
-  // Open the page to create a new company
+// Open the page to create a new company
   function openForm() {
       navigate("/new-company")
   }

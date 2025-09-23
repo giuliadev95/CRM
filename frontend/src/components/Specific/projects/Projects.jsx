@@ -30,7 +30,7 @@ const Projects = ({ projects, loading }) => {
   }, [projects]);
 
   if (loading) {
-    return <h2>Loading...</h2>;
+    return <div class="spinner"></div>
   }
 
   if (!projects || projects.length === 0) {

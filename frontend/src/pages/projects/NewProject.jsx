@@ -47,6 +47,7 @@ const NewProject = () => {
             navigate("/projects");
         } catch (err) {
             console.error("Error:", err);
+            
         }
     };
 

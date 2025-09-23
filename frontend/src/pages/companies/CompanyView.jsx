@@ -1,15 +1,3 @@
-/*
-const CompanyView = () => {
-    return(
-        <>
-        <h3>
-            Company View
-        </h3></>
-    )
-}
-export default CompanyView;
-*/
-
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AiTwotoneDelete } from "react-icons/ai";

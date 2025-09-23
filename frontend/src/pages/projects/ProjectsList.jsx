@@ -41,20 +41,27 @@ const ProjectsList = () => {
     
                 // EXPECTED OUTPUT: [ An array of objects { }, { },... ] , "object".
                 console.log(response.data, typeof response.data);
-                setLoading(false);
 
-            } catch(error){
+                 // Set a 2 secs timeout, during which the Loader must fire
+                setTimeout(()=> {
+                    setLoading(false);
+                }, 1000);  
+
+            } catch(error) {
                 if(error.response && error.response.status === 404) {
-                        console.error(error);
-                        console.log(`404 - Projects not found: ${error}`);
-                    } else {
-                        console.error(error);
-                        console.log(error);
-                    }
-                    console.error(`Error fetching the projects with the axios get method: ${error}`);
+                    console.error(error);
+                    console.log(`404 - Projects not found: ${error}`);
+                } else {
+                    console.error(error);
                     console.log(error);
-            } finally {
-                setLoading(false);
+                }
+
+                console.error(`Error fetching the projects with the axios get method: ${error}`);
+                console.log(error);
+                // Set a 2 secs timeout, during which the Loader must fire
+                setTimeout(()=> {
+                    setLoading(false);
+                }, 1000);  
             }              
         };
         fetchProjects();
