@@ -1,7 +1,6 @@
-// Contacts.jsx
+import axios from "axios";
 import React from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate to redirect to configured routes without refreshing the page thanks to SPA
-import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { MdModeEdit } from "react-icons/md";
@@ -41,7 +40,8 @@ const Contacts = ({ contacts, loading }) => {
     })
     .catch((err) => console.error(`Error: ${err}`));
   }
-    
+  
+  // Function to handle the Search query
   async function handleSubmit(e) {
     e.preventDefault();
     const cleanedInput = input.trim().toLowerCase().replace(/\s+/g, '');  

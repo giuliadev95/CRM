@@ -1,15 +1,3 @@
-/*
-import '@styles/app.css';
-const UpdateCompany = () => {
-    return(
-        <>
-            <h1>Update Company</h1>
-        </>
-    )
-}
-export default UpdateCompany;
-*/
-
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import '@styles/app.css';

@@ -13,16 +13,14 @@ const Pagination = ({recordsPerPage, totalRecords, paginate})=> {
                 <ul className="pagination">
                     {pageNumbers.map(number => {
                         return(
-                       
-                                <li key={number} className="page-item">
-                                    <a          
-                                        className="page-link"
-                                        onClick={()=> paginate(number)}
-                                    >
-                                        {number}
-                                    </a>
-                                </li>
-                          
+                            <li key={number} className="page-item">
+                                <a          
+                                    className="page-link"
+                                    onClick={()=> paginate(number)}
+                                >
+                                    {number}
+                                </a>
+                            </li>      
                         )
                     })}
                 </ul>

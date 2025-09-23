@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { FaPen } from "react-icons/fa";
+import View from "@/components/Global/View";
 import '@styles/app.css';
 
 const CompanyView = () => {
@@ -34,45 +35,38 @@ const CompanyView = () => {
     }
 
     return (
-        <div className="company-view-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Telefono</th>
-                        <th>Email</th>
-                        <th>Website</th>
-                        <th>Tipo</th>
-                        <th>Dettagli</th>
-                        <th>Opzioni</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {company ? (
-                        <tr>
-                            <td>{company.name}</td>
-                            <td>{company.phone}</td>
-                            <td>{company.email}</td>
-                            <td>{company.website}</td>
-                            <td>{company.company_type || "-"}</td>
-                            <td>{company.notes}</td>
-                            <td className="actions-button-container">
-                                <button
-                                    type="button"
-                                    className="actions-button"
-                                    onClick={() => deleteCompany(company.id_company)}
-                                >
-                                    <AiTwotoneDelete />
-                                </button>
-                                <button
-                                    type="button"
-                                    className="actions-button"
-                                    onClick={() => openCompanyPage(company.id_company)}
-                                >
-                                    <FaPen />
-                                </button>
-                            </td>
-                        </tr>
+        <div className="company-view-container"> 
+            {company ? (
+                <View 
+                    avatar={"company"}
+                    title={company.name}
+                    fields={[
+                        {
+                            label: "Nome",
+                            value: company.name
+                        },
+                        {
+                            label: "Telefono",
+                            value: company.phone
+                        },
+                        {
+                            label: "Email",
+                            value: company.email
+                        },
+                        {
+                            label: "Sito web",
+                            value: company.website
+                        },
+                        {
+                            label: "Tipologia",
+                            value: company.company_type
+                        },
+                        {
+                            label: "Dettagli",
+                            value: company.notes
+                        }
+                    ]}/>
+                       
                     ) : (
                         <tr>
                             <td colSpan={5} style={{ textAlign: "center" }}>
@@ -80,14 +74,6 @@ const CompanyView = () => {
                             </td>
                         </tr>
                     )}
-                </tbody>
-            </table>
-            <button
-                type="button"
-                onClick={ (e)=> navigate("/companies")}
-            >
-                Indietro
-            </button>
         </div>
     );
 };

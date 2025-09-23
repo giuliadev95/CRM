@@ -1,15 +1,45 @@
-// Contacts.jsx
 import React from "react";
 import axios from "axios";
-import { BsThreeDotsVertical } from "react-icons/bs";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { MdModeEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 
 const Projects = ({ projects, loading }) => { 
   // constants I need, moved here from the ProjectsList.jsx component
   const [input, setInput] = useState("");
   const [filteredProjects, setFilteredProjects]= useState([]);
 
+  // This constant hooks the "useNavigate()" functionalities to the "navigate" variable
+  const navigate = useNavigate();
+
+  // Open the page to update the project
+  const openProjectPage = (id) => {
+    navigate(`/update-project/${id}`);
+  }
+
+  const openProjectView = (id) => {
+    navigate(`/project-view/${id}`);
+  }
+  
+  // Delete project
+  function deleteProject(id) {
+    if (!id) return console.error("The ID is missing to perform the deletion.");
+
+    fetch(`http://localhost:3000/api/project/delete/${id}`, {
+        method: "DELETE",
+    })
+    .then((res) => {
+        if (!res.ok) throw new Error("Error during the deletion.");
+        console.log(`Contact with ID: ${id} deleted successfully.`);
+        // Avoid mapping and filtering the deleted contact, as its ID will be missing.
+        setFilteredProjects(projects.filter((project) => project.id_project !== id));
+    })
+    .catch((err) => console.error(`Error: ${err}`));
+  }
+
+  // Function to handle the Search query
   async function handleSubmit(e) {
     e.preventDefault();
     const cleanedInput = input.trim().toLowerCase().replace(/\s+/g, '');
@@ -78,29 +108,37 @@ const Projects = ({ projects, loading }) => {
             {filteredProjects.length > 0 ? (
               filteredProjects.map((project) => (
               <tr key={project.id_project}>
-                <td className="hover:underline cursor-pointer">{project.name}</td>
-                <td className="d-none d-md-table-cell hover:underline cursor-pointer">{project.company_name || "-"}</td>
-                <td className="d-none d-md-table-cell hover:underline cursor-pointer">{project.status || "-"}</td>
-                <td className="d-none d-md-table-cell hover:underline cursor-pointer">
-                    {
-                      project.start_date && formatDate(project.start_date)
-                      ? formatDate(project.start_date)
-                      : "Non disponibile"
-                    }
+                <td className="hover:underline cursor-pointer" onClick={() => openProjectView(project.id_project)}>{project.name}</td>
+                <td className="d-none d-md-table-cell hover:underline cursor-pointer" onClick={() => openProjectView(project.id_project)}>{project.company_name || "-"}</td>
+                <td className="d-none d-md-table-cell hover:underline cursor-pointer" onClick={() => openProjectView(project.id_project)}>{project.status || "-"}</td>
+                <td className="d-none d-md-table-cell hover:underline cursor-pointer" onClick={() => openProjectView(project.id_project)}>
+                  {
+                    project.start_date && formatDate(project.start_date)
+                    ? formatDate(project.start_date)
+                    : "Non disponibile"
+                  }
+                </td>
+                <td className="d-none d-md-table-cell hover:underline cursor-pointer" onClick={() => openProjectView(project.id_project)}>
+                  {
+                    project.end_date && formatDate(project.end_date)
+                    ? formatDate(project.end_date)
+                    : "Non disponibile"
+                  }
                   </td>
-                  <td>
-                    {
-                      project.end_date && formatDate(project.end_date)
-                      ? formatDate(project.end_date)
-                      : "Non disponibile"
-                    }
-                    </td>
-                <td className="d-none d-md-table-cell hover:underline cursor-pointer">{project.budget || "-"}</td>
+                <td className="d-none d-md-table-cell hover:underline cursor-pointer" onClick={() => openProjectView(project.id_project)}>{project.budget || "-"}</td>
                 <td>
-                  <div  
-                      className="bg-transparent border-none shadow-none p-0 m-0 outline-none">
-                      <BsThreeDotsVertical/>
-                  </div>
+                  <button  
+                    onClick={() => openProjectPage(project.id_project)}
+                    className="bg-transparent border-none shadow-none p-0 m-0 outline-none"
+                  >
+                    <MdModeEdit />
+                  </button>
+                  <button  
+                    onClick={() => deleteProject(project.id_project)}
+                    className="bg-transparent border-none shadow-none p-0 m-0 outline-none"
+                  >
+                    <MdDelete />
+                  </button>
                 </td>
               </tr>
               ))

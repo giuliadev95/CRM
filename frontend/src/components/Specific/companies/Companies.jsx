@@ -19,7 +19,7 @@ const Companies = ({ companies, loading }) => {
   }
   // Function to open the single company's view
   const openCompanyView = (id) => {
-      navigate(`/contact-view/${id}`);
+      navigate(`/company-view/${id}`);
   }
 
 // Delete company

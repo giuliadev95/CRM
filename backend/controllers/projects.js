@@ -82,8 +82,13 @@ export const delete_project = async (req, res) => {
 // UPDATE a single project by ID
 export const update_project = async (req, res) => {
   const { id } = req.params;
-  const { name, description, company_id, status, start_date, end_date, budget } = req.body;
-  
+  let { name, description, company_id, status, start_date, end_date, budget } = req.body;
+
+  start_date = start_date === "" ? null : start_date;
+  end_date = end_date === "" ? null : end_date;
+  budget = budget === "" ? null : budget;
+  company_id = company_id === "" ? null : company_id;
+
   try {
     const result = await pool.query(
       `UPDATE projects
@@ -96,12 +101,14 @@ export const update_project = async (req, res) => {
       return res.status(404).send({ message: `404 Not Found: Project with id: ${id} not found.` });
     }
 
-    res.send({message: `Project with id: ${id} updated successfully.`});
+  res.send({ message: `Project with id: ${id} updated successfully.` });
+
   } catch (err) {
     console.error("Error updating the project: ", err);
-    res.status(500).send({ error: "Error updating the project."});
+    res.status(500).send({ error: "Error updating the project." });
   }
 };
+
 
 // Get searched project
 export const search_project = async (req, res) => {
