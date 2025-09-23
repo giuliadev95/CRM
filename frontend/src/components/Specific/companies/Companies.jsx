@@ -1,14 +1,41 @@
 // Contacts.jsx
 import React from "react";
 import axios from "axios";
-import { BsThreeDotsVertical } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
+import { MdModeEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 
 const Companies = ({ companies, loading }) => { 
   // constants I need, moved here  rom the ContactsList.jsx component
   const [input, setInput] = useState("");
   const [filteredCompanies, setFilteredCompanies]= useState([]);
+  const navigate= useNavigate();
+
+  // Open the page to open the single company's update page
+  const openCompanyPage = (id) => {
+      navigate(`/update-company/${id}`);
+  }
+  // Function to open the single company's view
+  const openCompanyView = (id) => {
+      navigate(`/contact-view/${id}`);
+  }
+
+// Delete company
+  function deleteCompany(id) {
+    if (!id) return console.error("The ID is missing to perform the deletion.");
+        fetch(`http://localhost:3000/api/company/delete/${id}`, {
+        method: "DELETE",
+    })
+    .then((res) => {
+        if (!res.ok) throw new Error("Error during the deletion.");
+        console.log(`Company with ID: ${id} deleted successfully.`);
+        // Avoid mapping and filtering the deleted contact, as its ID will be missing.
+        setFilteredCompanies(companies.filter((company) => company.id_company !== id));
+    })
+    .catch((err) => console.error(`Error: ${err}`));
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -63,7 +90,7 @@ const Companies = ({ companies, loading }) => {
               <th className="d-none d-md-table-cell" scope="col">Telefono</th>
               <th className="d-none d-md-table-cell" scope="col">Sito Web</th>
               <th className="d-none d-md-table-cell" scope="col">Tipo</th>
-              <th className="d-none d-md-table-cell" scope="col"></th>
+              <th></th>
             </tr>
           </thead>
           {/* Map the fetched contacts to display each of them in a table row */}
@@ -71,17 +98,25 @@ const Companies = ({ companies, loading }) => {
             {filteredCompanies.length > 0 ? (
               filteredCompanies.map((company) => (
               <tr key={company.id_company}>
-                <td className="hover:underline cursor-pointer">{company.name}</td>
-                <td className="d-none d-md-table-cell hover:underline cursor-pointer">{company.email || "-"}</td>
-                <td className="d-none d-md-table-cell hover:underline cursor-pointer">{company.phone || "-"}</td>
-                <td className="d-none d-md-table-cell hover:underline cursor-pointer">{company.website || "-"}</td>
-                <td className="d-none d-md-table-cell hover:underline cursor-pointer">{company.company_type || "-"}</td>
-                <td>
-                  <div  
-                      className="bg-transparent border-none shadow-none p-0 m-0 outline-none">
-                      <BsThreeDotsVertical/>
-                  </div>
-                </td>
+                <td className="hover:underline cursor-pointer" onClick={()=> {openCompanyView(company.id_company)}}>{company.name}</td>
+                <td className="d-none d-md-table-cell hover:underline cursor-pointer" onClick={()=> {openCompanyView(company.id_company)}}>{company.email || "-"}</td>
+                <td className="d-none d-md-table-cell hover:underline cursor-pointer" onClick={()=> {openCompanyView(company.id_company)}}>{company.phone || "-"}</td>
+                <td className="d-none d-md-table-cell hover:underline cursor-pointer" onClick={()=> {openCompanyView(company.id_company)}}>{company.website || "-"}</td>
+                <td className="d-none d-md-table-cell hover:underline cursor-pointer" onClick={()=> {openCompanyView(company.id_company)}}>{company.company_type || "-"}</td>
+                  <td className="hover:underline cursor-pointer"> 
+                    <button 
+                      onClick={()=> openCompanyPage(company.id_company)}
+                      className="bg-transparent border-none shadow-none p-0 m-0 outline-none"
+                    >
+                      <MdModeEdit/>
+                    </button>
+                    <button 
+                      onClick={ ()=> deleteCompany(company.id_company) }
+                      className="bg-transparent border-none shadow-none p-0 m-0 outline-none"
+                    >
+                      <MdDelete/>
+                    </button>
+                  </td>
               </tr>
               ))
               ) : (

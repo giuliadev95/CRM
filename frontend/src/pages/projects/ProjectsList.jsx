@@ -85,7 +85,7 @@ const ProjectsList = () => {
                 <Breadcrumb items={breadCrumbitems}
                 />
                 <div className="flex flex-col md:flex md:flex-row md:justify-between">
-                    <h1 className="h2">Project</h1>
+                    <h1 className="h2">Progetti</h1>
                     <div className="flex md:gap-2 justify-start gap-4 md:justify-between items-center my-4 md:hidden">
                         <button 
                             type="button" 

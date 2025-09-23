@@ -22,7 +22,7 @@ const ContactsList = () => {
     // BreadCrumb items imported from breadCrumb.jsx
     const breadCrumbitems= [
         { label: "Home", href: "/" },
-        {label: "Contatti"}
+        { label: "Contatti"}
     ]
 
     // This constant hooks the "useNavigate()" functionalities to the "navigate" variable

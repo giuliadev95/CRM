@@ -7,6 +7,7 @@ const UpdateContact = () => {
     const navigate = useNavigate();
     const [name, setName] = useState("");
     const [surname, setSurname] = useState("");
+    const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
     const [role, setRole] = useState("");
     const [details, setDetails] = useState(""); // Add details row to be modified
@@ -43,6 +44,7 @@ const UpdateContact = () => {
         const updatedContact = {
             name,
             surname,
+            phone,
             email,
             role,
             company_id: parseInt(companyId),
@@ -82,6 +84,14 @@ const UpdateContact = () => {
                     required
                     value={surname}
                     onChange={(e) => setSurname(e.target.value)}
+                />
+                 <input
+                    type="text"
+                    name="phone"
+                    placeholder="Telefono"
+                    required
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                 />
 
                 <input

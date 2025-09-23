@@ -19,15 +19,12 @@ const Contacts = ({ contacts, loading }) => {
 
   // Open the page to update the contact
   const openContactPage = (id) => {
-      navigate(`/update-contact/${id}`);
+    navigate(`/update-contact/${id}`);
   }
 
   const openContactView = (id) => {
-      navigate(`/contact-view/${id}`);
+    navigate(`/contact-view/${id}`);
   }
-
-  // Loader timer
-
 
   // Delete contact
   function deleteContact(id) {
@@ -104,17 +101,14 @@ const Contacts = ({ contacts, loading }) => {
   {filteredContacts.length > 0 ? (
     filteredContacts.map((contact) => (
       <tr key={contact.id_contact}>
-        <td 
-          className="hover:underline cursor-pointer" 
-          onClick={() => openContactView(contact.id_contact)}
-        >
+        <td className="hover:underline cursor-pointer" onClick={() => openContactView(contact.id_contact)}>
           {contact.name}
         </td>
-        <td className="hover:underline cursor-pointer">{contact.surname || "-"}</td>
-        <td className="d-none d-md-table-cell hover:underline cursor-pointer">{contact.phone || "-"}</td>
-        <td className="d-none d-md-table-cell hover:underline cursor-pointer">{contact.email || "-"}</td>
-        <td className="d-none d-md-table-cell hover:underline cursor-pointer">{contact.role || "-"}</td>
-        <td className="d-none d-md-table-cell hover:underline cursor-pointer">{contact.company_name || "-"}</td>
+        <td className="hover:underline cursor-pointer" onClick={() => openContactView(contact.id_contact)}>{contact.surname || "-"}</td>
+        <td className="d-none d-md-table-cell hover:underline cursor-pointer" onClick={() => openContactView(contact.id_contact)}>{contact.phone || "-"}</td>
+        <td className="d-none d-md-table-cell hover:underline cursor-pointer" onClick={() => openContactView(contact.id_contact)}>{contact.email || "-"}</td>
+        <td className="d-none d-md-table-cell hover:underline cursor-pointer" onClick={() => openContactView(contact.id_contact)}>{contact.role || "-"}</td>
+        <td className="d-none d-md-table-cell hover:underline cursor-pointer" onClick={() => openContactView(contact.id_contact)}>{contact.company_name || "-"}</td>
         <td className="hover:underline cursor-pointer">
           <button  
             onClick={() => openContactPage(contact.id_contact)}

@@ -103,7 +103,7 @@ const NewCompany = () => {
             </form>
             <button
                 type="button"
-                onClick= {()=> navigate('/companies')}
+                onClick={()=> navigate('/companies')}
             >
                 Indietro
             </button>
