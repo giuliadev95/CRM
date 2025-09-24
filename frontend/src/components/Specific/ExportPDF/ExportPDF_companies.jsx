@@ -44,7 +44,7 @@ const ExportPDF_companies = ({ companies }) => {
       doc.setFontSize(10);
     };
 
-    // --- First page ever on printed PDF ---
+    // --- First page ever of the generated PDF ---
     addHeader();
 
     rows.forEach((row, index) => {

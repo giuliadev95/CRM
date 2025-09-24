@@ -21,6 +21,7 @@ const UpdateContact = () => {
             .then((data) => {
                 setName(data.name || "");
                 setSurname(data.surname || "");
+                setPhone(data.phone || "");
                 setEmail(data.email || "");
                 setRole(data.role || "");
                 setDetails(data.details || "");

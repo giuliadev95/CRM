@@ -83,15 +83,15 @@ export const delete_contact = async (req, res) => {
 // UPDATE a single contact by ID
 export const update_contact = async (req, res) => {
   const { id } = req.params;
-  const { name, phone, email, role, company_id, details } = req.body;
+  const { name, surname, phone, email, role, company_id, details } = req.body;
   
   try {
     const result = await pool.query(
       `UPDATE contact
-       SET name = $1, phone = $2, email = $3, role = $4,
-        company_id = $5, details = $6
-       WHERE id_contact = $7`, // where the ID of the contact is equal to the req. params id. ATTENTION: The comparison is possible because PostgreSQL automatically converts the req.params to an integer while trying to compare it with the contact_id serial primary key.
-      [name, phone, email, role, company_id, details, id] // Here, each value gets associated with the respective $placeholder.
+        SET name = $1, surname = $2, phone = $3, email = $4,
+        role = $5, company_id = $6, details = $7
+        WHERE id_contact = $8`, // where the ID of the contact is equal to the req. params id. ATTENTION: The comparison is possible because PostgreSQL automatically converts the req.params to an integer while trying to compare it with the contact_id serial primary key.
+      [name, surname, phone, email, role, company_id, details, id] // Here, each value gets associated with the respective $placeholder.
     );
 
     if (result.rowCount === 0) {
