@@ -3,24 +3,15 @@ import { FaUserAlt } from "react-icons/fa";
 import { HiBuildingOffice2 } from "react-icons/hi2";
 import { FaRocket } from "react-icons/fa";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import Breadcrumb from "./BreadCrumb";
 import { useNavigate } from "react-router-dom";
 
 const View = ({title, fields, avatar}) => {
-    // BreadCrumb items imported from breadCrumb.jsx
-    const breadCrumbitems= [
-        { label: "Home", href: "/" },
-        { label: "Aziende", href:"/companies"},
-        {label: "Dettagli"}
-    ]
 
-    // navigate
     const navigate = useNavigate();
 
     return(
         <div className="flex flex-col items-start justify-start mt-4">
             <div className="mx-8 flex flex-col gap-3 justify-start">  
-                <Breadcrumb items={breadCrumbitems}/> 
                 <button
                     type="button"
                     onClick={()=> navigate(-1)}

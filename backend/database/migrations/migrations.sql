@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS company (
 CREATE TABLE IF NOT EXISTS contact (
   id_contact SERIAL PRIMARY KEY, /* SERIAL is an INTEGER */
   name VARCHAR(255) NOT NULL,
+  surname,
   phone VARCHAR(50),
   email VARCHAR(255),
   role VARCHAR(100),
@@ -52,26 +53,26 @@ INSERT INTO company (name, phone, email, website, company_type, notes, created_a
 
 /* PUPULATE CONTACT TABLE */
 INSERT INTO contact (name, phone, email, role, company_id, details, created_at) VALUES
-('Silvia Romano', '328 1234567', 's.romano@techworld.it', 'IT Manager', 1, 'Gestisce i progetti di infrastruttura cloud e sicurezza. Referente principale per le soluzioni enterprise.', '2025-09-01'),
-('Andrea Greco', '347 9876543', 'a.greco@greenlifesol.it', 'Responsabile Acquisti', 2, 'Si occupa della selezione di fornitori tecnologici e trattative commerciali.', '2025-09-01'),
-('Laura Ferrari', '334 3344556', 'l.ferrari@bizadvance.it', 'Consulente HR', 3, 'Supporta i clienti nei progetti di digitalizzazione HR, onboarding e formazione.', '2025-09-01'),
-('Roberto Galli', '340 2233445', 'r.galli@smartchain.com', 'Sales Executive', 4, 'Responsabile delle trattative per progetti IT logistici e CRM. Coordina il team sales.', '2025-09-01'),
-('Martina Rossi', '345 6677889', 'm.rossi@innovo.it', 'Account Manager', 5, 'Gestisce i rapporti commerciali e segue la personalizzazione dei software forniti.', '2025-09-01'),
-('Giovanni Conti', '333 2244668', 'g.conti@techworld.it', 'Specialista Cybersecurity', 1, 'Collabora su progetti di audit e implementazione policy di sicurezza. Relatore in eventi marketing.', '2025-09-02'),
-('Valeria Sanna', '392 4455667', 'v.sanna@greenlifesol.it', 'Marketing Manager', 2, 'Gestisce campagne digitali e relazioni con aziende partner. Interessata a servizi CRM.', '2025-09-02'),
-('Luca Marchetti', '366 8899001', 'l.marchetti@bizadvance.it', 'Formatore', 3, 'Eroga corsi su soft skills e strumenti HR digitali per clienti aziendali.', '2025-09-02'),
-('Claudio De Luca', '340 5566778', 'c.deluca@smartchain.com', 'HR Manager', 4, 'Responsabile della selezione IT, coordina piani di formazione tecnica interna.', '2025-09-02'),
-('Elena Grassi', '335 7788990', 'elena.grassi@innovo.it', 'Specialista prodotto', 5, 'Segue le implementazioni software e formazione clienti finali nel settore sanitario.', '2025-09-02');
+('Silvia', 'Romanelli', '328 1234567', 's.romano@techworld.it', 'IT Manager', 1, 'Gestisce i progetti di infrastruttura cloud e sicurezza. Referente principale per le soluzioni enterprise.', '2025-09-01'),
+('Andrea', 'Greco', '347 9876543', 'a.greco@greenlifesol.it', 'Responsabile Acquisti', 2, 'Si occupa della selezione di fornitori tecnologici e trattative commerciali.', '2025-09-01'),
+('Laura', 'Ferrari', '334 3344556', 'l.ferrari@bizadvance.it', 'Consulente HR', 3, 'Supporta i clienti nei progetti di digitalizzazione HR, onboarding e formazione.', '2025-09-01'),
+('Roberto', 'Galli', '340 2233445', 'r.galli@smartchain.com', 'Sales Executive', 4, 'Responsabile delle trattative per progetti IT logistici e CRM. Coordina il team sales.', '2025-09-01'),
+('Martina', 'Rossi', '345 6677889', 'm.rossi@innovo.it', 'Account Manager', 5, 'Gestisce i rapporti commerciali e segue la personalizzazione dei software forniti.', '2025-09-01'),
+('Giovanni', 'Conti', '333 2244668', 'g.conti@techworld.it', 'Specialista Cybersecurity', 1, 'Collabora su progetti di audit e implementazione policy di sicurezza. Relatore in eventi marketing.', '2025-09-02'),
+('Valeria', 'Sanna', '392 4455667', 'v.sanna@greenlifesol.it', 'Marketing Manager', 2, 'Gestisce campagne digitali e relazioni con aziende partner. Interessata a servizi CRM.', '2025-09-02'),
+('Luca', 'Marchetti', '366 8899001', 'l.marchetti@bizadvance.it', 'Formatore', 3, 'Eroga corsi su soft skills e strumenti HR digitali per clienti aziendali.', '2025-09-02'),
+('Claudio', 'De Luca', '340 5566778', 'c.deluca@smartchain.com', 'HR Manager', 4, 'Responsabile della selezione IT, coordina piani di formazione tecnica interna.', '2025-09-02'),
+('Elena', 'Grassi', '335 7788990', 'elena.grassi@innovo.it', 'Specialista prodotto', 5, 'Segue le implementazioni software e formazione clienti finali nel settore sanitario.', '2025-09-02');
 
 /* ALTER CONTACT TABLE AND ADD THE COLUMN: "SURNAME" AS A STRING FIELD*/
-ALTER TABLE contact
-ADD surname VARCHAR(255);
+/*ALTER TABLE contact
+ADD surname VARCHAR(255);*/
 
 /* UPDATE THE EXISTING RECORDS BY SETTING A SURNAME FOR THEM */
-UPDATE contact
+/*UPDATE contact
 SET name = 'Valeria', surname = 'Sanna'
 WHERE id_contact = 59
-RETURNING *;
+RETURNING *;*/
 
 
 /* SELECT ALL FROM CONTACT */

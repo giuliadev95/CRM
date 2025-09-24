@@ -1,12 +1,22 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import View from "@/components/Global/View";
-import '@styles/app.css';
 import ExportPDF_company from "@/components/Specific/ExportPDF/ExportPDF_company_details";
+import Breadcrumb from "@/components/Global/BreadCrumb";
+import '@styles/app.css';
 
 const CompanyView = () => {
     const { id } = useParams();
     const [company, setCompany] = useState(null);
+    
+    // BreadCrumb items imported from breadCrumb.jsx
+    const breadCrumbitems= [
+        { label: "Home", href: "/" },
+        { label: "Aziende", href:"/companies"},
+        {label: "Dettagli"}
+    ]
+    
+    const [showConfirm, setShowConfirm] = useState(false); // dont's show the pop-up msg by default
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -17,6 +27,7 @@ const CompanyView = () => {
             .catch((err) => console.error(err));
     }, [id]);
 
+    // Delete company
     function deleteCompany(id) {
         if (!id) return console.error("The ID is missing to perform the deletion.");
         fetch(`http://localhost:3000/api/company/delete/${id}`, {
@@ -24,18 +35,21 @@ const CompanyView = () => {
         })
         .then((res) => {
             if (!res.ok) throw new Error("Error during the deletion.");
-            navigate("/"); // Navigate to the Homepage
+            navigate(-1); // Navigate back 
         })
         .catch((err) => console.error(`Error: ${err}`));
+        setShowConfirm(false);
     }
 
+    // Open edit page
     const openCompanyPage = (id) => {
         navigate(`/update-company/${id}`);
     }
 
     return (
         <>
-            <div className="company-view-container"> 
+            <div>
+                <Breadcrumb items={breadCrumbitems}/> 
                 {company ? (
                     <>
                         {/* Display the View component */ }
@@ -68,7 +82,6 @@ const CompanyView = () => {
                                     value: company.notes
                                 }
                             ]}
-                            company={company}
                         /> 
                         {/* Display the 3 buttons: Export, Edit, Delete */ }
                         <div className="mx-8 flex flex-col sm:flex-row gap-3 md:gap-0 max-w-fit justify-center ">
@@ -83,8 +96,8 @@ const CompanyView = () => {
                             <button
                                 class="btn btn-danger"
                                 type="button"
-                                onClick={() => deleteCompany(company.id_company)}
-                                >
+                                onClick={()=> setShowConfirm(true)} // pop-up opening
+                            >
                                 Elimina
                             </button>
                         </div>
@@ -97,6 +110,32 @@ const CompanyView = () => {
                         </tr>
                     )}
             </div>
+            {/* Pop up msg to ask the user if he wants to delete the Company */}         
+            {showConfirm && (
+                <>
+                    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                        <div className="bg-white p-6 rounded-lg shadow-lg">
+                            <p className="mb-4 text-lg">
+                                Confermi di voler eliminare quest'azienda definitivamente?
+                            </p>
+                            <div className="flex gap-4 justify-center">
+                                <button 
+                                    className="btn btn-danger"
+                                    onClick={()=> deleteCompany(company.id_company)} // delete the company and navigate back of 1 page
+                                >
+                                    Sì
+                                </button>
+                                <button 
+                                    className="btn btn-secondary"
+                                    onClick={() => setShowConfirm(false)} // just close the pop-up
+                                >
+                                    No
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </>
+            )}
         </>
     );
 };
