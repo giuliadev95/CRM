@@ -13,7 +13,7 @@ const ContactView = () => {
     //BreadCrumb items imported from breadCrumb.jsx
     const breadCrumbitems= [
         { label: "Home", href: "/" },
-        { label: "Contatti", href:"/contatti"},
+        { label: "Contatti", href:"/"},
         {label: `Dettagli`}
     ]
         
@@ -48,13 +48,15 @@ const ContactView = () => {
     return (
         <>
             <div>
-                <Breadcrumb items={breadCrumbitems}/>
+                <div className="mx-8">
+                    <Breadcrumb items={breadCrumbitems}/>
+                </div>
                 {contact ? (
-                    <>
+                    <div className="max-w-xl">
                         {/* Display the View component */ }
                         <View 
                             avatar={"contact"}
-                            title={contact.name}
+                            title={`${contact.name} ${contact.surname}`}
                             fields={[
                                 {
                                     label: "Nome",
@@ -86,25 +88,25 @@ const ContactView = () => {
                                 }
                             ]}
                         /> 
-                    {/* Display the 3 buttons: Export, Edit, Delete */ }
-                    <div className="mx-4 flex flex-wrap items-center sm:flex-row gap-3 md:gap-0 max-w-fit justify-start md:justify-center ">
-                        <ExportPDF_contact contact={contact}/>
-                        <button
-                            type="button"
-                            class="btn btn-warning"
-                            onClick={() => openContactPage(contact.id)}
+                        {/* Display the 3 buttons: Export, Edit, Delete */ }
+                        <div className="mx-4 flex flex-wrap items-center sm:flex-row gap-3 md:gap-0 max-w-fit justify-start md:justify-center ">
+                            <ExportPDF_contact contact={contact}/>
+                            <button
+                                type="button"
+                                class="btn btn-warning"
+                                onClick={() => openContactPage(contact.id)}
+                                >
+                                    Modifica
+                            </button>
+                            <button
+                                class="btn btn-danger"
+                                type="button"
+                                onClick={()=> setShowConfirm(true)} // pop-up opening
                             >
-                                Modifica
-                        </button>
-                        <button
-                            class="btn btn-danger"
-                            type="button"
-                            onClick={()=> setShowConfirm(true)} // pop-up opening
-                        >
-                            Elimina
-                        </button>
-                    </div>
-                </>
+                                Elimina
+                            </button>
+                        </div>
+                </div>
                 ) : (
                     <tr>
                         <td colSpan={5} style={{ textAlign: "center" }}>

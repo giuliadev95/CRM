@@ -49,9 +49,11 @@ const CompanyView = () => {
     return (
         <>
             <div>
-                <Breadcrumb items={breadCrumbitems}/> 
+                <div className="mx-8">
+                    <Breadcrumb items={breadCrumbitems}/>
+                </div>
                 {company ? (
-                    <>
+                    <div className="max-w-xl">
                         {/* Display the View component */ }
                         <View 
                             avatar={"company"}
@@ -101,7 +103,7 @@ const CompanyView = () => {
                                 Elimina
                             </button>
                         </div>
-                    </>
+                    </div>
                     ) : (
                         <tr>
                             <td colSpan={5} style={{ textAlign: "center" }}>

@@ -1,20 +1,28 @@
+import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { FaPen } from "react-icons/fa";
 import { AiTwotoneDelete } from "react-icons/ai";
+import ExportPDF_project from "@/components/Specific/ExportPDF/ExportPDF_project_details";
+import Breadcrumb from "@/components/Global/BreadCrumb";
+import View from "@/components/Global/View";
 
 const ProjectView=()=>{
     const [project, setProject] = useState([]);
-    const [error, setError] = useState(null);
-    const [loader, setLoader] = useState(false);
     const {id} = useParams();
+    const [showConfirm, setShowConfirm] = useState(false); // dont's show the pop-up msg by default
+   
     const navigate = useNavigate();
+
+    // BreadCrumb items imported from breadCrumb.jsx
+    const breadCrumbitems= [
+        { label: "Home", href: "/" },
+        { label: "Progetti", href:"/projects"},
+        {label: "Dettagli"}
+    ]
  
     useEffect(()=>{
         if(id){
-            setLoader(true);
-            setError(null);
             const fetchSingleProject = async()=> {
                 try {
                         const response = await axios.get(`http://localhost:3000/api/project/get/${id}`)
@@ -23,15 +31,13 @@ const ProjectView=()=>{
                         setProject(response.data)
                 } catch(error) {
                     if(error.response && error.response.status === 404) {
-                        setError("Progetto non trovato")
+                        console.error(`404 Not found: ${error}`);
                     } else {
-                        setError("Si è verificato un errore, riprova.")
+                        console.error("Si è verificato un errore, riprova: ", error)
                     }
                     console.error(`Error fetching the project with the id ${id}: ${error}`);
                     console.log(error);
-                } finally {
-                    setLoader(false);
-                }
+                } 
             };
             fetchSingleProject();
         } else {
@@ -50,6 +56,7 @@ const ProjectView=()=>{
             navigate("/projects"); // Navigate back to the Homepage
         })
         .catch((err) => console.error(`Error: ${err}`));
+        setShowConfirm(false);
     }
 
     // Function to format the data from Iso to the timezone stored in the client's browser
@@ -67,65 +74,99 @@ const ProjectView=()=>{
     // return the JSX content
     return(
         <>
-        { loader? (
-            <p>Caricamento...</p>
-        ): error? (
-            <p style={{color: "red"}}>{error}</p>
-        ) : (
-            <table>
-                    <tr>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Descrizione</th>
-                    <th scope="col">Azienda</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Data inizio</th>
-                    <th scope="col">Data fine</th>
-                    <th scope="col">Budget</th>
-                    <th scope="col">Opzioni</th>
-                    </tr>
-                <tbody>   
-                    <td>{project.name}</td>
-                    <td>{project.description}</td>
-                    <td>{project.company_name}</td>
-                    <td>{project.status}</td>
-                    <td>
-                        {
-                            project.start_date && formatDate(project.start_date)
-                            ? formatDate(project.start_date)
-                            : "Non disponibile"
-                        }
-                    </td>
-                    <td>
-                        {
-                            project.end_date && formatDate(project.end_date)
-                            ? formatDate(project.end_date)
-                            : "Non disponibile"
-                        }
-                    </td>
-                    <td>{project.budget}</td>
-                    <td>
-                        <button
-                            type="button"   
-                            onClick={()=> deleteProject(project.id_project)} 
-                        >
-                            <AiTwotoneDelete/>
-                        </button>
+            <div className="mx-8">
+                <Breadcrumb items={breadCrumbitems}/>
+            </div>
+            {project ? (
+                <div className="max-w-xl">
+                    {/* Display the View component */ }
+                    <View 
+                        avatar={"project"}
+                        title={project.name}
+                        fields={[
+                            {
+                                label: "Nome",
+                                value: project.name
+                            },
+                            {
+                                label: "Azienda",
+                                value: project.company_name
+                            },
+                            {
+                                label: "Status",
+                                value: project.status
+                            },
+                            {
+                                label: "Budget",
+                                value: project.budget
+                            },
+                            {
+                                label: "Inizio",
+                                value: formatDate(project.start_date) 
+                            },
+                            {
+                                label: "Fine",
+                                value: formatDate(project.end_date)
+                            },
+                            {
+                                label: "Dettagli",
+                                value: project.description
+                            }
+                        ]}
+                    /> 
+                    {/* Display the 3 buttons: Export, Edit, Delete */ }
+                    <div className="mx-8 flex flex-col sm:flex-row gap-3 md:gap-0 max-w-fit justify-center ">
+                        <ExportPDF_project project={project}/>
                         <button
                             type="button"
-                            onClick={ (e)=> openProjectPage(project.id_project)}
-                        >
-                            <FaPen/>
+                            class="btn btn-warning"
+                            onClick={() => openProjectPage(project.id_project)}
+                            >
+                                Modifica
                         </button>
-                    </td>  
-                </tbody>
-            </table>
-        )}
-        <button
-            type="button"
-            onClick={ ()=> navigate ("/projects")}
-        >
-            Indietro
-        </button>
+                        <button
+                            class="btn btn-danger"
+                            type="button"
+                            onClick={()=> setShowConfirm(true)} // pop-up opening
+                        >
+                            Elimina
+                        </button>
+                    </div>
+                </div>
+                ) : (
+                    <tr>
+                        <td colSpan={5} style={{ textAlign: "center" }}>
+                            Nessuna azienda trovata
+                        </td>
+                    </tr>
+                )
+            }
+             {/* Pop up msg to ask the user if he wants to delete the Company */}         
+            {showConfirm && (
+                <>
+                    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                        <div className="bg-white p-6 rounded-lg shadow-lg">
+                            <p className="mb-4 text-lg">
+                                Confermi di voler eliminare questo progetto definitivamente?
+                            </p>
+                            <div className="flex gap-4 justify-center">
+                                <button 
+                                    className="btn btn-danger"
+                                    onClick={()=> deleteProject(project.id_project)} // delete the project and navigate back of 1 page
+                                >
+                                    Sì
+                                </button>
+                                <button 
+                                    className="btn btn-secondary"
+                                    onClick={() => setShowConfirm(false)} // just close the pop-up
+                                >
+                                    No
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </>
+            )}
         </>
     )
 }
