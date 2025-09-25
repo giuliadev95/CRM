@@ -11,6 +11,10 @@ const Companies = ({ companies, loading }) => {
   // constants I need, moved here  rom the ContactsList.jsx component
   const [input, setInput] = useState("");
   const [filteredCompanies, setFilteredCompanies]= useState([]);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [companyToDelete, setCompanyToDelete] = useState(null);
+
+  // Navigation among pages
   const navigate= useNavigate();
 
   // Open the page to open the single company's update page
@@ -35,6 +39,7 @@ const Companies = ({ companies, loading }) => {
         setFilteredCompanies(companies.filter((company) => company.id_company !== id));
     })
     .catch((err) => console.error(`Error: ${err}`));
+    setShowConfirm(false);
   }
 
   async function handleSubmit(e) {
@@ -111,7 +116,11 @@ const Companies = ({ companies, loading }) => {
                       <MdModeEdit/>
                     </button>
                     <button 
-                      onClick={ ()=> deleteCompany(company.id_company) }
+                      onClick={ ()=> {
+                        setCompanyToDelete(company.id_company)
+                        setShowConfirm(true)
+                        }
+                      }
                       className="bg-transparent border-none shadow-none p-0 m-0 outline-none"
                     >
                       <MdDelete/>
@@ -125,9 +134,37 @@ const Companies = ({ companies, loading }) => {
                   Nessuna azienda presente
                 </td>
               </tr>
-            )}
+            )
+          }
         </tbody>
+    {/** Pop-up msg */}
+    {showConfirm && (
+      <>
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+              <p className="mb-4 text-lg">
+                  Eliminare l'azienda definitivamente?
+              </p>
+              <div className="flex gap-4 justify-center">
+                  <button 
+                      className="btn btn-danger"
+                      onClick={()=> deleteCompany(companyToDelete)} // delete the company and navigate back of 1 page
+                  >
+                      Sì
+                  </button>
+                  <button 
+                      className="btn btn-secondary"
+                      onClick={() => setShowConfirm(false)} // just close the pop-up
+                  >
+                      No
+                  </button>
+              </div>
+          </div>
+        </div>
+      </>
+    )}
     </table>
+
   </div>
   );
 };

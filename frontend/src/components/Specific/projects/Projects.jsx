@@ -10,7 +10,9 @@ const Projects = ({ projects, loading }) => {
   // constants I need, moved here from the ProjectsList.jsx component
   const [input, setInput] = useState("");
   const [filteredProjects, setFilteredProjects]= useState([]);
-
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [projectToDelete, setProjectDelete] = useState(null);
+  
   // This constant hooks the "useNavigate()" functionalities to the "navigate" variable
   const navigate = useNavigate();
 
@@ -37,6 +39,7 @@ const Projects = ({ projects, loading }) => {
         setFilteredProjects(projects.filter((project) => project.id_project !== id));
     })
     .catch((err) => console.error(`Error: ${err}`));
+    setShowConfirm(false);
   }
 
   // Function to handle the Search query
@@ -134,7 +137,11 @@ const Projects = ({ projects, loading }) => {
                     <MdModeEdit />
                   </button>
                   <button  
-                    onClick={() => deleteProject(project.id_project)}
+                    onClick={() => {
+                        setProjectDelete(project.id_project)
+                        setShowConfirm(true)
+                      }
+                    }
                     className="bg-transparent border-none shadow-none p-0 m-0 outline-none"
                   >
                     <MdDelete />
@@ -151,6 +158,32 @@ const Projects = ({ projects, loading }) => {
             )}
         </tbody>
     </table>
+     {/** Pop-up msg */}
+    {showConfirm && (
+      <>
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+              <p className="mb-4 text-lg">
+                  Eliminare il progetto definitivamente?
+              </p>
+              <div className="flex gap-4 justify-center">
+                  <button 
+                      className="btn btn-danger"
+                      onClick={()=> deleteProject(projectToDelete)} // delete the company and navigate back of 1 page
+                  >
+                      Sì
+                  </button>
+                  <button 
+                      className="btn btn-secondary"
+                      onClick={() => setShowConfirm(false)} // just close the pop-up
+                  >
+                      No
+                  </button>
+              </div>
+          </div>
+        </div>
+      </>
+    )}
   </div>
   );
 };
