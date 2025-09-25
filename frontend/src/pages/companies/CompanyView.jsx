@@ -48,77 +48,75 @@ const CompanyView = () => {
 
     return (
         <>
-            <div>
-                <div className="mx-8">
-                    <Breadcrumb items={breadCrumbitems}/>
-                </div>
-                {company ? (
-                    <div className="max-w-xl">
-                        {/* Display the View component */ }
-                        <View 
-                            avatar={"company"}
-                            title={company.name}
-                            fields={[
-                                {
-                                    label: "Nome",
-                                    value: company.name
-                                },
-                                {
-                                    label: "Telefono",
-                                    value: company.phone
-                                },
-                                {
-                                    label: "Email",
-                                    value: company.email
-                                },
-                                {
-                                    label: "Sito web",
-                                    value: company.website
-                                },
-                                {
-                                    label: "Tipologia",
-                                    value: company.company_type
-                                },
-                                {
-                                    label: "Dettagli",
-                                    value: company.notes
-                                }
-                            ]}
-                        /> 
-                        {/* Display the 3 buttons: Export, Edit, Delete */ }
-                        <div className="mx-8 flex flex-col sm:flex-row gap-3 md:gap-0 max-w-fit justify-center ">
-                            <ExportPDF_company company={company}/>
-                            <button
-                                type="button"
-                                class="btn btn-warning"
-                                onClick={() => openCompanyPage(company.id_company)}
-                                >
-                                    Modifica
-                            </button>
-                            <button
-                                class="btn btn-danger"
-                                type="button"
-                                onClick={()=> setShowConfirm(true)} // pop-up opening
-                            >
-                                Elimina
-                            </button>
-                        </div>
-                    </div>
-                    ) : (
-                        <tr>
-                            <td colSpan={5} style={{ textAlign: "center" }}>
-                                Nessuna azienda trovata
-                            </td>
-                        </tr>
-                    )}
+            <div className="mx-8">
+                <Breadcrumb items={breadCrumbitems}/>
             </div>
+            {company ? (
+                <div className="max-w-xl">
+                    {/* Display the View component */ }
+                    <View 
+                        avatar={"company"}
+                        title={company.name}
+                        fields={[
+                            {
+                                label: "Nome",
+                                value: company.name
+                            },
+                            {
+                                label: "Telefono",
+                                value: company.phone
+                            },
+                            {
+                                label: "Email",
+                                value: company.email
+                            },
+                            {
+                                label: "Sito web",
+                                value: company.website
+                            },
+                            {
+                                label: "Tipologia",
+                                value: company.company_type
+                            },
+                            {
+                                label: "Dettagli",
+                                value: company.notes
+                            }
+                        ]}
+                    /> 
+                    {/* Display the 3 buttons: Export, Edit, Delete */ }
+                    <div className="mx-8 flex flex-col sm:flex-row gap-3 md:gap-0 max-w-fit justify-center ">
+                        <ExportPDF_company company={company}/>
+                        <button
+                            type="button"
+                            class="btn btn-warning"
+                            onClick={() => openCompanyPage(company.id_company)}
+                            >
+                                Modifica
+                        </button>
+                        <button
+                            class="btn btn-danger"
+                            type="button"
+                            onClick={()=> setShowConfirm(true)} // pop-up opening
+                        >
+                            Elimina
+                        </button>
+                    </div>
+                </div>
+            ) : (
+                <tr>
+                    <td colSpan={5} style={{ textAlign: "center" }}>
+                        Nessuna azienda trovata
+                    </td>
+                </tr>
+            )}
             {/* Pop up msg to ask the user if he wants to delete the Company */}         
             {showConfirm && (
                 <>
                     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                         <div className="bg-white p-6 rounded-lg shadow-lg">
                             <p className="mb-4 text-lg">
-                                Confermi di voler eliminare quest'azienda definitivamente?
+                                Eliminare l'azienda definitivamente?
                             </p>
                             <div className="flex gap-4 justify-center">
                                 <button 

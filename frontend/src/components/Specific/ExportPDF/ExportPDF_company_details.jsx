@@ -27,6 +27,12 @@ const ExportPDF_company = ({ company }) => {
       startY: 30,
       head: [["Campo", "Valore"]],
       body: tableData,
+      didParseCell: (data) => {
+      if (data.section === "body" && data.column.index === 0) {
+        // "Campo"
+        data.cell.styles.fontStyle = "bold";
+      }
+    }
     });
 
     doc.save(`Azienda_${company.name || "export"}.pdf`);

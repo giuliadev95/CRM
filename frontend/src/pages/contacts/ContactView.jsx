@@ -47,81 +47,79 @@ const ContactView = () => {
 
     return (
         <>
-            <div>
-                <div className="mx-8">
-                    <Breadcrumb items={breadCrumbitems}/>
-                </div>
-                {contact ? (
-                    <div className="max-w-xl">
-                        {/* Display the View component */ }
-                        <View 
-                            avatar={"contact"}
-                            title={`${contact.name} ${contact.surname}`}
-                            fields={[
-                                {
-                                    label: "Nome",
-                                    value: contact.name
-                                },
-                                {
-                                    label: "Cognome",
-                                    value: contact.surname
-                                },
-                                {
-                                    label: "Telefono",
-                                    value: contact.phone
-                                },
-                                {
-                                    label: "Email",
-                                    value: contact.email
-                                },
-                                {
-                                    label: "Ruolo",
-                                    value: contact.role
-                                },
-                                {
-                                    label: "Azienda",
-                                    value: contact.company_name
-                                },
-                                {
-                                    label: "Dettagli",
-                                    value: contact.details
-                                }
-                            ]}
-                        /> 
-                        {/* Display the 3 buttons: Export, Edit, Delete */ }
-                        <div className="mx-4 flex flex-wrap items-center sm:flex-row gap-3 md:gap-0 max-w-fit justify-start md:justify-center ">
-                            <ExportPDF_contact contact={contact}/>
-                            <button
-                                type="button"
-                                class="btn btn-warning"
-                                onClick={() => openContactPage(contact.id)}
-                                >
-                                    Modifica
-                            </button>
-                            <button
-                                class="btn btn-danger"
-                                type="button"
-                                onClick={()=> setShowConfirm(true)} // pop-up opening
-                            >
-                                Elimina
-                            </button>
-                        </div>
-                </div>
-                ) : (
-                    <tr>
-                        <td colSpan={5} style={{ textAlign: "center" }}>
-                            Nessuna azienda trovata
-                        </td>
-                    </tr>
-                )}
+            <div className="mx-8">
+                <Breadcrumb items={breadCrumbitems}/>
             </div>
+            {contact ? (
+                <div className="max-w-xl">
+                    {/* Display the View component */ }
+                    <View 
+                        avatar={"contact"}
+                        title={`${contact.name} ${contact.surname}`}
+                        fields={[
+                            {
+                                label: "Nome",
+                                value: contact.name
+                            },
+                            {
+                                label: "Cognome",
+                                value: contact.surname
+                            },
+                            {
+                                label: "Telefono",
+                                value: contact.phone
+                            },
+                            {
+                                label: "Email",
+                                value: contact.email
+                            },
+                            {
+                                label: "Ruolo",
+                                value: contact.role
+                            },
+                            {
+                                label: "Azienda",
+                                value: contact.company_name
+                            },
+                            {
+                                label: "Dettagli",
+                                value: contact.details
+                            }
+                        ]}
+                    /> 
+                    {/* Display the 3 buttons: Export, Edit, Delete */ }
+                    <div className="mx-4 flex flex-wrap items-center sm:flex-row gap-3 md:gap-0 max-w-fit justify-start md:justify-center ">
+                        <ExportPDF_contact contact={contact}/>
+                        <button
+                            type="button"
+                            class="btn btn-warning"
+                            onClick={() => openContactPage(contact.id)}
+                            >
+                                Modifica
+                        </button>
+                        <button
+                            class="btn btn-danger"
+                            type="button"
+                            onClick={()=> setShowConfirm(true)} // pop-up opening
+                        >
+                            Elimina
+                        </button>
+                    </div>
+                </div>
+            ) : (
+                <tr>
+                    <td colSpan={5} style={{ textAlign: "center" }}>
+                        Nessuna azienda trovata
+                    </td>
+                </tr>
+            )}         
             {/* Pop up msg to ask the user if he wants to delete the Company */}         
             {showConfirm && (
                 <>
                     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                         <div className="bg-white p-6 rounded-lg shadow-lg">
                             <p className="mb-4 text-lg">
-                                Confermi di voler eliminare quest'azienda definitivamente?
+                                Eliminare il contatto definitivamente?
                             </p>
                             <div className="flex gap-4 justify-center">
                                 <button 

@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS company (
 CREATE TABLE IF NOT EXISTS contact (
   id_contact SERIAL PRIMARY KEY, /* SERIAL is an INTEGER */
   name VARCHAR(255) NOT NULL,
-  surname,
+  surname VARCHAR(255) NOT NULL,
   phone VARCHAR(50),
   email VARCHAR(255),
   role VARCHAR(100),
@@ -52,7 +52,7 @@ INSERT INTO company (name, phone, email, website, company_type, notes, created_a
 ('Innovo S.r.l.', '081 33445566', 'admin@innovo.it', 'www.innovo.it', 'Fornitore', 'Fornitore di soluzioni software verticali per settore sanitario.', '2025-09-01 09:04:00');
 
 /* PUPULATE CONTACT TABLE */
-INSERT INTO contact (name, phone, email, role, company_id, details, created_at) VALUES
+INSERT INTO contact (name, surname, phone, email, role, company_id, details, created_at) VALUES
 ('Silvia', 'Romanelli', '328 1234567', 's.romano@techworld.it', 'IT Manager', 1, 'Gestisce i progetti di infrastruttura cloud e sicurezza. Referente principale per le soluzioni enterprise.', '2025-09-01'),
 ('Andrea', 'Greco', '347 9876543', 'a.greco@greenlifesol.it', 'Responsabile Acquisti', 2, 'Si occupa della selezione di fornitori tecnologici e trattative commerciali.', '2025-09-01'),
 ('Laura', 'Ferrari', '334 3344556', 'l.ferrari@bizadvance.it', 'Consulente HR', 3, 'Supporta i clienti nei progetti di digitalizzazione HR, onboarding e formazione.', '2025-09-01'),

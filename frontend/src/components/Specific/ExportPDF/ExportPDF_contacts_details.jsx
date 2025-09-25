@@ -28,6 +28,12 @@ const ExportPDF_contact = ({ contact }) => {
       startY: 30,
       head: [["Campo", "Valore"]],
       body: tableData,
+      didParseCell: (data) => {
+      if (data.section === "body" && data.column.index === 0) {
+        // "Campo"
+        data.cell.styles.fontStyle = "bold";
+      }
+    }
     });
 
     doc.save(`${contact.name || "export"}_${contact.surname || ""}.pdf`);

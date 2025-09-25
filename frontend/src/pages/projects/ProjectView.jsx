@@ -1,8 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { FaPen } from "react-icons/fa";
-import { AiTwotoneDelete } from "react-icons/ai";
 import ExportPDF_project from "@/components/Specific/ExportPDF/ExportPDF_project_details";
 import Breadcrumb from "@/components/Global/BreadCrumb";
 import View from "@/components/Global/View";
@@ -147,7 +145,7 @@ const ProjectView=()=>{
                     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                         <div className="bg-white p-6 rounded-lg shadow-lg">
                             <p className="mb-4 text-lg">
-                                Confermi di voler eliminare questo progetto definitivamente?
+                                Eliminare il progetto definitivamente?
                             </p>
                             <div className="flex gap-4 justify-center">
                                 <button 
@@ -170,7 +168,5 @@ const ProjectView=()=>{
         </>
     )
 }
-
-
 
 export default ProjectView;
