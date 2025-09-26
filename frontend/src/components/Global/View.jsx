@@ -1,7 +1,7 @@
 import React from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { HiBuildingOffice2 } from "react-icons/hi2";
-import { FaRocket } from "react-icons/fa";
+import { FaProjectDiagram } from "react-icons/fa";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
@@ -22,12 +22,12 @@ const View = ({title, fields, avatar}) => {
                 <div className="flex items-center justify-start gap-3 mb-4">
                     {
                         avatar === "contact" ? (   
-                        <FaUserAlt/>
+                        <FaUserAlt size={"2rem"}/>
           
                         ): avatar==="company"? (
                             <HiBuildingOffice2 size={"2rem"}/>
 
-                        ): <FaRocket/>
+                        ): <FaProjectDiagram size={"2rem"}/>
                     }
                     <h1 class="h2 p-0 m-0">{title}</h1>   
                 </div>

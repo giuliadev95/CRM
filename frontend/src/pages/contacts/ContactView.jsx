@@ -9,12 +9,13 @@ const ContactView = () => {
     const { id } = useParams();
     const [contact, setContact] = useState(null);
     const [showConfirm, setShowConfirm] = useState(false); // dont's show the pop-up msg by default
+    const [contactDetails, setContactDetails] = useState(null);
      
     //BreadCrumb items imported from breadCrumb.jsx
     const breadCrumbitems= [
         { label: "Home", href: "/" },
         { label: "Contatti", href:"/"},
-        {label: `Dettagli`}
+        { label: contactDetails}
     ]
         
     const navigate = useNavigate();
@@ -23,7 +24,13 @@ const ContactView = () => {
         if (!id) return;
         fetch(`http://localhost:3000/api/contact/get/${id}`)
             .then((res) => res.json())
-            .then((data) => setContact(data))
+            .then((data) => {
+                const fullName = (`${data.name} ${data.surname}`);
+                setContact(data);
+                setContactDetails(fullName);
+            }
+
+        )
             .catch((err) => console.error(err));
     }, [id]);
 
@@ -93,7 +100,7 @@ const ContactView = () => {
                         <button
                             type="button"
                             class="btn btn-warning"
-                            onClick={() => openContactPage(contact.id)}
+                            onClick={() => openContactPage(contact.id_contact)}
                             >
                                 Modifica
                         </button>
