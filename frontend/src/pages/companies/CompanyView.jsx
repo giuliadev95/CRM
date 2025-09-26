@@ -48,7 +48,7 @@ const CompanyView = () => {
 
     return (
         <>
-            <div className="mx-8">
+            <div className="mx-8 my-4">
                 <Breadcrumb items={breadCrumbitems}/>
             </div>
             {company ? (

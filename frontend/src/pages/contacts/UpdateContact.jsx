@@ -90,7 +90,7 @@ const UpdateContact = () => {
     };
 
     return (
-        <div className='container my-4'>
+        <div className='container my-4 px-4'>
             <Breadcrumb items={breadCrumbitems}/>
             <button
                 type="button"
@@ -99,7 +99,10 @@ const UpdateContact = () => {
             >
                 <IoMdArrowRoundBack/>{" Indietro"}
             </button> 
-            <h2 className='flex gap-2'> <FaEdit /> Modifica contatto</h2>
+            <h2 className='flex gap-2'> 
+                <FaEdit /> 
+                Modifica contatto
+            </h2>
             <form 
                 className='max-w-[80%] md:max-w-[50%] flex flex-col gap-3 md:gap-6'
                 onSubmit={handleUpdate}
@@ -130,7 +133,7 @@ const UpdateContact = () => {
                     />
                 </div>
                 <div>
-                    <label for="phone" class="form-label"></label>
+                    <label for="phone" class="form-label">Telefono</label>
                     <input
                         id='phone'
                         class='form-control'
@@ -143,7 +146,7 @@ const UpdateContact = () => {
                     />
                 </div>
                 <div>
-                    <label for="email" class="form-label"></label>
+                    <label for="email" class="form-label">Email</label>
                     <input
                         id='email'
                         class='form-control'
@@ -156,7 +159,7 @@ const UpdateContact = () => {
                     />
                 </div>
                 <div>
-                    <label for="role" class="form-label"></label>
+                    <label for="role" class="form-label">Ruolo</label>
                     <input
                         id='role'
                         class='form-control'
@@ -169,7 +172,7 @@ const UpdateContact = () => {
                     />
                 </div>
                  <div>
-                    <label for="details" class="form-label"></label>
+                    <label for="details" class="form-label">Dettagli</label>
                     <input
                         id='details'
                         class='form-control'
@@ -181,8 +184,9 @@ const UpdateContact = () => {
                         onChange={(e) => setDetails(e.target.value)}
                     />
                 </div>
-                <label for="company" class="form-label">Azienda</label>
-                <div className='flex items-center gap-4'>      
+                <div className='flex items-center gap-4'> 
+                    <div>
+                        <label for="company" class="form-label">Azienda</label>
                         <select
                             className="form-select"
                             name="company"
@@ -190,7 +194,7 @@ const UpdateContact = () => {
                             value={companyId}
                             onChange={(e) => setCompanyId(e.target.value)}
                             required
-                        >
+                            >
                             <option value="">Seleziona Azienda</option>
                             {companies.map((c) => (
                                 <option key={c.id_company} value={c.id_company}>
@@ -198,12 +202,13 @@ const UpdateContact = () => {
                                 </option>
                             ))}
                         </select>
-                        <button
-                            type="button"
-                            onClick={()=> navigate("/new-company")}
-                            >
-                            <IoIosAddCircle className="w-[2rem] h-[2rem] text-blue-500"/>
-                        </button>
+                    </div>     
+                    <button
+                        type="button"
+                        onClick={()=> navigate("/new-company")}
+                        >
+                        <IoIosAddCircle className="w-[2rem] h-[2rem] text-blue-500"/>
+                    </button>
                 </div>
                 <div className="flex flex-wrap items-center sm:flex-row gap-3 md:gap-0 max-w-fit justify-start md:justify-center ">
                     <button 

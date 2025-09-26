@@ -71,7 +71,7 @@ const ProjectView=()=>{
 
     // return the JSX content
     return(
-        <>
+        <div className="my-4">
             <div className="mx-8">
                 <Breadcrumb items={breadCrumbitems}/>
             </div>
@@ -165,7 +165,7 @@ const ProjectView=()=>{
                     </div>
                 </>
             )}
-        </>
+        </div>
     )
 }
 

@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import Breadcrumb from '@/components/Global/BreadCrumb';
+import { IoMdArrowRoundBack } from 'react-icons/io';
+import { FaEdit } from 'react-icons/fa';
 import '@styles/app.css';
 
 const UpdateCompany = () => {
@@ -11,6 +14,19 @@ const UpdateCompany = () => {
     const [website, setWebsite] = useState("");
     const [company_type, setCompanyType] = useState("");
     const [notes, setNotes] = useState("");
+    const [companyDetails, setCompanyDetails] = useState(null);
+
+    const breadCrumbitems= [
+        {label : "Home", href:"/"},
+        {label : "Aziende", href:"/companies"},
+        {label: companyDetails, href:"#", onClick:(e)=> {
+            e.preventDefault();
+            navigate(-1);
+            } 
+        },
+        {label: "Modifica"}
+    ]
+
  
     // 1. Fetch the company's data basing on the { id }, that is a req. param, before updating its fields
     useEffect(() => {
@@ -18,6 +34,8 @@ const UpdateCompany = () => {
             .then((res) => res.json())
             .then((data) => {
                 setName(data.name || "");
+                const fullName = data.name;
+                setCompanyDetails(fullName);
                 setPhone(data.phone || "");
                 setEmail(data.email || "");
                 setWebsite(data.website || "");
@@ -26,6 +44,11 @@ const UpdateCompany = () => {
             })
             .catch((err) => console.error(err));
     }, [id]);
+
+    // Force the page to be viewd from the top, because by default I see it starting from the H2, leaving the BreadBrumb off sigth.
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     // 2. Form submission handler
     const handleUpdate = async (event) => {
@@ -56,63 +79,100 @@ const UpdateCompany = () => {
     };
 
     return (
-        <>
-            <form onSubmit={handleUpdate}>
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Name"
-                    required
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
-
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-
-                <input
-                    type="text"
-                    name="phone"
-                    placeholder="Phone"
-                    required
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                />
-
-                <input
-                    type="text"
-                    name="website"
-                    placeholder="Website"
-                    required
-                    value={website}
-                    onChange={(e) => setWebsite(e.target.value)}
-                />
-
-                <input
-                    type="text"
-                    name="notes"
-                    placeholder="Notes"              
-                    value={notes}
-                    onChange={(e) => setNotes(e.target.value)}
-                />
-                <button 
-                    type="submit"
-                >
-                    Salva
-                </button>
-                <button
-                    type="button"
-                    onClick={(e)=> navigate("/companies")}
-                >
-                    Indietro
-                </button>
-            </form>
+        <> 
+            <div className='container my-4 px-4'>
+                <Breadcrumb items={breadCrumbitems}/>
+                 <button
+                        type="button"
+                        onClick={()=> navigate(-1)}
+                        className="flex gap-1 items-center mb-4"
+                    >
+                        <IoMdArrowRoundBack/>{" Indietro"}
+                    </button> 
+                <h2 className='flex gap-2'> 
+                    <FaEdit /> 
+                    Modifica azienda
+                </h2>
+                <form 
+                    className='max-w-[80%] md:max-w-[50%] flex flex-col gap-3 md:gap-6'
+                    onSubmit={handleUpdate}>
+                    <div className='flex flex-col gap-1'>
+                        <label for="name" class="form-label">Nome</label>
+                        <input
+                            id='name'
+                            class='form-control'
+                            type="text"
+                            placeholder="Name"
+                            required
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </div>   
+                    <div className='flex flex-col gap-1'>
+                        <label for="name" class="form-label">Email</label>           
+                        <input
+                            id='email'
+                            class='form-control'
+                            type="email"
+                            placeholder="Email"
+                            required
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </div>
+                    <div className='flex flex-col gap-1'>
+                        <label for="name" class="form-label">Telefono</label>
+                        <input
+                            id='phone'
+                            class='form-control'
+                            type="text"
+                            placeholder="Phone"
+                            required
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                        />
+                    </div>
+                    <div className='flex flex-col gap-1'>
+                        <label for="website" class="form-label">Sito web</label>
+                        <input
+                            id='website'
+                            class='form-control'
+                            type="text"
+                            name="website"
+                            placeholder="Website"
+                            required
+                            value={website}
+                            onChange={(e) => setWebsite(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <label for="details" class="form-label">Dettagli</label>
+                        <input
+                            id='details'
+                            class='form-control'
+                            type="text"
+                            placeholder="Notes"              
+                            value={notes}
+                            onChange={(e) => setNotes(e.target.value)}
+                        />
+                    </div>
+                    <div className="flex flex-wrap items-center sm:flex-row gap-3 md:gap-0 max-w-fit justify-start md:justify-center ">
+                    <button 
+                        type="submit"
+                        className="btn btn-primary w-[6rem]"
+                    >
+                        Salva
+                    </button>
+                    <button 
+                        type="button"
+                        className="btn btn-dark w-[6rem]"
+                        onClick= {()=>  navigate(-1)}
+                    > 
+                        Annulla
+                    </button>
+                </div>
+                </form>
+            </div>
         </>
     );
 };
