@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import ExportPDF_project from "@/components/Specific/ExportPDF/ExportPDF_project_details";
 import Breadcrumb from "@/components/Global/BreadCrumb";
 import View from "@/components/Global/View";
+import '@styles/app.css';
 
 const ProjectView=()=>{
     const [project, setProject] = useState([]);

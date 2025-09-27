@@ -60,6 +60,7 @@ const UpdateContact = () => {
         window.scrollTo(0, 0);
     }, []);
 
+
     // 3. Form submission handler
     const handleUpdate = async (event) => {
         event.preventDefault();
@@ -90,143 +91,145 @@ const UpdateContact = () => {
     };
 
     return (
-        <div className='container my-4 px-4'>
-            <Breadcrumb items={breadCrumbitems}/>
-            <button
-                type="button"
-                onClick={()=> navigate(-1)}
-                className="flex gap-1 items-center mb-4"
-            >
-                <IoMdArrowRoundBack/>{" Indietro"}
-            </button> 
-            <h2 className='flex gap-2'> 
-                <FaEdit /> 
-                Modifica contatto
-            </h2>
-            <form 
-                className='max-w-[80%] md:max-w-[50%] flex flex-col gap-3 md:gap-6'
-                onSubmit={handleUpdate}
-            >
-                <div className='flex flex-col gap-1'>
-                    <label for="name" class="form-label">Nome</label>
-                    <input
-                        id='name'
-                        class='form-control'
-                        type="text"
-                        placeholder="Nome"
-                        required
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                </div>
-                <div className='flex flex-col gap-1'>
-                    <label for="surname" class="form-label">Cognome</label>
-                    <input
-                        id='surname'
-                        class='form-control'
-                        type="text"
-                        className='form-control'
-                        placeholder="Cognome"
-                        required
-                        value={surname}
-                        onChange={(e) => setSurname(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label for="phone" class="form-label">Telefono</label>
-                    <input
-                        id='phone'
-                        class='form-control'
-                        type="text"
-                        name="phone"
-                        placeholder="Telefono"
-                        required
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label for="email" class="form-label">Email</label>
-                    <input
-                        id='email'
-                        class='form-control'
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        required
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label for="role" class="form-label">Ruolo</label>
-                    <input
-                        id='role'
-                        class='form-control'
-                        type="text"
-                        name="role"
-                        placeholder="Ruolo"
-                        required
-                        value={role}
-                        onChange={(e) => setRole(e.target.value)}
-                    />
-                </div>
-                 <div>
-                    <label for="details" class="form-label">Dettagli</label>
-                    <input
-                        id='details'
-                        class='form-control'
-                        type="text"
-                        name="details"
-                        placeholder="Dettagli"
-                        
-                        value={details}
-                        onChange={(e) => setDetails(e.target.value)}
-                    />
-                </div>
-                <div className='flex items-center gap-4'> 
-                    <div>
-                        <label for="company" class="form-label">Azienda</label>
-                        <select
-                            className="form-select"
-                            name="company"
-                            id="company"
-                            value={companyId}
-                            onChange={(e) => setCompanyId(e.target.value)}
+        <>
+            <div className='container my-4 px-4 md:px-0'>
+                <Breadcrumb items={breadCrumbitems}/>
+                <button
+                    type="button"
+                    onClick={()=> navigate(-1)}
+                    className="flex gap-1 items-center mb-4"
+                >
+                    <IoMdArrowRoundBack/>{" Indietro"}
+                </button> 
+                <h2 className='flex gap-2'> 
+                    <FaEdit /> 
+                    Modifica contatto
+                </h2>
+                <form 
+                    className='max-w-[80%] md:max-w-[50%] flex flex-col gap-3 md:gap-6'
+                    onSubmit={handleUpdate}
+                >
+                    <div className='flex flex-col gap-1'>
+                        <label for="name" class="form-label">Nome</label>
+                        <input
+                            id='name'
+                            class='form-control'
+                            type="text"
+                            placeholder="Nome"
                             required
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </div>
+                    <div className='flex flex-col gap-1'>
+                        <label for="surname" class="form-label">Cognome</label>
+                        <input
+                            id='surname'
+                            class='form-control'
+                            type="text"
+                            className='form-control'
+                            placeholder="Cognome"
+                            required
+                            value={surname}
+                            onChange={(e) => setSurname(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <label for="phone" class="form-label">Telefono</label>
+                        <input
+                            id='phone'
+                            class='form-control'
+                            type="text"
+                            name="phone"
+                            placeholder="Telefono"
+                            required
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <label for="email" class="form-label">Email</label>
+                        <input
+                            id='email'
+                            class='form-control'
+                            type="email"
+                            name="email"
+                            placeholder="Email"
+                            required
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <label for="role" class="form-label">Ruolo</label>
+                        <input
+                            id='role'
+                            class='form-control'
+                            type="text"
+                            name="role"
+                            placeholder="Ruolo"
+                            required
+                            value={role}
+                            onChange={(e) => setRole(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <label for="details" class="form-label">Dettagli</label>
+                        <textarea
+                            id='details'
+                            class='form-control'
+                            type="text"
+                            name="details"
+                            placeholder="Dettagli"
+                            
+                            value={details}
+                            onChange={(e) => setDetails(e.target.value)}
+                        />
+                    </div>
+                    <div className='flex items-center gap-4'> 
+                        <div>
+                            <label for="company" class="form-label">Azienda</label>
+                            <select
+                                className="form-select"
+                                name="company"
+                                id="company"
+                                value={companyId}
+                                onChange={(e) => setCompanyId(e.target.value)}
+                                required
+                                >
+                                <option value="">Seleziona Azienda</option>
+                                {companies.map((c) => (
+                                    <option key={c.id_company} value={c.id_company}>
+                                        {c.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>     
+                        <button
+                            type="button"
+                            onClick={()=> navigate("/new-company")}
                             >
-                            <option value="">Seleziona Azienda</option>
-                            {companies.map((c) => (
-                                <option key={c.id_company} value={c.id_company}>
-                                    {c.name}
-                                </option>
-                            ))}
-                        </select>
-                    </div>     
-                    <button
-                        type="button"
-                        onClick={()=> navigate("/new-company")}
+                            <IoIosAddCircle className="w-[2rem] h-[2rem] text-blue-500"/>
+                        </button>
+                    </div>
+                    <div className="flex flex-wrap items-center sm:flex-row gap-3 md:gap-0 max-w-fit justify-start md:justify-center ">
+                        <button 
+                            type="submit"
+                            className="btn btn-primary w-[6rem]"
                         >
-                        <IoIosAddCircle className="w-[2rem] h-[2rem] text-blue-500"/>
-                    </button>
-                </div>
-                <div className="flex flex-wrap items-center sm:flex-row gap-3 md:gap-0 max-w-fit justify-start md:justify-center ">
-                    <button 
-                        type="submit"
-                        className="btn btn-primary w-[6rem]"
-                    >
-                        Salva
-                    </button>
-                    <button 
-                        type="button"
-                        className="btn btn-dark w-[6rem]"
-                        onClick= {()=>  navigate(-1)}
-                    > 
-                        Annulla
-                    </button>
-                </div>
-            </form>
-        </div>
+                            Salva
+                        </button>
+                        <button 
+                            type="button"
+                            className="btn btn-dark w-[6rem]"
+                            onClick= {()=>  navigate(-1)}
+                        > 
+                            Annulla
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </>
     );
 };
 

@@ -5,7 +5,7 @@ import Contacts from "@/components/Specific/contacts/Contacts";
 import Pagination from "@/components/Global/Pagination";
 import ExportPDF_contacts from "@/components/Specific/ExportPDF/ExportPDF_contacts";
 import Breadcrumb from "@/components/Global/BreadCrumb";
-import '../../styles/app.css';
+import '@styles/app.css';
 
 const ContactsList = () => {
 

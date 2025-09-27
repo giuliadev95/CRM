@@ -5,8 +5,7 @@ import Companies from "@/components/Specific/companies/Companies";
 import Pagination from "@/components/Global/Pagination";
 import ExportPDF_companies from "@/components/Specific/ExportPDF/ExportPDF_companies";
 import Breadcrumb from "@/components/Global/BreadCrumb";
-import '../../styles/app.css';
-
+import '@styles/app.css';
 export default function CompaniesList() {
   
     // Store all companies fetched from the PostgreSQL database 

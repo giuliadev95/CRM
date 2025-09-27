@@ -7,7 +7,6 @@ import '@styles/app.css';
 
 const UpdateCompany = () => {
     const { id } = useParams();
-    const navigate = useNavigate();
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
@@ -15,6 +14,7 @@ const UpdateCompany = () => {
     const [company_type, setCompanyType] = useState("");
     const [notes, setNotes] = useState("");
     const [companyDetails, setCompanyDetails] = useState(null);
+    const navigate = useNavigate();
 
     const breadCrumbitems= [
         {label : "Home", href:"/"},
@@ -80,7 +80,7 @@ const UpdateCompany = () => {
 
     return (
         <> 
-            <div className='container my-4 px-4'>
+            <div className='container my-4 px-4 md:px-0'>
                 <Breadcrumb items={breadCrumbitems}/>
                  <button
                         type="button"
@@ -147,7 +147,7 @@ const UpdateCompany = () => {
                     </div>
                     <div>
                         <label for="details" class="form-label">Dettagli</label>
-                        <input
+                        <textarea
                             id='details'
                             class='form-control'
                             type="text"
