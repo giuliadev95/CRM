@@ -19,8 +19,8 @@ export const post_contact = async (req, res) => {
   // try catch block: insert the record and use $int placeholders to establish the values' counting
   try {
     await pool.query(
-      `INSERT INTO contact (name, phone, email, role, company_id, details)
-       VALUES ($1, $2, $3, $4, $5, $6, 7$)`,
+      `INSERT INTO contact (name, surname, phone, email, role, company_id, details)
+       VALUES ($1, $2, $3, $4, $5, $6, $7)`,
       [
         name,
         surname,
@@ -33,7 +33,7 @@ export const post_contact = async (req, res) => {
     );
 
     res.status(201).send({ message: "Contact created successfully." });
-  } catch (err) {
+  } catch (error) {
     console.error(`Error creating the contact: ${error}`);
     res.status(500).send({ error: "Internal server error: The creation of the contact failed. Check the syntax and logic of the query in the backend." });
   }

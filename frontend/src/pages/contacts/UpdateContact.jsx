@@ -59,7 +59,7 @@ const UpdateContact = () => {
             .catch((err) => console.error("There was an error in fetching the companies: ", err));
     }, []);
 
-    // Force the page to be viewd from the top, because by default I see it starting from the H2, leaving the BreadBrumb off sigth.
+    // Force the page to be viewed from the top, because by default I see it starting from the H2, leaving the BreadBrumb off sigth.
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
