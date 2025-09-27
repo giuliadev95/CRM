@@ -14,7 +14,6 @@ export const get_companies = async (req, res) => {
   }
 };
 
-
 // GET a single company by ID
 export const get_single_company = async (req, res) => {
   const { id } = req.params;
@@ -23,7 +22,6 @@ export const get_single_company = async (req, res) => {
       `SELECT * FROM companies_view WHERE id_company = $1`,
       [id]
     );
-
     if (result.rows.length === 0) {
       return res.status(404).send({ message: `404 Not Found: The company with id: ${id} was not found.`});
     }

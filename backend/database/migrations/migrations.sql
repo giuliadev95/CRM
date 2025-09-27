@@ -12,6 +12,19 @@ CREATE TABLE IF NOT EXISTS company (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
+/* ADD CHECK AMONG PREDEFINED VALUES */
+SELECT DISTINCT company_type
+FROM company
+WHERE company_type NOT IN ('Supplier', 'Partner', 'Client', 'Prospect', 'Seller', 'Buyer', 'Assurance');
+
+ALTER TABLE company DROP CONSTRAINT IF EXISTS company_type_check;
+
+ALTER TABLE company 
+ADD CONSTRAINT company_type_check
+CHECK(company_type IN ('Supplier', 'Partner', 'Client', 'Prospect', 'Seller', 'Buyer', 'Assurance'));
+
+
 /* CONTACT TABLE */
 CREATE TABLE IF NOT EXISTS contact (
   id_contact SERIAL PRIMARY KEY, /* SERIAL is an INTEGER */

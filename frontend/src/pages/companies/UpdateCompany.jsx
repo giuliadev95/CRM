@@ -15,8 +15,9 @@ const UpdateCompany = () => {
     const [company_type, setCompanyType] = useState("");
     const [notes, setNotes] = useState("");
     const [companyDetails, setCompanyDetails] = useState(null);
-    const navigate = useNavigate();
     const [showConfirm, setShowConfirm] = useState(false);
+    const[companyTypeSelect, setCompanyTypeSelect] = useState("");
+    const navigate = useNavigate();
 
     const breadCrumbitems= [
         {label : "Home", href:"/"},
@@ -43,6 +44,7 @@ const UpdateCompany = () => {
                 setWebsite(data.website || "");
                 setCompanyType(data.company_type || "");
                 setNotes(data.notes || "");
+                setCompanyTypeSelect(data.company_type)
             })
             .catch((err) => console.error(err));
     }, [id]);
@@ -150,6 +152,28 @@ const UpdateCompany = () => {
                             value={website}
                             onChange={(e) => setWebsite(e.target.value)}
                         />
+                    </div>
+                    <div className='flex flex-col gap-1'>
+                        <label for="type" class="form-label">Tipo</label>
+                       <select
+                            class="form-select"
+                            name="type"
+                            id="type"
+                            value={company_type}
+                            onChange={(e) => setCompanyType(e.target.value)}
+                            required
+                            className='max-w-[8rem] md:max-w-35 border rounded p-1 bg-white'
+                            >
+                            <option selected>{companyTypeSelect}</option>            
+                                <>
+                                    <option value="Client">Cliente</option>
+                                    <option value="Supplier">Fornitore</option>
+                                    <option value="Partner">Collaboratore</option>
+                                    <option value="Seller">Venditore</option>
+                                    <option value="Buyer">Compratore</option>
+                                    <option value="Assurance">Assicurazione</option>
+                                </>    
+                        </select>
                     </div>
                     <div>
                         <label for="details" class="form-label">Dettagli</label>

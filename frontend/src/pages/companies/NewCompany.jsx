@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Breadcrumb from "@/components/Global/BreadCrumb";
+import { IoMdArrowRoundBack } from 'react-icons/io';
+import { FaEdit } from 'react-icons/fa';
 import '@styles/app.css';
 
 const NewCompany = () => {
@@ -11,6 +14,12 @@ const NewCompany = () => {
     const [website, setWebsite] = useState("");
     const [company_type, setCompanyType] = useState("");
     const [notes, setNotes] = useState("");
+
+    const breadCrumbitems= [
+        {label: "Home", href: "/"},
+        {label : "Aziende", href:"/companies"},
+        {label : "Nuova azienda"}
+    ]
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -38,75 +47,123 @@ const NewCompany = () => {
         }
     };
 
-    return (
-        <>
-            <form onSubmit={handleSubmit} id="form">
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Nome"
-                    required
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
-
-                <input
-                    type="text"
-                    name="phone"
-                    placeholder="Telefono"
-                    required
-                    value={phone}
-                    onChange={(e)=> setPhone(e.target.value)}
-                />
-
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                
-                <input
-                    type="text"
-                    name="website"
-                    placeholder="Sito web"
-                    required
-                    value={website}
-                    onChange={(e) => setWebsite(e.target.value)}
-                />
-
-                <input
-                    type="text"
-                    name="type"
-                    placeholder="Tipo"
-                    required
-                    value={company_type}
-                    onChange={(e) => setCompanyType(e.target.value)}
-                />
-
-                 <input
-                    type="text"
-                    name="notes"
-                    placeholder="Dettagli"
-                    required
-                    value={notes}
-                    onChange={(e) => setNotes(e.target.value)}
-                />
-
-                <button 
-                type="submit"
-                >
-                    Salva
-                </button>
-            </form>
-            <button
-                type="button"
-                onClick={()=> navigate('/companies')}
-            >
-                Indietro
-            </button>
+    return (        
+        <> 
+            <div className='container my-4 px-4 md:px-0'>
+                <Breadcrumb items={breadCrumbitems}/>
+                 <button
+                        type="button"
+                        onClick={()=> navigate(-1)}
+                        className="flex gap-1 items-center mb-4"
+                    >
+                        <IoMdArrowRoundBack/>{" Indietro"}
+                    </button> 
+                <h2 className='flex gap-2'> 
+                    <FaEdit /> 
+                    Nuova azienda
+                </h2>
+                <form 
+                    className='max-w-[80%] md:max-w-[50%] flex flex-col gap-3 md:gap-6'
+                    onSubmit={handleSubmit}>
+                    <div className='flex flex-col gap-1'>
+                        <label for="name" class="form-label">Nome</label>
+                        <input
+                            id='name'
+                            class='form-control'
+                            type="text"
+                            placeholder="Name"
+                            required
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </div>   
+                    <div className='flex flex-col gap-1'>
+                        <label for="name" class="form-label">Email</label>           
+                        <input
+                            id='email'
+                            class='form-control'
+                            type="email"
+                            placeholder="Email"
+                            required
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </div>
+                    <div className='flex flex-col gap-1'>
+                        <label for="name" class="form-label">Telefono</label>
+                        <input
+                            id='phone'
+                            class='form-control'
+                            type="text"
+                            placeholder="Phone"
+                            required
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                        />
+                    </div>
+                    <div className='flex flex-col gap-1'>
+                        <label for="website" class="form-label">Sito web</label>
+                        <input
+                            id='website'
+                            class='form-control'
+                            type="text"
+                            name="website"
+                            placeholder="Sito web"
+                            required
+                            value={website}
+                            onChange={(e) => setWebsite(e.target.value)}
+                        />
+                    </div>
+                    <div className='flex flex-col gap-1'>
+                        <label for="type" class="form-label">Tipo</label>
+                        <select
+                            class="form-select"
+                            name="type"
+                            id="type"
+                            value={company_type}
+                            onChange={(e) => setCompanyType(e.target.value)}
+                            required
+                            className='max-w-[8rem] md:max-w-35 border rounded p-1 bg-white'
+                            >
+                            <option selected>Seleziona il tipo</option>            
+                                <>
+                                    <option value="Client">Cliente</option>
+                                    <option value="Supplier">Fornitore</option>
+                                    <option value="Partner">Collaboratore</option>
+                                    <option value="Seller">Venditore</option>
+                                    <option value="Buyer">Compratore</option>
+                                    <option value="Assurance">Assicurazione</option>
+                                </>    
+                        </select>
+                    </div>
+                    <div>
+                        <label for="details" class="form-label">Dettagli</label>
+                        <textarea
+                            id='details'
+                            class='form-control'
+                            type="text"
+                            placeholder="Notes"              
+                            value={notes}
+                            onChange={(e) => setNotes(e.target.value)}
+                        />
+                    </div>
+                    <div className="flex flex-wrap items-center sm:flex-row gap-3 md:gap-0 max-w-fit justify-start md:justify-center ">
+                    <button 
+                        type="submit"
+                        className="btn btn-primary w-[6rem]"
+                    >
+                        Salva
+                    </button>
+                    <button 
+                        type="button"
+                        className="btn btn-dark w-[6rem]"
+                        onClick= {()=>  navigate(-1)}
+                    > 
+                        Annulla
+                    </button>
+                </div>
+                </form>
+            </div>
         </>
     );
 };
