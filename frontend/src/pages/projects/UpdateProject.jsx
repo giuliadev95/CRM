@@ -1,17 +1,15 @@
-// IMPORT
+import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Breadcrumb from '@/components/Global/BreadCrumb';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { FaEdit } from 'react-icons/fa';
-import { FaRegCheckCircle } from "react-icons/fa";
-import { MdError } from "react-icons/md";
-import axios from 'axios';
+import { IoIosAddCircle } from 'react-icons/io';
+import Breadcrumb from '@/components/Global/BreadCrumb';
+import MsgSuccess from '@/components/Global/MsgSuccess';
+import MsgDeny from '@/components/Global/MsgDeny';
 import '@styles/app.css';
 
-// COMPONENT
 const UpdateProject = () => {
-
     const { id } = useParams();
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
@@ -36,7 +34,6 @@ const UpdateProject = () => {
         },
         {label: "Modifica"}
     ]
-
     const navigate = useNavigate();
     
     // FETCH PROJECT DATA
@@ -81,7 +78,6 @@ const UpdateProject = () => {
     // UPDATE PROJECT
     const handleUpdate = async (event) => {
         event.preventDefault();
-
         const updatedProject = {
             name,
             description,
@@ -91,7 +87,6 @@ const UpdateProject = () => {
             end_date: endDate,
             budget
         };
-
         try {
             const res =await axios.put(
                 `http://localhost:3000/api/project/update/${id}`, 
@@ -104,14 +99,15 @@ const UpdateProject = () => {
             setShowConfirm(true);
             setTimeout(()=> {
                 setShowConfirm(false);
-                ;
-            }, 2000); 
+                navigate(-1);
+            }, 1200); 
         } catch (error) {
                 console.error("Error:", error);
                 setShowDeny(true);
                 setTimeout(()=> {
                     setShowDeny(false);
-                }, 2000);
+                    navigate(-1);
+                }, 1200);
             }
         };
 
@@ -160,26 +156,34 @@ const UpdateProject = () => {
                         onChange={(e) => setDescription(e.target.value)}
                     />
                 </div>
-                <div className='flex flex-col gap-1'>
-                    <label for="company" class="form-label">Azienda</label>
-                    <select
-                        className="form-select"
-                        id="company"
-                        name="company"
-                        value={companyId}
-                        onChange={(e) => setCompanyId(e.target.value)}
-                        required
+                <div className='flex items-center gap-4'>
+                    <div className='flex flex-col gap-1'>
+                        <label for="company" class="form-label">Azienda</label>
+                        <select
+                            className="form-select"
+                            id="company"
+                            name="company"
+                            value={companyId}
+                            onChange={(e) => setCompanyId(e.target.value)}
+                            required
+                        >
+                            <option value="">Seleziona l'azienda</option>
+                            {companies.map((c) => (
+                                <option key={c.id_company} value={c.id_company}>
+                                    {c.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                 <button className='pt-[2rem]'
+                    type="button"
+                    onClick={()=> navigate("/new-company")}
                     >
-                        <option value="">Seleziona l'azienda</option>
-                        {companies.map((c) => (
-                            <option key={c.id_company} value={c.id_company}>
-                                {c.name}
-                            </option>
-                        ))}
-                    </select>
+                    <IoIosAddCircle className="w-[1.5rem] h-[1.5rem] mdw-[2rem] md:h-[2rem] text-blue-500"/>
+                </button>
                 </div>
                     <div className='flex flex-col gap-1'>
-                        <div>
+                        <div className='flex flex-col'>
                             <label for="status" class="form-label">Stato</label>
                             <select
                                 class="form-select"
@@ -188,6 +192,7 @@ const UpdateProject = () => {
                                 value={status}
                                 onChange={(e) => setStatus(e.target.value)}
                                 required
+                                className='max-w-[8rem] md:max-w-35 border rounded p-1 bg-white'
                                 >
                                 <option selected>{projectStatusSelect}</option>
                                 {
@@ -230,10 +235,9 @@ const UpdateProject = () => {
                             required
                             value={startDate}
                             onChange={(e)=> setStartDate(e.target.value)}
-                            className='md:max-w-35 border rounded p-1 bg-white'
+                            className='max-w-[8rem] md:max-w-35 border rounded p-1 bg-white'
                         />
-                    </div>
-                            
+                    </div>                
                     <label for="end_date" class="form-label">Fine</label>
                         <input
                             class="form-class"
@@ -243,15 +247,15 @@ const UpdateProject = () => {
                             placeholder="01/01/2001"
                             value={endDate}
                             onChange={(e)=> setEndDate(e.target.value)}
-                            className='md:max-w-35 border rounded p-1 bg-white'     
+                            className='max-w-[8rem] md:max-w-35 border rounded p-1 bg-white'     
                         />
 
                     <div className='flex flex-col gap-1'>
                         <label for="budget" class="form-label">Budget</label>
                         <input
-                            class="form-select"
-                            id="budget"
-                            type="number"
+                            id='budget'
+                            className="form-control max-w-[8rem] md:max-w-35"
+                            type="text"
                             name="budget"
                             placeholder="Budget"
                             value={budget}
@@ -276,39 +280,9 @@ const UpdateProject = () => {
                 </form>
             </div>
                 {/* Pop up msg : Project updated successfully */}         
-            {
-                showConfirm && (
-                    <>
-                        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                            <div className="bg-white p-6 rounded-lg shadow-lg mx-4 md:mx-0">
-                                <p className="mb-4 text-lg font-bold">
-                                    Progetto aggiornato con successo.
-                                </p>
-                                <div className="flex gap-4 justify-center">
-                                <   FaRegCheckCircle className='text-green-600'/>
-                                </div>
-                            </div>
-                        </div>
-                    </>
-                )
-            }
-                {/* Pop up msg: Impossible to update the project */}         
-            {
-                showDeny && (
-                    <>
-                        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                        <div className="bg-white p-6 rounded-lg shadow-lg mx-4 md:mx-0">
-                            <p className="mb-4 text-lg font-bold">
-                               Aggiornamento non riuscito.
-                            </p>
-                            <div className="flex gap-4 justify-center">
-                               <MdError className='text-red-800'/>
-                            </div>
-                        </div>
-                    </div>
-                    </>
-                )
-            }
+            <MsgSuccess state={showConfirm}/>
+                {/* Pop up msg: Impossible to update the project */}      
+            <MsgDeny state={showDeny}/>
         </>
     );
 };

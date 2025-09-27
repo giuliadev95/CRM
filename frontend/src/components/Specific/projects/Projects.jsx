@@ -103,7 +103,7 @@ const Projects = ({ projects, loading }) => {
               <th className="d-none d-md-table-cell" scope="col">Inizio</th>
               <th className="d-none d-md-table-cell" scope="col">Fine</th>
               <th className="d-none d-md-table-cell" scope="col">Budget €</th>
-              <th className=""></th>
+              <th className="d-none d-md-table-cell"></th>
             </tr>
           </thead>
           {/* Map the fetched projects to display each of them in a table row */}

@@ -4,6 +4,8 @@ import { IoIosAddCircle } from "react-icons/io";
 import { FaEdit } from "react-icons/fa";
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import Breadcrumb from '@/components/Global/BreadCrumb';
+import MsgSuccess from '@/components/Global/MsgSuccess';
+import MsgDeny from '@/components/Global/MsgDeny';
 import '@styles/app.css';
 
 const UpdateContact = () => {
@@ -18,6 +20,8 @@ const UpdateContact = () => {
     const [companyId, setCompanyId] = useState("");
     const [companies, setCompanies] = useState([]); 
     const [contactDetails, setContactDetails] = useState(null);
+    const [showConfirm, setShowConfirm] = useState(false); // dont's show the pop-up msg by default
+    const [showDeny, setShowDeny] = useState(false); // dont's show the pop-up msg by default
     
     const breadCrumbitems= [
         {label : "Home", href:"/"},
@@ -83,10 +87,19 @@ const UpdateContact = () => {
             });
 
             if (!res.ok) throw new Error("Error with the contact update.");
-            navigate(-1);
+            setShowConfirm(true);
+            setTimeout(()=> {
+                setShowConfirm(false)
+                navigate(-1);
+            }, 1200);
             return res.json();
-        } catch (err) {
-            console.error("Error:", err);
+        } catch (error) {
+             console.error("Error:", error);
+            setShowDeny(true);
+            setTimeout(()=> {
+                setShowDeny(false);
+                navigate(-1);
+            }, 1200);
         }
     };
 
@@ -205,11 +218,11 @@ const UpdateContact = () => {
                                 ))}
                             </select>
                         </div>     
-                        <button
+                        <button className='pt-[2rem]'
                             type="button"
                             onClick={()=> navigate("/new-company")}
                             >
-                            <IoIosAddCircle className="w-[2rem] h-[2rem] text-blue-500"/>
+                            <IoIosAddCircle className="w-[1.5rem] h-[1.5rem] mdw-[2rem] md:h-[2rem] text-blue-500"/>
                         </button>
                     </div>
                     <div className="flex flex-wrap items-center sm:flex-row gap-3 md:gap-0 max-w-fit justify-start md:justify-center ">
@@ -229,6 +242,10 @@ const UpdateContact = () => {
                     </div>
                 </form>
             </div>
+                {/* Pop up msg : Contact updated successfully */}     
+            <MsgSuccess state={showConfirm} subject={"contatto"}/>
+                {/* Pop up msg: Impossible to update the contact */}  
+            <MsgDeny state={showDeny} subject={"contatto"}/>
         </>
     );
 };

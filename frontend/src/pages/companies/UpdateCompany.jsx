@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Breadcrumb from '@/components/Global/BreadCrumb';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { FaEdit } from 'react-icons/fa';
+import MsgSuccess from '@/components/Global/MsgSuccess';
 import '@styles/app.css';
 
 const UpdateCompany = () => {
@@ -15,6 +16,7 @@ const UpdateCompany = () => {
     const [notes, setNotes] = useState("");
     const [companyDetails, setCompanyDetails] = useState(null);
     const navigate = useNavigate();
+    const [showConfirm, setShowConfirm] = useState(false);
 
     const breadCrumbitems= [
         {label : "Home", href:"/"},
@@ -71,7 +73,11 @@ const UpdateCompany = () => {
             });
 
             if (!res.ok) throw new Error("Error with the company update.");
-            navigate(`/company-view/${id}`);
+            setShowConfirm(true);
+            setTimeout(()=> {
+                setShowConfirm(false);
+                navigate(-1);
+            }, 2000)
             return res.json();
         } catch (err) {
             console.error("Error:", err);
@@ -173,6 +179,7 @@ const UpdateCompany = () => {
                 </div>
                 </form>
             </div>
+            <MsgSuccess state={showConfirm} subject={"azienda"}/>
         </>
     );
 };
