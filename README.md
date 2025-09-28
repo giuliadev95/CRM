@@ -19,6 +19,9 @@ Pensata per **Sales, Marketing e HR**, che vogliono uno strumento leggero e velo
 ---
 
 ## Screenshot
+![Pagina dei contatti](./images/mock-up.jpg)
+*(UI responsiva, adatta per mobile, tablet e desktop.)*
+
 ![Pagina dei contatti](./images/contactList.png)
 *(Esempio di schermata della dashboard con lista contatti)*
 
