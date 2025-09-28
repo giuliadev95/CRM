@@ -22,21 +22,6 @@ Pensata per **Sales, Marketing e HR**, che vogliono uno strumento leggero e velo
 ![Pagina dei contatti](./images/mock-up.jpg)
 *(UI responsiva, adatta per mobile, tablet e desktop.)*
 
-![Pagina dei contatti](./images/contactList.png)
-*(Esempio di schermata della dashboard con lista contatti)*
-
-![Pagina di aggiunta di un nuovo contatto](./images/newContact.png)
-*(Esempio di schermata della pagina per creare un nuovo contatto)*
-
-![Pagina con vista dettagli di un progetto](./images/projectView.png)
-*(Esempio di schermata della pagina con la vista dei dettagli di un singolo progetto)*
-
-![Pagina per aggiornare un progetto](./images/updateProject.png)
-*(Esempio di schermata della pagina di aggiornamento di un singolo progetto)*
-
-![PDF esportato da un progetto](./images/PDFExport.png)
-*(Esempio di PFD con l'export dei dettagli di un singolo progetto)*
-
 
 ---
 
