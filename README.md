@@ -9,19 +9,18 @@ Pensata per **Sales, Marketing e HR**, che vogliono uno strumento leggero e velo
 
 ---
 
+## Responsive UI
+![Pagina dei contatti](./images/mock-up.jpg)
+*(UI responsiva, adatta per mobile, tablet e desktop.)*
+
+---
+
 ## Funzionalità principali
 - 👩‍💻 CRUD completo per contatti, aziende e progetti  
 - 🔎 Ricerca rapida 
 - 🔗 Collegamenti tra entità (contatto ↔ azienda, progetto ↔ azienda)  
 - 📱 Frontend in **React** con interfaccia responsive, SPA reattiva e moderna.
 - ⚙️ Backend in **Node.js + Express + PostgreSQL**
-
----
-
-## Screenshot
-![Pagina dei contatti](./images/mock-up.jpg)
-*(UI responsiva, adatta per mobile, tablet e desktop.)*
-
 
 ---
 
