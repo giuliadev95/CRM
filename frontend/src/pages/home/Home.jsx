@@ -1,6 +1,7 @@
 import React from "react";
 import Breadcrumb from "@/components/Global/BreadCrumb";
 import { MdDashboard } from "react-icons/md";
+import RecentContacts from "@/components/Specific/contacts/RecentsContacts";
 import '../../styles/app.css';
 
 const Home=()=>{
@@ -16,6 +17,7 @@ const Home=()=>{
                 <div className="flex flex-col md:flex md:flex-row md:justify-between">
                     <h1 className="h2 flex items-center">{<MdDashboard/>}Dashboard</h1>
                 </div>
+                <RecentContacts/>
                 <div className="flex flex-wrap items-baseline justify-start ">
                    <div class="row">
                         <div class="col-sm-6 mb-3 mb-sm-0">

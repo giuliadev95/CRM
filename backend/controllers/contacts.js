@@ -151,14 +151,14 @@ export const search_contact = async (req, res) => {
     try {
       const result = await pool.query(`
         SELECT *
-        FROM contact_companies_view
-        WHERE created_at >= NOW() - INTERVAL ' 7 days '
-        ORDERED BY created_at DESC
+        FROM contact
+        WHERE created_at >= NOW() - INTERVAL '7 days'
+        ORDER BY created_at DESC
       `);
     res.status(200).json(result.rows);
     }
     catch(error){
-      console.error("Error retrieving recent contacts: ", err.message);
+      console.error("Error retrieving recent contacts: ", error);
       return res.status(500).send("500: Internal Server Error. Couldn't retrieve recent contacts.");
     }
   };
