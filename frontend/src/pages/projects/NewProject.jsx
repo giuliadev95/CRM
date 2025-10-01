@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Breadcrumb from "@/components/Global/BreadCrumb";
 import MsgSuccess from "@/components/Global/MsgSuccess";
+import MsgDeny from "@/components/Global/MsgDeny";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { FaEdit } from "react-icons/fa";
 
@@ -19,6 +20,7 @@ const NewProject = () => {
     const [budget, setBudget] = useState("");
     const [companies, setCompanies] = useState([]);
     const [showConfirm, setShowConfirm]= useState(false);
+    const [showDeny, setShowDeny]= useState(false);
 
     // Breadcrumb configuration
     const breadCrumbitems= [
@@ -64,7 +66,9 @@ const NewProject = () => {
             }, 1200)
         } catch (err) {
             console.error("Error:", err);
-            
+            setTimeout(()=> {
+                setShowDeny(true);
+            }, 1200)
         }
     };
 
@@ -207,6 +211,7 @@ const NewProject = () => {
                 </form>
             </div>
             <MsgSuccess state={showConfirm} subject={"nuovo-progetto"}/>
+            <MsgDeny state={showDeny} subject={"nuovo-progetto"}/>
         </>
     );
 };
