@@ -20,7 +20,7 @@ function RecentContacts() {
           <div class="card-body">
               <h5 class="card-title">Contatti recenti</h5>   
                 <p class="card-text">{recentContacts.length}</p>
-                <Link to="/" class="btn btn-primary">Vedi tutti</Link>            
+                <Link to="/contacts" class="btn btn-primary">Vedi tutti</Link>            
           </div>
       </div>
     </div>
