@@ -15,7 +15,7 @@ export const SidebarData = [
     },
     { 
         title: 'Contatti',
-        path: '/',
+        path: '/contacts',
         icon: <RiContactsBook2Fill/>,
         cName: 'nav-text'
     },
