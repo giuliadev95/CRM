@@ -15,6 +15,9 @@ const MsgSuccess = ({state, subject}) => {
         case "azienda":
             message = "Azienda aggiornata con successo";
             break;
+        case "nuovo-progetto":
+            message = "Progetto creato con successo";
+            break;
         default:
             message = "Progetto aggiornato con successo";
        }

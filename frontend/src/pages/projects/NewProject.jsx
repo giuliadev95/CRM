@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Breadcrumb from "@/components/Global/BreadCrumb";
+import MsgSuccess from "@/components/Global/MsgSuccess";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { FaEdit } from "react-icons/fa";
 
@@ -17,6 +18,7 @@ const NewProject = () => {
     const [endDate, setEndDate] = useState("");
     const [budget, setBudget] = useState("");
     const [companies, setCompanies] = useState([]);
+    const [showConfirm, setShowConfirm]= useState(false);
 
     // Breadcrumb configuration
     const breadCrumbitems= [
@@ -55,7 +57,11 @@ const NewProject = () => {
             });
 
             if (!res.ok) throw new Error("Error: impossible to create the new project.");
-            navigate("/projects");
+            setShowConfirm(true);
+            setTimeout(()=> {
+                setShowConfirm(false);
+                navigate(-1);
+            }, 1200)
         } catch (err) {
             console.error("Error:", err);
             
@@ -200,6 +206,7 @@ const NewProject = () => {
                     </div> 
                 </form>
             </div>
+            <MsgSuccess state={showConfirm} subject={"nuovo-progetto"}/>
         </>
     );
 };
