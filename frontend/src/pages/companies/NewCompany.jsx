@@ -15,6 +15,7 @@ const NewCompany = () => {
     const [company_type, setCompanyType] = useState("");
     const [notes, setNotes] = useState("");
 
+    // Breadcrumb configuration
     const breadCrumbitems= [
         {label: "Home", href: "/"},
         {label : "Aziende", href:"/companies"},
@@ -51,12 +52,13 @@ const NewCompany = () => {
         <> 
             <div className='container my-4 px-4 md:px-0'>
                 <Breadcrumb items={breadCrumbitems}/>
-                 <button
+                <button
                         type="button"
                         onClick={()=> navigate(-1)}
                         className="flex gap-1 items-center mb-4"
                     >
-                        <IoMdArrowRoundBack/>{" Indietro"}
+                        <IoMdArrowRoundBack/>
+                        {" Indietro"}
                     </button> 
                 <h2 className='flex gap-2'> 
                     <FaEdit /> 
