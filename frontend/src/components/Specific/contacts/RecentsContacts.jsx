@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function RecentContacts() {
   const [recentContacts, setRecentContacts] = useState([]);
@@ -6,7 +7,7 @@ function RecentContacts() {
   useEffect(() => {
     fetch(`http://localhost:3000/api/contacts/get/recent`)
       .then((res) => {
-        if (!res.ok) throw new Error("Errore nel recupero dei contatti recenti");
+        if (!res.ok) throw new Error("Error fetching recent contacts");
         return res.json();
       })
       .then((data) => setRecentContacts(data))
@@ -14,19 +15,18 @@ function RecentContacts() {
   }, []);
 
   return (
-    <div className="card mt-3">
-      <div className="card-body">
-        <h5 className="card-title">Contatti Creati nell'Ultima Settimana</h5>
-        <ul className="list-group">
-          {recentContacts.map((c) => (
-            <li key={c.id_contact} className="list-group-item">
-              {c.name} {c.surname} – {c.company_name}
-            </li>
-          ))}
-        </ul>
+    <div className="card mt-3 w-fit h-auto">    
+      <div class="card">
+          <div class="card-body">
+              <h5 class="card-title">Contatti recenti</h5>   
+                <p class="card-text">{recentContacts.length}</p>
+                <Link to="/" class="btn btn-primary">Vedi tutti</Link>            
+          </div>
       </div>
     </div>
   );
 }
 
 export default RecentContacts;
+
+
