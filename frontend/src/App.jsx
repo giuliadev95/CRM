@@ -25,8 +25,8 @@ function App() {
           <Route element={<Layout/>}>
 
             {/** Home */}
-            <Route path='/' element={<ContactsList/>}/>
-            <Route path='/home' element={<Home/>}/>
+            <Route path='/contacts' element={<ContactsList/>}/>
+            <Route path='/' element={<Home/>}/>
 
             {/** Contacts */}
             <Route path='/' element={<ContactsList/>}/>
