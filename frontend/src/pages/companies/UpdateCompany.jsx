@@ -33,7 +33,7 @@ const UpdateCompany = () => {
  
     // 1. Fetch the company's data basing on the { id }, that is a req. param, before updating its fields
     useEffect(() => {
-        fetch(`http://localhost:3000/api/company/get/${id}`)
+        fetch(`http://192.168.1.3:3000/api/company/get/${id}`)
             .then((res) => res.json())
             .then((data) => {
                 setName(data.name || "");
@@ -68,7 +68,7 @@ const UpdateCompany = () => {
         };
 
         try {
-            const res = await fetch(`http://localhost:3000/api/company/update/${id}`, {
+            const res = await fetch(`http://192.168.1.3:3000/api/company/update/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(updatedCompany)

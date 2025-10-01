@@ -21,7 +21,7 @@ const CompanyView = () => {
 
     useEffect(() => {
         if (!id) return;
-        fetch(`http://localhost:3000/api/company/get/${id}`)
+        fetch(`http://192.168.1.3:3000/api/company/get/${id}`)
             .then((res) => res.json())
             .then((data) => setCompany(data))
             .catch((err) => console.error(err));
@@ -30,7 +30,7 @@ const CompanyView = () => {
     // Delete company
     function deleteCompany(id) {
         if (!id) return console.error("The ID is missing to perform the deletion.");
-        fetch(`http://localhost:3000/api/company/delete/${id}`, {
+        fetch(`http://192.168.1.3:3000/api/company/delete/${id}`, {
             method: "DELETE",
         })
         .then((res) => {

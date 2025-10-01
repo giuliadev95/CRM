@@ -29,7 +29,7 @@ const Companies = ({ companies, loading }) => {
 // Delete company
   function deleteCompany(id) {
     if (!id) return console.error("The ID is missing to perform the deletion.");
-        fetch(`http://localhost:3000/api/company/delete/${id}`, {
+        fetch(`http://192.168.1.3:3000/api/company/delete/${id}`, {
         method: "DELETE",
     })
     .then((res) => {
@@ -47,7 +47,7 @@ const Companies = ({ companies, loading }) => {
     const cleanedInput = input.trim().toLowerCase().replace(/\s+/g, '');
     
     try {
-      const res = await axios.get("http://localhost:3000/api/companies/search/company", {
+      const res = await axios.get("http://192.168.1.3:3000/api/companies/search/company", {
         params: { q: cleanedInput }, 
       });
 

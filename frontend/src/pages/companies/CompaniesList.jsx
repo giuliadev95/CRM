@@ -32,7 +32,7 @@ export default function CompaniesList() {
         const fetchCompanies = async()=> {
             try{
                 setLoading(true);
-                const response = await axios.get("http://localhost:3000/api/companies/get");
+                const response = await axios.get("http://192.168.1.3:3000/api/companies/get");
                 console.log(response)
                 console.log(response.data)
                 // The fetched data update the content of the company variable. This happens even after the deletion of a single company.
