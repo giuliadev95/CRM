@@ -33,7 +33,7 @@ const ProjectsList = () => {
         const fetchProjects = async()=> {
             try{
                 setLoading(true);
-                const response = await axios.get("http://localhost:3000/api/projects/get");
+                const response = await axios.get("http://192.168.1.3:3000/api/projects/get");
                 console.log(response)
                 console.log(response.data)
                 // The fetched data update the content of the project variable. This happens even after the deletion of a single project.

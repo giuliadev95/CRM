@@ -38,7 +38,7 @@ const UpdateProject = () => {
     
     // FETCH PROJECT DATA
     useEffect(() => {
-        fetch(`http://localhost:3000/api/project/get/${id}`)
+        fetch(`http://192.168.1.3:3000/api/project/get/${id}`)
         .then((res) => res.json())
         .then((data) => {
             const projectName = (data.name);
@@ -64,7 +64,7 @@ const UpdateProject = () => {
 
     // FETCH COMPANIES
     useEffect(() => {
-        fetch("http://localhost:3000/api/companies/get")
+        fetch("http://192.168.1.3:3000/api/companies/get")
             .then((res) => res.json())
             .then((data) => setCompanies(data))
             .catch((err) => console.error("There was an error in fetching the companies: ", err));
@@ -89,7 +89,7 @@ const UpdateProject = () => {
         };
         try {
             const res =await axios.put(
-                `http://localhost:3000/api/project/update/${id}`, 
+                `http://192.168.1.3:3000/api/project/update/${id}`, 
                 updatedProject, 
                 {
                     headers: { 'Content-Type': 'application/json' },      

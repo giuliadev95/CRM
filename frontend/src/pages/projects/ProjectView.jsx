@@ -24,7 +24,7 @@ const ProjectView=()=>{
         if(id){
             const fetchSingleProject = async()=> {
                 try {
-                        const response = await axios.get(`http://localhost:3000/api/project/get/${id}`)
+                        const response = await axios.get(`http://192.168.1.3:3000/api/project/get/${id}`)
                         console.log(response)
                         console.log(response.data)
                         setProject(response.data)
@@ -47,7 +47,7 @@ const ProjectView=()=>{
     // Function to delete the project
     function deleteProject(id) {
         if (!id) return console.error("The ID is missing to perform the deletion.");
-        fetch(`http://localhost:3000/api/project/delete/${id}`, {
+        fetch(`http://192.168.1.3:3000/api/project/delete/${id}`, {
             method: "DELETE",
         })
         .then((res) => {
