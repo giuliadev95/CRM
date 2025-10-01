@@ -5,6 +5,7 @@ import MsgSuccess from "@/components/Global/MsgSuccess";
 import MsgDeny from "@/components/Global/MsgDeny";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { FaEdit } from "react-icons/fa";
+import { IoIosAddCircle } from "react-icons/io";
 
 import '@styles/app.css';
 
@@ -114,24 +115,32 @@ const NewProject = () => {
                             onChange={(e) => setDescription(e.target.value)}
                         />
                     </div>
-                    <div>
-                        <label for="company" className="form-label">Azienda</label>
-                        <select
-                            className="form-select"
-                            name="company"
-                            id="company"
-                            value={companyId}
-                            onChange={(e) => setCompanyId(e.target.value)}
-                            required
+                    <div className='flex items-center gap-4'> 
+                        <div>
+                            <label for="company" class="form-label">Azienda</label>
+                            <select
+                                className="form-select"
+                                name="company"
+                                id="company"
+                                value={companyId}
+                                onChange={(e) => setCompanyId(e.target.value)}
+                                required
+                                >
+                                <option value="">Seleziona Azienda</option>
+                                {companies.map((c) => (
+                                    <option key={c.id_company} value={c.id_company}>
+                                        {c.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>     
+                        <button className='pt-[2rem]'
+                            type="button"
+                            onClick={()=> navigate("/new-company")}
                             >
-                            <option value="">Seleziona Azienda</option>
-                            {companies.map((c) => (
-                                <option key={c.id_company} value={c.id_company}>
-                                    {c.name}
-                                </option>
-                            ))}
-                        </select>
-                    </div>     
+                            <IoIosAddCircle className="w-[1.5rem] h-[1.5rem] mdw-[2rem] md:h-[2rem] text-blue-500"/>
+                        </button>
+                    </div> 
 
                     <div className='flex flex-col gap-1'>
                         <div className='flex flex-col'>
