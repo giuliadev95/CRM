@@ -15,8 +15,11 @@ const MsgDeny = ({state, subject}) => {
         case "azienda":
             message = "Errore: impossibile aggiornare l'azienda";
             break;
+        case "nuovo-progetto":
+            message = "Errore: creazione progetto non riuscita";
+            break;
         default:
-            message = "Errore: impossibile aggiornare il progetto";
+            message = "Errore: impossibile completare l'azione";
        }
        return(
         <>
@@ -26,7 +29,7 @@ const MsgDeny = ({state, subject}) => {
                         {message}
                     </p>
                     <div className="flex gap-4 justify-center">
-                    <MdError className='text-red-800'/>
+                        <MdError className='text-red-800'/>
                     </div>
                 </div>
             </div>
