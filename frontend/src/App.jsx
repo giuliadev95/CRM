@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/home/Home.jsx";
 import ContactsList from "./pages/contacts/ContactsList.jsx";
 import NewContact from './pages/contacts/NewContact.jsx'
 import UpdateContact from "./pages/contacts/UpdateContact.jsx";
@@ -25,6 +26,7 @@ function App() {
 
             {/** Home */}
             <Route path='/' element={<ContactsList/>}/>
+            <Route path='/home' element={<Home/>}/>
 
             {/** Contacts */}
             <Route path='/' element={<ContactsList/>}/>

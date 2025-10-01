@@ -145,3 +145,20 @@ export const search_contact = async (req, res) => {
     return res.status(500).send("500: Internal Server Error");
   }
 };
+
+  // Get recent contacts
+  export const get_recent_contacts = async(req,res)=> {
+    try {
+      const result = await pool.query(`
+        SELECT *
+        FROM contact_companies_view
+        WHERE created_at >= NOW() - INTERVAL ' 7 days '
+        ORDERED BY created_at DESC
+      `);
+    res.status(200).json(result.rows);
+    }
+    catch(error){
+      console.error("Error retrieving recent contacts: ", err.message);
+      return res.status(500).send("500: Internal Server Error. Couldn't retrieve recent contacts.");
+    }
+  };
