@@ -5,7 +5,7 @@ function RecentContacts() {
   const [recentContacts, setRecentContacts] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/contacts/get/recent`)
+    fetch(`http://192.168.1.3:3000/api/contacts/get/recent`)
       .then((res) => {
         if (!res.ok) throw new Error("Error fetching recent contacts");
         return res.json();
@@ -15,7 +15,7 @@ function RecentContacts() {
   }, []);
 
   return (
-    <div className="card mt-3 w-fit h-auto">    
+    <div className="card mt-3 w-[200px] lg:w-fit h-auto ">    
       <div class="card">
           <div class="card-body">
               <h5 class="card-title">Contatti recenti</h5>   

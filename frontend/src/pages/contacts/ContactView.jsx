@@ -22,7 +22,7 @@ const ContactView = () => {
 
     useEffect(() => {
         if (!id) return;
-        fetch(`http://localhost:3000/api/contact/get/${id}`)
+        fetch(`http://192.168.1.3:3000/api/contact/get/${id}`)
             .then((res) => res.json())
             .then((data) => {
                 const fullName = (`${data.name} ${data.surname}`);
@@ -37,7 +37,7 @@ const ContactView = () => {
     // Function to delete the contact
     function deleteContact(id) {
         if (!id) return console.error("The ID is missing to perform the deletion.");
-        fetch(`http://localhost:3000/api/contact/delete/${id}`, {
+        fetch(`http://192.168.1.3:3000/api/contact/delete/${id}`, {
             method: "DELETE",
         })
         .then((res) => {
@@ -116,7 +116,7 @@ const ContactView = () => {
             ) : (
                 <tr>
                     <td colSpan={5} style={{ textAlign: "center" }}>
-                        Nessuna azienda trovata
+                        Nessun contatto trovato
                     </td>
                 </tr>
             )}         

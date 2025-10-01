@@ -25,7 +25,7 @@ const NewContact = () => {
     ]
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/companies/get")
+        fetch("http://192.168.1.3:3000/api/companies/get")
             .then((res) => res.json())
             .then((data) => {
                 setCompanies(data);
@@ -53,7 +53,7 @@ const NewContact = () => {
         };
 
         try {
-            const res = await fetch("http://localhost:3000/api/contact/post", {
+            const res = await fetch("http://192.168.1.3:3000/api/contact/post", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(newContact)

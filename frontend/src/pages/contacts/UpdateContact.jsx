@@ -36,7 +36,7 @@ const UpdateContact = () => {
 
     // 1. Fetch the contact's data basing on the { id }, that is a req. param, before updating its fields
     useEffect(() => {
-        fetch(`http://localhost:3000/api/contact/get/${id}`)
+        fetch(`http://192.168.1.3:3000/api/contact/get/${id}`)
         .then((res) => res.json())
         .then((data) => {
             setName(data.name || "");
@@ -53,7 +53,7 @@ const UpdateContact = () => {
     }, [id]);
     // 2. Fetch the companies' data too
     useEffect(() => {
-        fetch("http://localhost:3000/api/companies/get")
+        fetch("http://192.168.1.3:3000/api/companies/get")
             .then((res) => res.json())
             .then((data) => setCompanies(data))
             .catch((err) => console.error("There was an error in fetching the companies: ", err));
@@ -80,7 +80,7 @@ const UpdateContact = () => {
         };
 
         try {
-            const res = await fetch(`http://localhost:3000/api/contact/update/${id}`, {
+            const res = await fetch(`http://192.168.1.3:3000/api/contact/update/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(updatedContact)

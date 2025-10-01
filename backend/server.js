@@ -3,9 +3,18 @@ import contacts_routes from "./routes/contacts_companies.js";
 import cors from 'cors';
 
 const app = express(); 
-const port = "3000";
+const port = 3000;
+
 app.use(express.json());
-app.use(cors());
+
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "http://192.168.1.3:5173"
+  ],
+  credentials: true
+}));
+
 app.use(express.static('public'));
 
 app.get('/', (req,res)=>{
@@ -26,6 +35,6 @@ app.get('/*', (req, res)=>{
 });
 
 // Server listen at port 5000
-app.listen(port, ()=> {
-    console.log(`Server listening at http://localhost:${port}`);   
+app.listen(port, "0.0.0.0", ()=> {
+    console.log(`Server listening at http://0.0.0.0:${port}`);   
 });

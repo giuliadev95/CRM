@@ -35,7 +35,7 @@ const ContactsList = () => {
 
                 setLoading(true);
 
-                const response = await axios.get("http://localhost:3000/api/contacts/get");
+                const response = await axios.get("http://192.168.1.3:3000/api/contacts/get");
                 console.log(response)
                 console.log(response.data)
                 console.log(response.data, typeof response.data); // EXPECTED OUTPUT: [ An array of objects { }, { },... ] , "object".     
