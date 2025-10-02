@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Chart as ChartJS } from "chart.js/auto";
-import { Bar, Doughnut, Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 
 const ProejctsDasboard =()=> {
 
@@ -19,7 +19,7 @@ const ProejctsDasboard =()=> {
                 const response = await axios.get("http://192.168.1.3:3000/api/projects/get");
                 console.log(response)
                 console.log(response.data)
-                // The fetched data update the content of the project variable. This happens even after the deletion of a single project.
+                // The fetched data update the content of the project variable. 
                 setProjects(response.data);
     
                 // EXPECTED OUTPUT: [ An array of objects { }, { },... ] , "object".
@@ -63,7 +63,7 @@ const ProejctsDasboard =()=> {
                                 }],
                             }}
                             options={{
-                                maintainAspectRatio: false, // permette al container di controllare l'altezza
+                                maintainAspectRatio: false,
                             }}
                         />
                 </div>
