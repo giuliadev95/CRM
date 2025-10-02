@@ -46,9 +46,6 @@ function CompaniesDashboard() {
     const partner = companies.filter((company)=> company.company_type === "Partner");
     const client = companies.filter((company)=> company.company_type === "Client");
     const prospect = companies.filter((company)=> company.company_type === "Prospect");
-    const seller = companies.filter((company)=> company.company_type ==="Seller");
-    const buyer = companies.filter((company)=> company.company_type === "Buyer");
-    const assurance = companies.filter((company)=> company.company_type === "Assurance");
 
     return(
         <>
@@ -56,17 +53,14 @@ function CompaniesDashboard() {
                 <div className="w-full h-64 ">
                         <Doughnut
                             data={{
-                                labels: ['Fornitori', 'Partner', 'Clienti', 'Prospect', 'Venditori', 'Compratori', 'Assicurazioni'],
+                                labels: ['Prospect','Clienti', 'Partner', 'Fornitori'],
                                 datasets: [{
                                     label: "Aziende",
                                     data: [
-                                        supplier.length, 
-                                        partner.length, 
+                                        prospect.length, 
                                         client.length,
-                                        prospect.length,
-                                        seller.length, 
-                                        buyer.length, 
-                                        assurance.length, 
+                                        partner.length,          
+                                        supplier.length, 
                                     ],
                                 }],
                             }}

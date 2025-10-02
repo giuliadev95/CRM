@@ -131,10 +131,8 @@ const NewCompany = () => {
                                 <>
                                     <option value="Client">Cliente</option>
                                     <option value="Supplier">Fornitore</option>
-                                    <option value="Partner">Collaboratore</option>
-                                    <option value="Seller">Venditore</option>
-                                    <option value="Buyer">Compratore</option>
-                                    <option value="Assurance">Assicurazione</option>
+                                    <option value="Partner">Partner</option>
+                                    <option value="Prospect">Prospect</option>            
                                 </>    
                         </select>
                     </div>

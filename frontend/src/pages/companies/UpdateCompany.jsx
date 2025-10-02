@@ -166,12 +166,34 @@ const UpdateCompany = () => {
                             >
                             <option selected>{companyTypeSelect}</option>            
                                 <>
-                                    <option value="Client">Cliente</option>
-                                    <option value="Supplier">Fornitore</option>
-                                    <option value="Partner">Collaboratore</option>
-                                    <option value="Seller">Venditore</option>
-                                    <option value="Buyer">Compratore</option>
-                                    <option value="Assurance">Assicurazione</option>
+                                    {
+                                        companyTypeSelect === "Client"? (
+                                            <>
+                                                <option value="Supplier">Fornitore</option>
+                                                <option value="Partner">Partner</option>
+                                                <option value="Prospect">Prospect</option>
+                                            </>
+                                        )  : companyTypeSelect === "Supplier"? (
+                                            <>
+                                                <option value="Client">Cliente</option>
+                                                <option value="Partner">Partner</option>
+                                                <option value="Prospect">Prospect</option>
+                                            </>
+                                        )  : companyTypeSelect === "Prospect"? (
+                                            <>
+                                                <option value="Client">Cliente</option>
+                                                <option value="Partner">Partner</option>
+                                                <option value="Supplier">Fornitore</option>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <option value="Client">Cliente</option>
+                                                <option value="Prospect">Prospect</option>
+                                                <option value="Supplier">Fornitore</option>
+                                            </>
+                                        )             
+                                    }
+                                   
                                 </>    
                         </select>
                     </div>
