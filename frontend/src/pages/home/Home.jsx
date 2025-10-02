@@ -29,7 +29,7 @@ const Home=()=>{
                             <div class="card-body">
                                 <h5 class="card-title">Progetti attivi</h5>   
                                     <p class="card-text">2</p>
-                                    <Link to="/contacts" class="btn btn-primary">Vedi tutti</Link>            
+                                    <Link to="/projects" class="btn btn-primary">Vedi tutti</Link>            
                             </div>
                         </div>
                     </div>
