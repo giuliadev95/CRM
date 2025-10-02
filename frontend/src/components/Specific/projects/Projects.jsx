@@ -98,12 +98,12 @@ const Projects = ({ projects, loading }) => {
             </tr>
             <tr>
               <th scope="col">Nome</th>
-              <th scope="d-none d-md-table-cell">Azienda</th>
+              <th className="d-none d-md-table-cell" scope="col">Azienda</th>
               <th className="d-none d-md-table-cell" scope="col">Status</th>
               <th className="d-none d-md-table-cell" scope="col">Inizio</th>
               <th className="d-none d-md-table-cell" scope="col">Fine</th>
               <th className="d-none d-md-table-cell" scope="col">Budget €</th>
-              <th className="d-none d-md-table-cell"></th>
+              <th></th>
             </tr>
           </thead>
           {/* Map the fetched projects to display each of them in a table row */}
