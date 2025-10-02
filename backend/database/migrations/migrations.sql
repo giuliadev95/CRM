@@ -12,39 +12,45 @@ CREATE TABLE IF NOT EXISTS company (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
-/* ADD CHECK AMONG PREDEFINED VALUES */
-SELECT DISTINCT company_type
-FROM company
-WHERE company_type NOT IN ('Supplier', 'Partner', 'Client', 'Prospect', 'Seller', 'Buyer', 'Assurance');
-
-ALTER TABLE company DROP CONSTRAINT IF EXISTS company_type_check;
-
-ALTER TABLE company 
-ADD CONSTRAINT company_type_check
-CHECK(company_type IN ('Supplier', 'Partner', 'Client', 'Prospect', 'Seller', 'Buyer', 'Assurance'));
-
-/* FIX: MODIFY COMPANY TYPES */
-
-/* seller + assurance => supplier */
-UPDATE company
-SET company_type = 'Supplier'
-WHERE company_type IN ('Seller', 'Assurance');
-
-/* buyer => client */
-UPDATE company
-SET company_type = 'Client'
-where company_type IN ('Buyer');
-
-ALTER TABLE company
-DROP CONSTRAINT IF EXISTS company_type_check;
-
+/* ADD CHECK AMONG UPDATED TYPES */
 ALTER TABLE company
 ADD CONSTRAINT company_type_check
 CHECK(company_type IN ('Client', 'Supplier', 'Prospect', 'Partner'));
 
-/* sanity check of the types */
-SELECT DISTINCT company_type FROM company ORDER BY company_type;
+  /* DANGER ZONE !DO NOT EXECUTE - OBSOLETE QUERY: 
+    ADD CHECK AMONG PREDEFINED VALUES */
+    SELECT DISTINCT company_type
+    FROM company
+    WHERE company_type NOT IN ('Supplier', 'Partner', 'Client', 'Prospect', 'Seller', 'Buyer', 'Assurance');
+
+      /* IF YOU EXECUTE THE PREVIOUS QUERY, THEN ALTER TABLE AFOLLOWS */
+      ALTER TABLE company DROP CONSTRAINT IF EXISTS company_type_check;
+
+      ALTER TABLE company 
+      ADD CONSTRAINT company_type_check
+      CHECK(company_type IN ('Supplier', 'Partner', 'Client', 'Prospect', 'Seller', 'Buyer', 'Assurance'));
+
+      /* FIX: MODIFY COMPANY TYPES */
+
+      /* seller + assurance => supplier */
+      UPDATE company
+      SET company_type = 'Supplier'
+      WHERE company_type IN ('Seller', 'Assurance');
+
+      /* buyer => client */
+      UPDATE company
+      SET company_type = 'Client'
+      where company_type IN ('Buyer');
+
+      ALTER TABLE company
+      DROP CONSTRAINT IF EXISTS company_type_check;
+
+      ALTER TABLE company
+      ADD CONSTRAINT company_type_check
+      CHECK(company_type IN ('Client', 'Supplier', 'Prospect', 'Partner'));
+
+      /* sanity check of the types */
+      SELECT DISTINCT company_type FROM company ORDER BY company_type;
 
 /* ---------*/
 
