@@ -34,7 +34,9 @@ const Home=()=>{
                         <CompaniesDashboard/>              
                     </div>
                 </div>
-                <RecentContacts/>
+                <div className="mx-8 mt-10">
+                   <RecentContacts/>
+                </div>
             </div>
         </>
     )

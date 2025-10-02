@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { FaUserAlt } from "react-icons/fa";
 
 function RecentContacts() {
   const [recentContacts, setRecentContacts] = useState([]);
@@ -15,15 +16,19 @@ function RecentContacts() {
   }, []);
 
   return (
-    <div className="card mt-3 w-[200px] lg:w-fit h-auto ">    
-      <div class="card">
-          <div class="card-body">
-              <h5 class="card-title">Contatti recenti</h5>   
-                <p class="card-text">{recentContacts.length}</p>
-                <Link to="/contacts" class="btn btn-primary">Vedi tutti</Link>            
+    <>
+      <div className="bg-[#c9cbcf] w-fit p-4 rounded-xl">
+        <h2 className="h3 flex flex-col items-start justify-start gap-4">
+          <div className="flex gap-1">
+            {<FaUserAlt/>}
+            Contatti recenti
           </div>
+          <p className="h1">{recentContacts.length}</p>
+        </h2>            
       </div>
-    </div>
+      <Link to="/contacts" class="btn btn-dark mt-3">Vai ai Contatti</Link>            
+    </>
+      
   );
 }
 
