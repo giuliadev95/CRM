@@ -1,11 +1,14 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Chart as ChartJS } from "chart.js/auto";
 import { Bar, Doughnut, Line } from "react-chartjs-2";
-import { FaProjectDiagram } from "react-icons/fa";
 
 const ProejctsDasboard =()=> {
+
+    // use navigate
+    const navigate = useNavigate();
 
     // Store all contacts fetched from the PostgreSQL database 
     const [ projects, setProjects ] = useState([]);
@@ -45,11 +48,7 @@ const ProejctsDasboard =()=> {
     return(
         <>
             <div className="flex flex-col gap-3">
-            <h1 className="h3 flex gap-1">
-                <FaProjectDiagram/>
-                Progetti
-            </h1>
-                <div className="w-full h-64 lg:w-[40%]">
+                <div className="w-full h-64 ">
                         <Bar
                             data={{
                                 labels: ["Attivi", "Chiusi", "In attesa", "Persi"],
@@ -68,7 +67,11 @@ const ProejctsDasboard =()=> {
                             }}
                         />
                 </div>
-            <button type="button" className=" btn btn-primary w-fit">
+            <button 
+                type="button" 
+                className=" btn btn-dark w-fit"
+                onClick={()=> navigate("/projects")}
+            >
                 Vai ai Progetti
             </button>
             </div>  

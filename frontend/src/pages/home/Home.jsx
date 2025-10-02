@@ -17,14 +17,9 @@ const Home=()=>{
     return(
         <>
             <div className="mx-8">
-                <Breadcrumb items={breadCrumbitems}/>
-                <div className="flex flex-col md:flex md:flex-row md:justify-between">
-                    <h1 className="h2 flex items-center">{<MdDashboard/>}Dashboard</h1>
-                </div>
-                <div className="flex flex-wrap gap-2 md:gap-4">
-                    {/* <RecentContacts/> */}    
-                    {/* <TotalCompaniesCard/> */}
-                   
+                <Breadcrumb items={breadCrumbitems}/>     
+                <h1 className="h2 flex items-center">{<MdDashboard/>}Dashboard</h1>           
+                <div className="lg:w-[50%] mt-4">
                     {/** ProjectsDasboard */}
                     <ProjectsDasboard/>              
                 </div>
