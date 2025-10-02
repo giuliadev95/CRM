@@ -91,7 +91,7 @@ const Companies = ({ companies, loading }) => {
             </tr>
             <tr>
               <th scope="col">Nome</th>
-              <th scope="d-none d-md-table-cell">Email</th>
+              <th className="d-none d-md-table-cell" scope="col">Email</th>
               <th className="d-none d-md-table-cell" scope="col">Telefono</th>
               <th className="d-none d-md-table-cell" scope="col">Sito Web</th>
               <th className="d-none d-md-table-cell" scope="col">Tipo</th>
