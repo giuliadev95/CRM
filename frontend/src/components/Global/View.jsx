@@ -10,7 +10,7 @@ const View = ({title, fields, avatar}) => {
     const navigate = useNavigate();
 
     return(
-        <div className="flex flex-col items-start justify-start mt-4">
+        <div className="flex flex-col items-start justify-start">
             <div className="mx-8 flex flex-col gap-3 justify-start">  
                 <button
                     type="button"
