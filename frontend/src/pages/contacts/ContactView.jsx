@@ -54,7 +54,7 @@ const ContactView = () => {
 
     return (
         <>
-            <div className="mx-8 my-4">
+            <div className="mx-8">
                 <Breadcrumb items={breadCrumbitems}/>
             </div>
             {contact ? (

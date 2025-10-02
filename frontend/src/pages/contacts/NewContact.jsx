@@ -68,7 +68,7 @@ const NewContact = () => {
 
     return (
         <>
-         <div className='container my-4 px-4 md:px-0'>
+         <div className='container px-4 md:px-0'>
             <Breadcrumb items={breadCrumbitems}/>
             <button
                 type="button"
