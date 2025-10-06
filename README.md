@@ -51,10 +51,10 @@ Assicurati di avere installato:
 La web app è stata creata per essere compatibile con un database PostgreSQL. E' possibile connettere il backend a un database PostgreSQL online, in fase di sviluppo si è usata un'istanza del database PostgreSQL ospitato su [render](https://render.com/).
 
 4. **Esegui le migrazioni**<br>  
-Nel file migrations.sql ( backend/database/migrations/migrations.sql ) sono scritte le migazioni per creare le tabelle e le relazioni. Vengono eseguite automaticamente al primo "npm i", se necessario eseguurle manualmente.
+Nel file migrations.sql ( backend/database/migrations/migrations.sql ) sono scritte le migazioni per creare le tabelle e le relazioni. Vengono eseguite automaticamente al primo "npm i", se necessario eseguirle manualmente.
 
 5. **Installa le dipendenze del frontend** 
-Installare le dipendenze della React App / Vite:
+Installare le dipendenze del frontend in React / Vite:
 ``` bash
    cd frontend
    npm i
@@ -66,6 +66,7 @@ Far partire il backend:
    npm run dev
 ```
 <br>
+
 Far partire il frontend:
 ``` bash
    cd frontend
