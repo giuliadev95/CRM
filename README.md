@@ -43,37 +43,36 @@ Assicurati di avere installato:
    cd CRM
 ```
 2. **Installa le dipendenze del backend**
-Installare le dipendenze del backend:
 ``` bash
    cd backend
    npm i
 ```
-3. **Crea il file .env**
+3. **Crea il file .env**<br>
 La web app è stata creata per essere compatibile con un database PostgreSQL. E' possibile connettere il backend a un database PostgreSQL online, in fase di sviluppo si è usata un'istanza del database PostgreSQL ospitato su [render](https://render.com/).
 
-4. **Esegui le migrazioni**
+4. **Esegui le migrazioni**<br>  
 Nel file migrations.sql ( backend/database/migrations/migrations.sql ) sono scritte le migazioni per creare le tabelle e le relazioni. Vengono eseguite automaticamente al primo "npm i", se necessario eseguurle manualmente.
 
-5. **Installa le dipendenze del frontend**
+5. **Installa le dipendenze del frontend** 
 Installare le dipendenze della React App / Vite:
 ``` bash
    cd frontend
    npm i
 ```
-6. **Far partire il progetto in locale**
+6. **Far partire il progetto in locale**<br>
 Far partire il backend:
 ``` bash
    cd backend
    npm run dev
 ```
-
+<br>
 Far partire il frontend:
 ``` bash
    cd frontend
    npm run dev
 ```
 
-## Funzionalità
+## Funzionalità<br>  
 - E' possibile:
     - Popolare il database con liste di contatti, aziende e progetti.
     - Visualizzare, modificare ed eliminare ogni record
