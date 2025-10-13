@@ -1,5 +1,5 @@
 import express from "express";
-import contacts_routes from "./routes/contacts_companies.js";
+import routes from "./routes/index.js";
 import cors from 'cors';
 
 const app = express(); 
@@ -22,7 +22,7 @@ app.get('/', (req,res)=>{
 });
 
 // THIS IS THE " /api " prefix, that is pute before any path of the family "contacts_routes"
-app.use('/api', contacts_routes); // = Every time in routes/users.js I
+app.use('/api', routes); // = Every time in routes/users.js
 // invoke the router. class, I'm actually requesting a response 
 // from: " http://localhost:5000/api/ + costum paths..."
 // This is important as it sets the different between the
