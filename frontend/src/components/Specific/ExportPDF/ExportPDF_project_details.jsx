@@ -25,8 +25,8 @@ const ExportPDF_project = ({ project }) => {
       ["Nome", project.name? project.name : "-"],
       ["Azienda", project.company_name? project.company_name : "-"],
       ["Status", project.status? project.status : "-"],
-      ["Fine",  project.start_date? formatDate(project.start_date) : "-"],
-      ["Fine",  project.end? formatDate(project.end_date) : "-"],
+      ["Inizio",  project.start_date? formatDate(project.start_date) : "-"],
+      ["Fine",  project.end_date? formatDate(project.end_date) : "-"],
       ["Budget", project.budget ? `${project.budget} €` : "-"],
       ["Dettagli", project.description? project.description : "-"],
     ];
