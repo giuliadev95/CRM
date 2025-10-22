@@ -1,3 +1,5 @@
+# La versione completa del CRM qui descritta è pubblicata sul ramo "bootstrap"
+
 # Web App CRM – Gestione Contatti, Aziende e Progetti
 
 Una **web app semplice e intuitiva** per gestire:
